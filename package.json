@@ -1,0 +1,27 @@
+{
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gringrape/project-react-2-gringrape.git"
+  },
+  "keywords": [],
+  "author": "Jin Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gringrape/project-react-2-gringrape/issues"
+  },
+  "homepage": "https://github.com/gringrape/project-react-2-gringrape#readme"
+}
