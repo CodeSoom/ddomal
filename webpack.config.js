@@ -1,16 +1,23 @@
-{
+module.exports = {
+  entry: './src/index.jsx',
+  output: {
+    filename: 'main.js',
+  },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
+        test: /\.m?jsx?$/,
+        exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env']
           }
         }
       }
-    ]
-  }
-}
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+};
