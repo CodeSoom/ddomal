@@ -1,1 +1,3 @@
-document.getElementById('app').innerHTML = '<h1>Hello World</h1>';
+import ReactDOM from 'react-dom';
+
+ReactDOM.render('Hello World', document.getElementById('app'));
