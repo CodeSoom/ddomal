@@ -4,8 +4,11 @@ import { render } from '@testing-library/react';
 
 import App from './App';
 
-test('App', () => {
-  const { container } = render(<App />);
+describe('App', () => {
+  const prompt = '사과';
+  it('renders prompt', () => {
+    const { queryByText } = render(<App />);
 
-  expect(container).toHaveTextContent('Hello');
+    expect(queryByText(prompt)).not.toBeNull();
+  });
 });
