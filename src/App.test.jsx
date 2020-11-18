@@ -2,10 +2,24 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import App from './App';
 
-test('App', () => {
-  const { container } = render(<App />);
+jest.mock('react-redux');
 
-  expect(container).toHaveTextContent('Hello');
+describe('App', () => {
+  const prompt = '사과';
+
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      spokenSentence: '',
+    }));
+  });
+
+  it('renders prompt', () => {
+    const { queryByText } = render(<App />);
+
+    expect(queryByText(prompt)).not.toBeNull();
+  });
 });
