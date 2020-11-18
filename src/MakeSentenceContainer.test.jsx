@@ -2,7 +2,11 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import MakeSentenceContainer from './MakeSentenceContainer';
+
+jest.mock('react-redux');
 
 describe('MakeSentenceContainer', () => {
   const prompt = '사과';
@@ -12,6 +16,12 @@ describe('MakeSentenceContainer', () => {
   const renderMakeSentenceContainer = () => render(
     <MakeSentenceContainer />,
   );
+
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      spokenSentence,
+    }));
+  });
 
   it('renders prompt', () => {
     const { queryByText } = renderMakeSentenceContainer();

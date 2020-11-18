@@ -13,7 +13,7 @@ describe('App', () => {
 
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      testSentence: '상태 테스트',
+      spokenSentence: '',
     }));
   });
 
@@ -21,12 +21,5 @@ describe('App', () => {
     const { queryByText } = render(<App />);
 
     expect(queryByText(prompt)).not.toBeNull();
-  });
-
-  // TODO: delete this
-  it('renders state', () => {
-    const { queryByText } = render(<App />);
-
-    expect(queryByText('상태 테스트')).not.toBeNull();
   });
 });

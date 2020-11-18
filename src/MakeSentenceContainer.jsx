@@ -1,17 +1,20 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
 import SpeakSentenceForm from './SpeakSentenceForm';
 
 export default function MakeSentenceContainer() {
-  // TODO: state 에서 문장 얻기
-  const sentence = '사과가 맛있네요';
+  const { spokenSentence } = useSelector((state) => ({
+    spokenSentence: state.spokenSentence,
+  }));
 
   return (
     <div>
       <p>
         사과
       </p>
-      <SpeakSentenceForm sentence={sentence} />
+      <SpeakSentenceForm sentence={spokenSentence} />
     </div>
   );
 }
