@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MakeSentenceContainer from './MakeSentenceContainer';
 
 export default function MakeSentencePage() {
