@@ -1,23 +1,28 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MakeSentenceContainer from './MakeSentenceContainer';
 
 jest.mock('react-redux');
+jest.mock('./services/speechRecognition.js');
 
 describe('MakeSentenceContainer', () => {
   const prompt = '사과';
   const micButton = 'Mic';
   const spokenSentence = '사과가 맛있네요';
 
+  const dispatch = jest.fn();
+
   const renderMakeSentenceContainer = () => render(
     <MakeSentenceContainer />,
   );
 
   beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       spokenSentence,
     }));
@@ -30,9 +35,11 @@ describe('MakeSentenceContainer', () => {
   });
 
   it('renders speak sentence button', () => {
-    const { queryByText } = renderMakeSentenceContainer();
+    const { getByText } = renderMakeSentenceContainer();
 
-    expect(queryByText(micButton)).not.toBeNull();
+    fireEvent.click(getByText(micButton));
+
+    expect(dispatch).toBeCalled();
   });
 
   it('renders spoken sentence', () => {
