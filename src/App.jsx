@@ -1,7 +1,8 @@
 import React from 'react';
+import MakeSentencePage from './MakeSentencePage';
 
 export default function App() {
   return (
-    <h1>Hello</h1>
+    <MakeSentencePage />
   );
 }
