@@ -1,6 +1,7 @@
 import reducer, {
   setSpokenSentence,
   setSpeaking,
+  changePrompt,
 } from './slice';
 
 jest.mock('../services/speechRecognition');
@@ -24,5 +25,13 @@ describe('reducer', () => {
 
       expect(state.speaking).toBe(true);
     });
+  });
+
+  test('changePrompt', () => {
+    const state = reducer({
+      prompt: '',
+    }, changePrompt('마늘'));
+
+    expect(state.prompt).toBe('마늘');
   });
 });

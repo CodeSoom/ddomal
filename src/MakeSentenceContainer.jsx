@@ -6,9 +6,13 @@ import SpeakSentenceForm from './SpeakSentenceForm';
 
 import { get } from './utils';
 
-import { recognizeVoice } from './redux/slice';
+import {
+  recognizeVoice,
+  changePrompt,
+} from './redux/slice';
 
 export default function MakeSentenceContainer() {
+  const prompt = useSelector(get('prompt'));
   const spokenSentence = useSelector(get('spokenSentence'));
   const speaking = useSelector(get('speaking'));
 
@@ -18,10 +22,17 @@ export default function MakeSentenceContainer() {
     dispatch(recognizeVoice());
   };
 
+  const handleClickChangePrompt = () => {
+    dispatch(changePrompt('마늘'));
+  };
+
   return (
     <div>
       <p>
-        사과
+        {prompt}
+        <button type="button" onClick={handleClickChangePrompt}>
+          change
+        </button>
       </p>
       <SpeakSentenceForm
         sentence={spokenSentence}
