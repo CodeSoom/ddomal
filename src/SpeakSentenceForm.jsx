@@ -15,15 +15,19 @@ const SentenceBox = styled.div({
   padding: '14vh 0',
 });
 
+const Sentence = styled.p({
+  fontSize: '2rem',
+});
+
 export default function SpeakSentenceForm({ spokenSentence, speaking, onClick }) {
   const sentence = spokenSentence ?? '문장을 입력해주세요';
 
   return (
     <Container>
       <SentenceBox>
-        <p>
+        <Sentence>
           {speaking ? '...' : sentence}
-        </p>
+        </Sentence>
       </SentenceBox>
       <MdMic
         title="mic"
