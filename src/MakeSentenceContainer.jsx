@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styled from '@emotion/styled';
 
+import { MdRefresh } from 'react-icons/md';
+
 import SpeakSentenceForm from './SpeakSentenceForm';
 
 import { flexBoxCenter } from './styles/common';
@@ -42,9 +44,11 @@ export default function MakeSentenceContainer() {
       <PromptBox>
         <p>
           {prompt}
-          <button type="button" onClick={handleClickChangePrompt}>
-            change
-          </button>
+          <MdRefresh
+            title="change"
+            type="button"
+            onClick={handleClickChangePrompt}
+          />
         </p>
       </PromptBox>
       <SpeakSentenceForm
