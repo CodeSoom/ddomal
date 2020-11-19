@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function SpeakSentenceForm({ sentence = '문장을 입력해주세요', speaking, onClick }) {
+export default function SpeakSentenceForm({ spokenSentence, speaking, onClick }) {
+  const sentence = spokenSentence ?? '문장을 입력해주세요';
+
   return (
     <div>
       <p>

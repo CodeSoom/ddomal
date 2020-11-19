@@ -14,7 +14,7 @@ describe('SpeakSentenceForm', () => {
 
   const renderSpeakSentenceForm = ({ sentence, speaking } = {}) => render(
     <SpeakSentenceForm
-      sentence={sentence}
+      spokenSentence={sentence}
       onClick={handleClick}
       speaking={speaking}
     />,
@@ -33,11 +33,13 @@ describe('SpeakSentenceForm', () => {
   });
 
   it('renders default sentence without sentence', () => {
-    const { container } = renderSpeakSentenceForm({
-      sentence: undefined,
-    });
+    [null, undefined].forEach((notExist) => {
+      const { container } = renderSpeakSentenceForm({
+        sentence: notExist,
+      });
 
-    expect(container).toHaveTextContent(defaultSentence);
+      expect(container).toHaveTextContent(defaultSentence);
+    });
   });
 
   it('renders loading sign while speaking', () => {
