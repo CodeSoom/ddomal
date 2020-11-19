@@ -43,10 +43,7 @@ describe('MakeSentenceContainer', () => {
 
     fireEvent.click(getByText(changePromptButton));
 
-    expect(dispatch).toBeCalledWith({
-      type: 'application/changePrompt',
-      payload: '마늘',
-    });
+    expect(dispatch).toBeCalled();
   });
 
   it('renders spoken sentence', () => {

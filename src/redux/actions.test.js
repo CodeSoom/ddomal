@@ -2,31 +2,55 @@ import configureStore from 'redux-mock-store';
 
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import { recognizeVoice } from './slice';
+import { changePrompt, recognizeVoice } from './slice';
 
 jest.mock('../services/speechRecognition.js');
 
-const mockStore = configureStore(getDefaultMiddleware());
+const middleWares = getDefaultMiddleware();
+const mockStore = configureStore(middleWares);
 
-test('recognizeVoice', async () => {
-  const store = mockStore({});
+describe('actions', () => {
+  let store;
 
-  await store.dispatch(recognizeVoice());
+  beforeEach(() => {
+    store = mockStore({});
+  });
 
-  const actions = store.getActions();
+  test('recognizeVoice', async () => {
+    await store.dispatch(recognizeVoice());
 
-  expect(actions).toEqual([
-    {
-      type: 'application/setSpeaking',
-      payload: true,
-    },
-    {
-      type: 'application/setSpokenSentence',
-      payload: '',
-    },
-    {
-      type: 'application/setSpeaking',
-      payload: false,
-    },
-  ]);
+    const actions = store.getActions();
+
+    expect(actions).toEqual([
+      {
+        type: 'application/setSpeaking',
+        payload: true,
+      },
+      {
+        type: 'application/setSpokenSentence',
+        payload: '',
+      },
+      {
+        type: 'application/setSpeaking',
+        payload: false,
+      },
+    ]);
+  });
+
+  test('change prompt', async () => {
+    await store.dispatch(changePrompt('마늘'));
+
+    const actions = store.getActions();
+
+    expect(actions).toEqual([
+      {
+        type: 'application/setPrompt',
+        payload: '마늘',
+      },
+      {
+        type: 'application/setSpokenSentence',
+        payload: null,
+      },
+    ]);
+  });
 });

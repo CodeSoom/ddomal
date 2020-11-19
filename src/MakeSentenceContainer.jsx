@@ -35,7 +35,7 @@ export default function MakeSentenceContainer() {
         </button>
       </p>
       <SpeakSentenceForm
-        sentence={spokenSentence}
+        spokenSentence={spokenSentence}
         speaking={speaking}
         onClick={handleClick}
       />

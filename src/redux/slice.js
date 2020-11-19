@@ -21,7 +21,7 @@ const { reducer, actions } = createSlice({
         speaking,
       };
     },
-    changePrompt(state, { payload: prompt }) {
+    setPrompt(state, { payload: prompt }) {
       return {
         ...state,
         prompt,
@@ -33,7 +33,7 @@ const { reducer, actions } = createSlice({
 export const {
   setSpokenSentence,
   setSpeaking,
-  changePrompt,
+  setPrompt,
 } = actions;
 
 export function recognizeVoice() {
@@ -44,6 +44,13 @@ export function recognizeVoice() {
     dispatch(setSpokenSentence(sentence));
 
     dispatch(setSpeaking(false));
+  };
+}
+
+export function changePrompt(prompt) {
+  return (dispatch) => {
+    dispatch(setPrompt(prompt));
+    dispatch(setSpokenSentence(null));
   };
 }
 
