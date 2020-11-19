@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { MdMic } from 'react-icons/md';
+
 import styled from '@emotion/styled';
 
 import { flexBoxCenter } from './styles/common';
@@ -23,9 +25,12 @@ export default function SpeakSentenceForm({ spokenSentence, speaking, onClick })
           {speaking ? '...' : sentence}
         </p>
       </SentenceBox>
-      <button type="button" onClick={onClick}>
-        Mic
-      </button>
+      <MdMic
+        title="mic"
+        type="button"
+        onClick={onClick}
+        size={70}
+      />
     </Container>
   );
 }

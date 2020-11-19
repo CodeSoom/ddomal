@@ -11,7 +11,7 @@ jest.mock('./services/speechRecognition.js');
 
 describe('MakeSentenceContainer', () => {
   const prompt = '사과';
-  const micButton = 'Mic';
+  const micButton = 'mic';
   const spokenSentence = '사과가 맛있네요';
   const changePromptButton = 'change';
 
@@ -39,9 +39,9 @@ describe('MakeSentenceContainer', () => {
   });
 
   it('renders change prompt button', () => {
-    const { getByText } = renderMakeSentenceContainer();
+    const { getByTitle } = renderMakeSentenceContainer();
 
-    fireEvent.click(getByText(changePromptButton));
+    fireEvent.click(getByTitle(changePromptButton));
 
     expect(dispatch).toBeCalled();
   });
@@ -53,9 +53,9 @@ describe('MakeSentenceContainer', () => {
   });
 
   it('renders speak sentence button', () => {
-    const { getByText } = renderMakeSentenceContainer();
+    const { getByTitle } = renderMakeSentenceContainer();
 
-    fireEvent.click(getByText(micButton));
+    fireEvent.click(getByTitle(micButton));
 
     expect(dispatch).toBeCalled();
   });

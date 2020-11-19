@@ -6,7 +6,7 @@ import SpeakSentenceForm from './SpeakSentenceForm';
 
 describe('SpeakSentenceForm', () => {
   const spokenSentence = '사과가 맛있네요';
-  const micButton = 'Mic';
+  const micButton = 'mic';
   const loadingSign = '...';
   const defaultSentence = '문장을 입력해주세요';
 
@@ -51,9 +51,9 @@ describe('SpeakSentenceForm', () => {
   });
 
   it('renders speak sentence button', () => {
-    const { getByText } = renderSpeakSentenceForm();
+    const { getByTitle } = renderSpeakSentenceForm();
 
-    fireEvent.click(getByText(micButton));
+    fireEvent.click(getByTitle(micButton));
 
     expect(handleClick).toBeCalled();
   });
