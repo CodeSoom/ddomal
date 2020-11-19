@@ -19,9 +19,14 @@ import {
 
 const PromptBox = styled.div({
   ...flexBoxCenter,
+  flexDirection: 'column',
   marginTop: '.5rem',
   padding: '2rem 0',
   backgroundColor: 'grey',
+});
+
+const Prompt = styled.p({
+  fontSize: '1.7rem',
 });
 
 export default function MakeSentenceContainer() {
@@ -42,14 +47,15 @@ export default function MakeSentenceContainer() {
   return (
     <div>
       <PromptBox>
-        <p>
+        <Prompt>
           {prompt}
-          <MdRefresh
-            title="change"
-            type="button"
-            onClick={handleClickChangePrompt}
-          />
-        </p>
+        </Prompt>
+        <MdRefresh
+          title="change"
+          type="button"
+          size={26}
+          onClick={handleClickChangePrompt}
+        />
       </PromptBox>
       <SpeakSentenceForm
         spokenSentence={spokenSentence}
