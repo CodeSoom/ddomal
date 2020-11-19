@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

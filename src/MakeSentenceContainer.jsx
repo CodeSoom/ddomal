@@ -2,7 +2,11 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import styled from '@emotion/styled';
+
 import SpeakSentenceForm from './SpeakSentenceForm';
+
+import { flexBoxCenter } from './styles/common';
 
 import { get } from './utils';
 
@@ -10,6 +14,13 @@ import {
   recognizeVoice,
   changePrompt,
 } from './redux/slice';
+
+const PromptBox = styled.div({
+  ...flexBoxCenter,
+  marginTop: '.5rem',
+  padding: '2rem 0',
+  backgroundColor: 'grey',
+});
 
 export default function MakeSentenceContainer() {
   const prompt = useSelector(get('prompt'));
@@ -28,12 +39,14 @@ export default function MakeSentenceContainer() {
 
   return (
     <div>
-      <p>
-        {prompt}
-        <button type="button" onClick={handleClickChangePrompt}>
-          change
-        </button>
-      </p>
+      <PromptBox>
+        <p>
+          {prompt}
+          <button type="button" onClick={handleClickChangePrompt}>
+            change
+          </button>
+        </p>
+      </PromptBox>
       <SpeakSentenceForm
         spokenSentence={spokenSentence}
         speaking={speaking}
