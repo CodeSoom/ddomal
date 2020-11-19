@@ -5,6 +5,7 @@ import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import { changePrompt, recognizeVoice } from './slice';
 
 jest.mock('../services/speechRecognition.js');
+jest.mock('../services/prompt.js');
 
 const middleWares = getDefaultMiddleware();
 const mockStore = configureStore(middleWares);
@@ -38,14 +39,14 @@ describe('actions', () => {
   });
 
   test('change prompt', async () => {
-    await store.dispatch(changePrompt('마늘'));
+    await store.dispatch(changePrompt());
 
     const actions = store.getActions();
 
     expect(actions).toEqual([
       {
         type: 'application/setPrompt',
-        payload: '마늘',
+        payload: '',
       },
       {
         type: 'application/setSpokenSentence',

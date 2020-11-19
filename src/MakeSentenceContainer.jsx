@@ -23,7 +23,7 @@ export default function MakeSentenceContainer() {
   };
 
   const handleClickChangePrompt = () => {
-    dispatch(changePrompt('마늘'));
+    dispatch(changePrompt());
   };
 
   return (

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { recognize } from '../services/speechRecognition';
+import { getRandomPrompt } from '../services/prompt';
 
 const { reducer, actions } = createSlice({
   name: 'application',
@@ -47,9 +48,12 @@ export function recognizeVoice() {
   };
 }
 
-export function changePrompt(prompt) {
+export function changePrompt() {
   return (dispatch) => {
-    dispatch(setPrompt(prompt));
+    // random 하게 제시어 고르기
+    const randomPrompt = getRandomPrompt();
+
+    dispatch(setPrompt(randomPrompt));
     dispatch(setSpokenSentence(null));
   };
 }
