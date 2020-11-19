@@ -22,7 +22,7 @@ const PromptBox = styled.div({
   flexDirection: 'column',
   marginTop: '.5rem',
   padding: '2rem 0',
-  backgroundColor: 'grey',
+  backgroundColor: '#DDD',
 });
 
 const Prompt = styled.p({
