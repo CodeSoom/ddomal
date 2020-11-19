@@ -16,6 +16,7 @@ describe('MakeSentencePage', () => {
 
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
+      prompt,
       spokenSentence: '',
     }));
   });

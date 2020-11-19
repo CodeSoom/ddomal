@@ -5,6 +5,7 @@ import { recognize } from '../services/speechRecognition';
 const { reducer, actions } = createSlice({
   name: 'application',
   initialState: {
+    prompt: '사과',
     speaking: false,
   },
   reducers: {
@@ -20,12 +21,19 @@ const { reducer, actions } = createSlice({
         speaking,
       };
     },
+    changePrompt(state, { payload: prompt }) {
+      return {
+        ...state,
+        prompt,
+      };
+    },
   },
 });
 
 export const {
   setSpokenSentence,
   setSpeaking,
+  changePrompt,
 } = actions;
 
 export function recognizeVoice() {

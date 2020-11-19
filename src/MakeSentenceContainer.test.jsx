@@ -13,6 +13,7 @@ describe('MakeSentenceContainer', () => {
   const prompt = '사과';
   const micButton = 'Mic';
   const spokenSentence = '사과가 맛있네요';
+  const changePromptButton = 'change';
 
   const dispatch = jest.fn();
 
@@ -21,9 +22,12 @@ describe('MakeSentenceContainer', () => {
   );
 
   beforeEach(() => {
+    dispatch.mockClear();
+
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      prompt,
       spokenSentence,
     }));
   });
@@ -34,17 +38,28 @@ describe('MakeSentenceContainer', () => {
     expect(queryByText(prompt)).not.toBeNull();
   });
 
-  it('renders speak sentence button', () => {
+  it('renders change prompt button', () => {
     const { getByText } = renderMakeSentenceContainer();
 
-    fireEvent.click(getByText(micButton));
+    fireEvent.click(getByText(changePromptButton));
 
-    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'application/changePrompt',
+      payload: '마늘',
+    });
   });
 
   it('renders spoken sentence', () => {
     const { container } = renderMakeSentenceContainer();
 
     expect(container).toHaveTextContent(spokenSentence);
+  });
+
+  it('renders speak sentence button', () => {
+    const { getByText } = renderMakeSentenceContainer();
+
+    fireEvent.click(getByText(micButton));
+
+    expect(dispatch).toBeCalled();
   });
 });
