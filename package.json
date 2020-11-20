@@ -37,7 +37,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start:dev": "webpack-dev-server"
+    "start:dev": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
