@@ -23,11 +23,17 @@ const PromptBox = styled.div({
   marginTop: '.5rem',
   padding: '2rem 0',
   backgroundColor: '#DDD',
+  width: '18rem',
+  borderRadius: '6px',
 });
 
 const Prompt = styled.p({
   fontSize: '1.7rem',
 });
+
+const StyledRefresh = styled(MdRefresh)`
+  cursor: pointer;
+`;
 
 export default function MakeSentenceContainer() {
   const prompt = useSelector(get('prompt'));
@@ -50,7 +56,7 @@ export default function MakeSentenceContainer() {
         <Prompt>
           {prompt}
         </Prompt>
-        <MdRefresh
+        <StyledRefresh
           title="change"
           type="button"
           size={26}

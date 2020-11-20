@@ -9,7 +9,7 @@ import { flexBoxCenter } from './styles/common';
 const Container = styled.div({
   ...flexBoxCenter,
   height: '100vh',
-  transform: 'translateY(-10%)',
+  transform: 'translateY(-5%)',
 });
 
 export default function App() {
