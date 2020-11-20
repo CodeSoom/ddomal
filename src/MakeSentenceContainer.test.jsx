@@ -13,7 +13,7 @@ describe('MakeSentenceContainer', () => {
   const prompt = '사과';
   const micButton = 'mic';
   const spokenSentence = '사과가 맛있네요';
-  const changePromptButton = 'change';
+  const nextButton = '다음 문제';
 
   const dispatch = jest.fn();
 
@@ -38,14 +38,6 @@ describe('MakeSentenceContainer', () => {
     expect(queryByText(prompt)).not.toBeNull();
   });
 
-  it('renders change prompt button', () => {
-    const { getByTitle } = renderMakeSentenceContainer();
-
-    fireEvent.click(getByTitle(changePromptButton));
-
-    expect(dispatch).toBeCalled();
-  });
-
   it('renders spoken sentence', () => {
     const { container } = renderMakeSentenceContainer();
 
@@ -56,6 +48,14 @@ describe('MakeSentenceContainer', () => {
     const { getByTitle } = renderMakeSentenceContainer();
 
     fireEvent.click(getByTitle(micButton));
+
+    expect(dispatch).toBeCalled();
+  });
+
+  it('renders next button', () => {
+    const { getByText } = renderMakeSentenceContainer();
+
+    fireEvent.click(getByText(nextButton));
 
     expect(dispatch).toBeCalled();
   });

@@ -11,7 +11,6 @@ jest.mock('./services/speechRecognition.js');
 
 describe('MakeSentencePage', () => {
   const prompt = '사과';
-  const heading = '문장 만들기';
   const explanation = '제시어를 보고 문장을 만들어 보세요!';
 
   beforeEach(() => {
@@ -30,8 +29,6 @@ describe('MakeSentencePage', () => {
   it('renders text contents', () => {
     const { container } = render(<MakeSentencePage />);
 
-    [heading, explanation].forEach((textContent) => {
-      expect(container).toHaveTextContent(textContent);
-    });
+    expect(container).toHaveTextContent(explanation);
   });
 });
