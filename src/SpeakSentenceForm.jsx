@@ -19,6 +19,10 @@ const Sentence = styled.p({
   fontSize: '2rem',
 });
 
+const StyledMic = styled(MdMic)`
+  cursor: pointer;
+`;
+
 export default function SpeakSentenceForm({ spokenSentence, speaking, onClick }) {
   const sentence = spokenSentence ?? '문장을 입력해주세요';
 
@@ -29,7 +33,7 @@ export default function SpeakSentenceForm({ spokenSentence, speaking, onClick })
           {speaking ? '...' : sentence}
         </Sentence>
       </SentenceBox>
-      <MdMic
+      <StyledMic
         title="mic"
         type="button"
         onClick={onClick}
