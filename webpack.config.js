@@ -6,6 +6,9 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, ''),
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
