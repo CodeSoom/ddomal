@@ -2,6 +2,7 @@ import reducer, {
   setSpokenSentence,
   setSpeaking,
   setPrompt,
+  saveAnswer,
 } from './slice';
 
 jest.mock('../services/speechRecognition');
@@ -33,5 +34,15 @@ describe('reducer', () => {
     }, setPrompt('마늘'));
 
     expect(state.prompt).toBe('마늘');
+  });
+
+  test('saveAnswer', () => {
+    const state = reducer({
+      answers: [],
+    }, saveAnswer({ prompt: '사과', sentence: '사과가 맛있다' }));
+
+    expect(state.answers).toEqual([
+      { prompt: '사과', sentence: '사과가 맛있다' },
+    ]);
   });
 });
