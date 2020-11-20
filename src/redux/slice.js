@@ -28,6 +28,17 @@ const { reducer, actions } = createSlice({
         prompt,
       };
     },
+    saveAnswer(state, { payload: answer }) {
+      const { answers } = state;
+
+      return {
+        ...state,
+        answers: [
+          ...answers,
+          answer,
+        ],
+      };
+    },
   },
 });
 
@@ -35,6 +46,7 @@ export const {
   setSpokenSentence,
   setSpeaking,
   setPrompt,
+  saveAnswer,
 } = actions;
 
 export function recognizeVoice() {
