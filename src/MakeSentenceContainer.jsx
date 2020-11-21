@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useHistory } from 'react-router-dom';
+
 import styled from '@emotion/styled';
 
 import SpeakSentenceForm from './SpeakSentenceForm';
@@ -40,6 +42,8 @@ export default function MakeSentenceContainer() {
 
   const isAnsweringComplete = answers.length === MAX_ANSWERS;
 
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const handleClickSpeak = () => {
@@ -49,6 +53,10 @@ export default function MakeSentenceContainer() {
   const handleClickNext = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
     dispatch(getNext());
+  };
+
+  const handleClickExit = () => {
+    history.push('/answers');
   };
 
   return (
@@ -66,7 +74,7 @@ export default function MakeSentenceContainer() {
       {
         isAnsweringComplete
           ? (
-            <button type="button">
+            <button type="button" onClick={handleClickExit}>
               종료
             </button>
           )

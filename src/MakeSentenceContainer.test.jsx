@@ -11,6 +11,15 @@ import MakeSentenceContainer from './MakeSentenceContainer';
 jest.mock('react-redux');
 jest.mock('./services/speechRecognition.js');
 
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
+
 describe('MakeSentenceContainer', () => {
   const prompt = '사과';
   const micButton = 'mic';
@@ -79,6 +88,8 @@ describe('MakeSentenceContainer', () => {
       const { getByText } = renderMakeSentenceContainer();
 
       fireEvent.click(getByText(exitButton));
+
+      expect(mockPush).toBeCalledWith('/answers');
     });
   });
 });
