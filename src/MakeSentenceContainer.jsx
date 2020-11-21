@@ -16,9 +16,14 @@ import {
   getNext,
 } from './redux/slice';
 
+const Container = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
 const PromptBox = styled.div({
   ...flexBoxCenter,
-  flexDirection: 'column',
   marginTop: '.5rem',
   padding: '2rem 0',
   backgroundColor: '#DDD',
@@ -58,7 +63,7 @@ export default function MakeSentenceContainer() {
   };
 
   return (
-    <div>
+    <Container>
       <PromptBox>
         <Prompt>
           {prompt}
@@ -82,6 +87,6 @@ export default function MakeSentenceContainer() {
             </button>
           )
       }
-    </div>
+    </Container>
   );
 }
