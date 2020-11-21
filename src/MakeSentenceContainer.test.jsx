@@ -67,7 +67,7 @@ describe('MakeSentenceContainer', () => {
   });
 
   context('when answering is not complete', () => {
-    given('answers', () => new Array(MAX_ANSWERS - 1));
+    given('answers', () => new Array(MAX_ANSWERS - 2));
 
     it('renders next button', () => {
       const { getByText } = renderMakeSentenceContainer();
@@ -82,7 +82,7 @@ describe('MakeSentenceContainer', () => {
   });
 
   context('when answering is complete', () => {
-    given('answers', () => new Array(MAX_ANSWERS));
+    given('answers', () => new Array(MAX_ANSWERS - 1));
 
     it('renders exit button', () => {
       const { getByText } = renderMakeSentenceContainer();
