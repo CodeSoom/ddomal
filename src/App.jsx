@@ -9,7 +9,7 @@ import styled from '@emotion/styled';
 
 import MainPage from './MainPage';
 import MakeSentencePage from './MakeSentencePage';
-import AnswersPage from './Answers';
+import AnswersPage from './AnswersPage';
 
 import { flexBoxCenter } from './styles/common';
 
