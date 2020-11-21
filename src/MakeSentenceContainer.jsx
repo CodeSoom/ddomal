@@ -53,6 +53,7 @@ export default function MakeSentenceContainer() {
   };
 
   const handleClickExit = () => {
+    dispatch(saveAnswer({ prompt, spokenSentence }));
     history.push('/answers');
   };
 
