@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styled from '@emotion/styled';
+
+import { useDispatch } from 'react-redux';
+
+import { getNext } from './redux/slice';
 
 import MakeSentenceContainer from './MakeSentenceContainer';
 
@@ -14,6 +18,12 @@ const Paragraph = styled.p({
 });
 
 export default function MakeSentencePage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNext());
+  }, []);
+
   return (
     <div>
       <HeadingBox>

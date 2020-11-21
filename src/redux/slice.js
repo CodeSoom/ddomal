@@ -6,7 +6,7 @@ import { getNextPrompt } from '../services/prompt';
 const { reducer, actions } = createSlice({
   name: 'application',
   initialState: {
-    prompt: '사과',
+    prompt: null,
     speaking: false,
     answers: [],
   },

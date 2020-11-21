@@ -10,8 +10,6 @@ import SpeakSentenceForm from './SpeakSentenceForm';
 
 import { flexBoxCenter } from './styles/common';
 
-import { get } from './utils';
-
 import {
   recognizeVoice,
   saveAnswer,
@@ -35,12 +33,11 @@ const Prompt = styled.p({
 export default function MakeSentenceContainer() {
   const MAX_ANSWERS = 5;
 
-  const prompt = useSelector(get('prompt'));
-  const spokenSentence = useSelector(get('spokenSentence'));
-  const speaking = useSelector(get('speaking'));
-  const answers = useSelector(get('answers'));
+  const {
+    prompt, spokenSentence, speaking, answers,
+  } = useSelector((state) => state);
 
-  const isAnsweringComplete = answers.length === MAX_ANSWERS;
+  const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
 
   const history = useHistory();
 

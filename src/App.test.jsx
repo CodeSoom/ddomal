@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
 
@@ -17,6 +17,8 @@ describe('App', () => {
   const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
   const answersPage = '결과 확인';
 
+  const dispatch = jest.fn();
+
   const renderApp = ({ path }) => render((
     <MemoryRouter initialEntries={[path]}>
       <App />
@@ -24,6 +26,8 @@ describe('App', () => {
   ));
 
   beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
       prompt,
       spokenSentence: '',
