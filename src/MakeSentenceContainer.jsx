@@ -13,6 +13,7 @@ import { get } from './utils';
 import {
   recognizeVoice,
   saveAnswer,
+  getNext,
 } from './redux/slice';
 
 const PromptBox = styled.div({
@@ -42,6 +43,7 @@ export default function MakeSentenceContainer() {
 
   const handleClickNext = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
+    dispatch(getNext());
   };
 
   return (

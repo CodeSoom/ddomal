@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { recognize } from '../services/speechRecognition';
-import { getRandomPrompt } from '../services/prompt';
+import { getNextPrompt } from '../services/prompt';
 
 const { reducer, actions } = createSlice({
   name: 'application',
   initialState: {
     prompt: '사과',
     speaking: false,
+    answers: [],
   },
   reducers: {
     setSpokenSentence(state, { payload: spokenSentence }) {
@@ -60,12 +61,11 @@ export function recognizeVoice() {
   };
 }
 
-export function changePrompt() {
+export function getNext() {
   return (dispatch) => {
-    // random 하게 제시어 고르기
-    const randomPrompt = getRandomPrompt();
+    const nextPrompt = getNextPrompt();
 
-    dispatch(setPrompt(randomPrompt));
+    dispatch(setPrompt(nextPrompt));
     dispatch(setSpokenSentence(null));
   };
 }
