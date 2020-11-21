@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import AnswersPage from './AnswersPage';
 
 jest.mock('react-redux');
+jest.mock('./services/speechRecognition.js');
 
 describe('AnswersPage', () => {
   const answer = {
