@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 
 import MainPage from './MainPage';
 import MakeSentencePage from './MakeSentencePage';
+import AnswersPage from './Answers';
 
 import { flexBoxCenter } from './styles/common';
 
@@ -24,6 +25,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/sentence" component={MakeSentencePage} />
+        <Route path="/answers" component={AnswersPage} />
       </Switch>
     </Container>
   );

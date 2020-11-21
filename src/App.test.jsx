@@ -15,6 +15,7 @@ describe('App', () => {
   const prompt = '사과';
   const mainPageButton = '시작하기';
   const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
+  const answersPage = '결과 확인';
 
   const renderApp = ({ path }) => render((
     <MemoryRouter initialEntries={[path]}>
@@ -40,5 +41,11 @@ describe('App', () => {
     const { container } = renderApp({ path: '/sentence' });
 
     expect(container).toHaveTextContent(makeSentencePageParagraph);
+  });
+
+  it('shows results page on route /results', () => {
+    const { container } = renderApp({ path: '/answers' });
+
+    expect(container).toHaveTextContent(answersPage);
   });
 });
