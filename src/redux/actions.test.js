@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store';
 
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import { changePrompt, recognizeVoice } from './slice';
+import { getNext, recognizeVoice } from './slice';
 
 jest.mock('../services/speechRecognition.js');
 jest.mock('../services/prompt.js');
@@ -38,8 +38,8 @@ describe('actions', () => {
     ]);
   });
 
-  test('change prompt', async () => {
-    await store.dispatch(changePrompt());
+  test('getNext', async () => {
+    await store.dispatch(getNext());
 
     const actions = store.getActions();
 

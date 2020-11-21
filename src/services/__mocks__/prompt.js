@@ -1,4 +1,4 @@
-export function getRandomPrompt() {
+export function getNextPrompt() {
   return '';
 }
 
