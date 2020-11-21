@@ -40,6 +40,12 @@ const { reducer, actions } = createSlice({
         ],
       };
     },
+    clearAnswers(state) {
+      return {
+        ...state,
+        answers: [],
+      };
+    },
   },
 });
 
@@ -48,6 +54,7 @@ export const {
   setSpeaking,
   setPrompt,
   saveAnswer,
+  clearAnswers,
 } = actions;
 
 export function recognizeVoice() {
@@ -67,6 +74,15 @@ export function getNext() {
 
     dispatch(setPrompt(nextPrompt));
     dispatch(setSpokenSentence(null));
+  };
+}
+
+export function initialize() {
+  return (dispatch) => {
+    dispatch(setPrompt(null));
+    dispatch(setSpokenSentence(null));
+    dispatch(clearAnswers());
+    dispatch(setSpeaking(false));
   };
 }
 
