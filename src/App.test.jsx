@@ -26,6 +26,7 @@ describe('App', () => {
     useSelector.mockImplementation((selector) => selector({
       prompt,
       spokenSentence: '',
+      answers: [],
     }));
   });
 

@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import given from 'given2';
+
 import MakeSentenceContainer from './MakeSentenceContainer';
 
 jest.mock('react-redux');
@@ -14,6 +16,8 @@ describe('MakeSentenceContainer', () => {
   const micButton = 'mic';
   const spokenSentence = '사과가 맛있네요';
   const nextButton = '다음 문제';
+  const exitButton = '종료';
+  const MAX_ANSWERS = 5;
 
   const dispatch = jest.fn();
 
@@ -29,6 +33,7 @@ describe('MakeSentenceContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       prompt,
       spokenSentence,
+      answers: given.answers || [],
     }));
   });
 
@@ -52,14 +57,28 @@ describe('MakeSentenceContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  it('renders next button', () => {
-    const { getByText } = renderMakeSentenceContainer();
+  context('when answering is not complete', () => {
+    given('answers', () => new Array(MAX_ANSWERS - 1));
 
-    fireEvent.click(getByText(nextButton));
+    it('renders next button', () => {
+      const { getByText } = renderMakeSentenceContainer();
 
-    expect(dispatch).toBeCalledWith({
-      type: 'application/saveAnswer',
-      payload: { prompt, spokenSentence },
+      fireEvent.click(getByText(nextButton));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'application/saveAnswer',
+        payload: { prompt, spokenSentence },
+      });
+    });
+  });
+
+  context('when answering is complete', () => {
+    given('answers', () => new Array(MAX_ANSWERS));
+
+    it('renders exit button', () => {
+      const { getByText } = renderMakeSentenceContainer();
+
+      fireEvent.click(getByText(exitButton));
     });
   });
 });

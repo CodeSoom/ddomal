@@ -31,9 +31,14 @@ const Prompt = styled.p({
 });
 
 export default function MakeSentenceContainer() {
+  const MAX_ANSWERS = 5;
+
   const prompt = useSelector(get('prompt'));
   const spokenSentence = useSelector(get('spokenSentence'));
   const speaking = useSelector(get('speaking'));
+  const answers = useSelector(get('answers'));
+
+  const isAnsweringComplete = answers.length === MAX_ANSWERS;
 
   const dispatch = useDispatch();
 
@@ -58,9 +63,19 @@ export default function MakeSentenceContainer() {
         speaking={speaking}
         onClick={handleClickSpeak}
       />
-      <button type="button" onClick={handleClickNext}>
-        다음 문제
-      </button>
+      {
+        isAnsweringComplete
+          ? (
+            <button type="button">
+              종료
+            </button>
+          )
+          : (
+            <button type="button" onClick={handleClickNext}>
+              다음 문제
+            </button>
+          )
+      }
     </div>
   );
 }
