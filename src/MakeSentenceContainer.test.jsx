@@ -89,6 +89,11 @@ describe('MakeSentenceContainer', () => {
 
       fireEvent.click(getByText(exitButton));
 
+      expect(dispatch).toBeCalledWith({
+        type: 'application/saveAnswer',
+        payload: { prompt, spokenSentence },
+      });
+
       expect(mockPush).toBeCalledWith('/answers');
     });
   });
