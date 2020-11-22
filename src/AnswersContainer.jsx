@@ -9,7 +9,9 @@ import { useHistory } from 'react-router-dom';
 import { initialize } from './redux/slice';
 
 import { get } from './utils';
+
 import { flexBoxCenter } from './styles/common';
+import Button from './styles/Button';
 
 const ButtonBox = styled.div({
   ...flexBoxCenter,
@@ -18,6 +20,10 @@ const ButtonBox = styled.div({
 
 const AnswerBox = styled.div({
   marginTop: '.5rem',
+});
+
+const Answer = styled.p({
+  fontSize: '1.4rem',
 });
 
 export default function MakeSentenceContainer() {
@@ -36,17 +42,17 @@ export default function MakeSentenceContainer() {
     <>
       {answers.map(({ prompt, spokenSentence }) => (
         <AnswerBox key={prompt}>
-          <p>
+          <Answer>
             {prompt}
             :
             {spokenSentence}
-          </p>
+          </Answer>
         </AnswerBox>
       ))}
       <ButtonBox>
-        <button type="button" onClick={handleClick}>
+        <Button type="button" onClick={handleClick}>
           처음으로
-        </button>
+        </Button>
       </ButtonBox>
     </>
   );

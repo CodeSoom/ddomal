@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 import SpeakSentenceForm from './SpeakSentenceForm';
 
 import { flexBoxCenter } from './styles/common';
+import Button from './styles/Button';
 
 import {
   recognizeVoice,
@@ -82,14 +83,14 @@ export default function MakeSentenceContainer() {
         {
           isAnsweringComplete
             ? (
-              <button type="button" onClick={handleClickExit}>
+              <Button type="button" onClick={handleClickExit}>
                 종료
-              </button>
+              </Button>
             )
             : (
-              <button type="button" onClick={handleClickNext}>
+              <Button type="button" onClick={handleClickNext}>
                 다음 문제
-              </button>
+              </Button>
             )
         }
       </ButtonBox>
