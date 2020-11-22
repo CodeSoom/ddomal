@@ -3,3 +3,8 @@ export const flexBoxCenter = {
   justifyContent: 'center',
   alignItems: 'center',
 };
+
+// TODO: delete this
+export const xx = {
+
+};

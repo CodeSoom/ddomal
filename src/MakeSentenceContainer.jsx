@@ -35,6 +35,10 @@ const Prompt = styled.p({
   fontSize: '1.7rem',
 });
 
+const ButtonBox = styled.div({
+  marginTop: '2rem',
+});
+
 export default function MakeSentenceContainer() {
   const MAX_ANSWERS = 5;
 
@@ -74,19 +78,21 @@ export default function MakeSentenceContainer() {
         speaking={speaking}
         onClick={handleClickSpeak}
       />
-      {
-        isAnsweringComplete
-          ? (
-            <button type="button" onClick={handleClickExit}>
-              종료
-            </button>
-          )
-          : (
-            <button type="button" onClick={handleClickNext}>
-              다음 문제
-            </button>
-          )
-      }
+      <ButtonBox>
+        {
+          isAnsweringComplete
+            ? (
+              <button type="button" onClick={handleClickExit}>
+                종료
+              </button>
+            )
+            : (
+              <button type="button" onClick={handleClickNext}>
+                다음 문제
+              </button>
+            )
+        }
+      </ButtonBox>
     </Container>
   );
 }
