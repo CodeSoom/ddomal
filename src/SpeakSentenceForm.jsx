@@ -12,7 +12,7 @@ const Container = styled.div({
 });
 
 const SentenceBox = styled.div({
-  padding: '14vh 0',
+  padding: '12vh 0',
 });
 
 const Sentence = styled.p({
