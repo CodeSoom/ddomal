@@ -19,8 +19,11 @@ const ButtonBox = styled.div({
 });
 
 const AnswersBox = styled.div({
-  width: '25rem',
+  position: 'relative',
+  minWidth: '23rem',
   border: '#DDD 1px solid',
+  borderTop: '#555 4px solid',
+  borderBottom: '#444 4px solid',
   borderRadius: '3px',
   padding: '1rem 2rem',
 });
@@ -31,6 +34,20 @@ const AnswerBox = styled.div({
 
 const Answer = styled.p({
   fontSize: '1.4rem',
+});
+
+const Prompt = styled.span({
+  width: '5rem',
+  display: 'inline-block',
+  textAlign: 'center',
+  borderBottom: '1px solid #EEE',
+  padding: '0 .5rem',
+  marginRight: '.5rem',
+});
+
+const Sentence = styled.span({
+  display: 'inline-block',
+  marginLeft: '1rem',
 });
 
 export default function MakeSentenceContainer() {
@@ -51,9 +68,13 @@ export default function MakeSentenceContainer() {
         {answers.map(({ prompt, spokenSentence }) => (
           <AnswerBox key={prompt}>
             <Answer>
-              {prompt}
+              <Prompt>
+                {prompt}
+              </Prompt>
               :
-              {spokenSentence}
+              <Sentence>
+                {spokenSentence}
+              </Sentence>
             </Answer>
           </AnswerBox>
         ))}
