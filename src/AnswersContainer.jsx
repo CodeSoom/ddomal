@@ -18,6 +18,13 @@ const ButtonBox = styled.div({
   marginTop: '2rem',
 });
 
+const AnswersBox = styled.div({
+  width: '25rem',
+  border: '#DDD 1px solid',
+  borderRadius: '3px',
+  padding: '1rem 2rem',
+});
+
 const AnswerBox = styled.div({
   marginTop: '.5rem',
 });
@@ -40,15 +47,17 @@ export default function MakeSentenceContainer() {
 
   return (
     <>
-      {answers.map(({ prompt, spokenSentence }) => (
-        <AnswerBox key={prompt}>
-          <Answer>
-            {prompt}
-            :
-            {spokenSentence}
-          </Answer>
-        </AnswerBox>
-      ))}
+      <AnswersBox>
+        {answers.map(({ prompt, spokenSentence }) => (
+          <AnswerBox key={prompt}>
+            <Answer>
+              {prompt}
+              :
+              {spokenSentence}
+            </Answer>
+          </AnswerBox>
+        ))}
+      </AnswersBox>
       <ButtonBox>
         <Button type="button" onClick={handleClick}>
           처음으로
