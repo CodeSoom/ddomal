@@ -2,6 +2,7 @@
   "name": "final_project",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesoom.github.io/project-react-2-gringrape/",
   "main": "index.js",
   "dependencies": {
     "@emotion/react": "^11.1.1",
@@ -52,6 +53,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gringrape/project-react-2-gringrape/issues"
-  },
-  "homepage": "https://github.com/gringrape/project-react-2-gringrape#readme"
+  }
 }
