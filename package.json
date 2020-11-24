@@ -46,7 +46,8 @@
     "start:dev": "webpack-dev-server",
     "build": "webpack",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --remote upstream"
+    "deploy": "gh-pages -d dist --remote upstream",
+    "deploy_cache_clean": "gh-pages-clean"
   },
   "repository": {
     "type": "git",
