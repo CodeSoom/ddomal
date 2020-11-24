@@ -9,6 +9,8 @@ import store from './redux/store';
 
 import App from './App';
 
+console.log('test');
+
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter basename="/">
