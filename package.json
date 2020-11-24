@@ -42,12 +42,13 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "start:dev": "webpack-dev-server",
     "build": "webpack",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --remote upstream",
-    "deploy_cache_clean": "gh-pages-clean"
+    "deploy_cache_clean": "gh-pages-clean",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
