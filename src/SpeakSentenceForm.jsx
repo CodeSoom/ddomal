@@ -21,6 +21,7 @@ const Sentence = styled.p({
 
 const StyledMic = styled(MdMic)`
   cursor: pointer;
+  color: ${({ speaking }) => (speaking ? 'green' : 'black')};
 `;
 
 export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick }) {
@@ -30,7 +31,7 @@ export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick
     <Container>
       <SentenceBox>
         <Sentence>
-          {speakStatus === 'MIC_ON' ? '...' : sentence}
+          {speakStatus === 'MIC_ON' || speakStatus === 'SPEAKING' ? '...' : sentence}
         </Sentence>
       </SentenceBox>
       <StyledMic
@@ -38,6 +39,7 @@ export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick
         type="button"
         onClick={onClick}
         size={70}
+        speaking={speakStatus === 'SPEAKING' ? 1 : 0}
       />
     </Container>
   );

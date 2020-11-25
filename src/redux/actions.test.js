@@ -2,7 +2,11 @@ import configureStore from 'redux-mock-store';
 
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import { getNext, initialize, recognizeVoice } from './slice';
+import {
+  getNext,
+  initialize,
+  recognizeVoice,
+} from './slice';
 
 jest.mock('../services/speechRecognition.js');
 jest.mock('../services/prompt.js');
@@ -24,12 +28,20 @@ describe('actions', () => {
 
     expect(actions).toEqual([
       {
+        type: 'application/setSpokenSentence',
+        payload: '',
+      },
+      {
+        type: 'application/setSpeakStatus',
+        payload: 'SPEAKING',
+      },
+      {
         type: 'application/setSpeakStatus',
         payload: 'MIC_ON',
       },
       {
-        type: 'application/setSpokenSentence',
-        payload: '',
+        type: 'application/setSpeakStatus',
+        payload: 'MIC_ON',
       },
       {
         type: 'application/setSpeakStatus',
