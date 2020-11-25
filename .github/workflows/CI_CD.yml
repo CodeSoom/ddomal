@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on: [push, pull_request]
 
@@ -24,3 +24,9 @@ jobs:
           HEADLESS: true
       - name: Lint
         run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: |
+          git remote set-url origin git@github.com:CodeSoom/project-react-2-gringrape.git
+          npm run deploy

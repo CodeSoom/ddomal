@@ -47,7 +47,7 @@
     "build": "webpack",
     "predeploy": "npm run build",
     "lint": "eslint --ext js,jsx .",
-    "deploy": "gh-pages -d dist --remote upstream",
+    "deploy": "gh-pages -d dist",
     "deploy_cache_clean": "gh-pages-clean",
     "coverage": "jest --coverage"
   },
