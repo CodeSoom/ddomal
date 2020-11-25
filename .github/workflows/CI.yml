@@ -24,3 +24,4 @@ jobs:
           HEADLESS: true
       - name: Lint
         run: npm run lint
+        
