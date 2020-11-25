@@ -24,16 +24,16 @@ describe('actions', () => {
 
     expect(actions).toEqual([
       {
-        type: 'application/setSpeaking',
-        payload: true,
+        type: 'application/setSpeakStatus',
+        payload: 'MIC_ON',
       },
       {
         type: 'application/setSpokenSentence',
         payload: '',
       },
       {
-        type: 'application/setSpeaking',
-        payload: false,
+        type: 'application/setSpeakStatus',
+        payload: 'MIC_OFF',
       },
     ]);
   });
@@ -73,8 +73,8 @@ describe('actions', () => {
         type: 'application/clearAnswers',
       },
       {
-        type: 'application/setSpeaking',
-        payload: false,
+        type: 'application/setSpeakStatus',
+        payload: 'MIC_OFF',
       },
     ]);
   });

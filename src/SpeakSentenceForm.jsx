@@ -23,14 +23,14 @@ const StyledMic = styled(MdMic)`
   cursor: pointer;
 `;
 
-export default function SpeakSentenceForm({ spokenSentence, speaking, onClick }) {
+export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick }) {
   const sentence = spokenSentence ?? '생각한 문장을 소리내어 말해보세요';
 
   return (
     <Container>
       <SentenceBox>
         <Sentence>
-          {speaking ? '...' : sentence}
+          {speakStatus === 'MIC_ON' ? '...' : sentence}
         </Sentence>
       </SentenceBox>
       <StyledMic

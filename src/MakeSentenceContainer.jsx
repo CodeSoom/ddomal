@@ -44,7 +44,7 @@ export default function MakeSentenceContainer() {
   const MAX_ANSWERS = 5;
 
   const {
-    prompt, spokenSentence, speaking, answers,
+    prompt, spokenSentence, speakStatus, answers,
   } = useSelector((state) => state);
 
   const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
@@ -76,7 +76,7 @@ export default function MakeSentenceContainer() {
       </PromptBox>
       <SpeakSentenceForm
         spokenSentence={spokenSentence}
-        speaking={speaking}
+        speakStatus={speakStatus}
         onClick={handleClickSpeak}
       />
       <ButtonBox>

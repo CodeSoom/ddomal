@@ -7,7 +7,7 @@ const { reducer, actions } = createSlice({
   name: 'application',
   initialState: {
     prompt: null,
-    speaking: false,
+    speakStatus: 'MIC_OFF',
     answers: [],
   },
   reducers: {
@@ -17,10 +17,10 @@ const { reducer, actions } = createSlice({
         spokenSentence,
       };
     },
-    setSpeaking(state, { payload: speaking }) {
+    setSpeakStatus(state, { payload: speakStatus }) {
       return {
         ...state,
-        speaking,
+        speakStatus,
       };
     },
     setPrompt(state, { payload: prompt }) {
@@ -51,7 +51,7 @@ const { reducer, actions } = createSlice({
 
 export const {
   setSpokenSentence,
-  setSpeaking,
+  setSpeakStatus,
   setPrompt,
   saveAnswer,
   clearAnswers,
@@ -59,12 +59,12 @@ export const {
 
 export function recognizeVoice() {
   return async (dispatch) => {
-    dispatch(setSpeaking(true));
+    dispatch(setSpeakStatus('MIC_ON'));
 
     const sentence = await recognize();
     dispatch(setSpokenSentence(sentence));
 
-    dispatch(setSpeaking(false));
+    dispatch(setSpeakStatus('MIC_OFF'));
   };
 }
 
@@ -82,7 +82,7 @@ export function initialize() {
     dispatch(setPrompt(null));
     dispatch(setSpokenSentence(null));
     dispatch(clearAnswers());
-    dispatch(setSpeaking(false));
+    dispatch(setSpeakStatus('MIC_OFF'));
   };
 }
 
