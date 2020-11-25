@@ -1,4 +1,4 @@
-name: CI
+name: Continuous Integration
 
 on: [push, pull_request]
 
@@ -24,3 +24,4 @@ jobs:
           HEADLESS: true
       - name: Lint
         run: npm run lint
+        
