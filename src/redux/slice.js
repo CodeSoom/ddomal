@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { recognize } from '../services/speechRecognition';
 import { getNextPrompt } from '../services/prompt';
+import {
+  recognize,
+  soundStart,
+  soundEnd,
+  start,
+  end,
+} from '../services/speechRecognition';
 
 const { reducer, actions } = createSlice({
   name: 'application',
@@ -57,14 +63,58 @@ export const {
   clearAnswers,
 } = actions;
 
+function changeSpeaking() {
+  return (dispatch) => {
+    const soundStarts$ = soundStart();
+
+    soundStarts$.subscribe(() => {
+      dispatch(setSpeakStatus('SPEAKING'));
+    });
+  };
+}
+
+function changeNotSpeaking() {
+  return (dispatch) => {
+    const soundEnds$ = soundEnd();
+
+    soundEnds$.subscribe(() => {
+      dispatch(setSpeakStatus('MIC_ON'));
+    });
+  };
+}
+
+function changeMicOn() {
+  return (dispatch) => {
+    const starts$ = start();
+
+    starts$.subscribe(() => {
+      dispatch(setSpeakStatus('MIC_ON'));
+    });
+  };
+}
+
+function changeMicOff() {
+  return (dispatch) => {
+    const ends$ = end();
+
+    ends$.subscribe(() => {
+      dispatch(setSpeakStatus('MIC_OFF'));
+    });
+  };
+}
+
 export function recognizeVoice() {
   return async (dispatch) => {
-    dispatch(setSpeakStatus('MIC_ON'));
+    const sentences$ = recognize();
 
-    const sentence = await recognize();
-    dispatch(setSpokenSentence(sentence));
+    sentences$.subscribe((sentence) => {
+      dispatch(setSpokenSentence(sentence));
+    });
 
-    dispatch(setSpeakStatus('MIC_OFF'));
+    dispatch(changeSpeaking());
+    dispatch(changeNotSpeaking());
+    dispatch(changeMicOn());
+    dispatch(changeMicOff());
   };
 }
 

@@ -1,20 +1,31 @@
+import { fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 // eslint-disable-next-line new-cap
 const recognition = new window.webkitSpeechRecognition();
 
 recognition.lang = 'ko';
 
-// TODO: error handling
-const getRecognitionResult = () => new Promise((resolve) => {
-  recognition.onresult = (event) => {
-    resolve(event.results[0][0].transcript);
-  };
-});
-
-export async function recognize() {
+export function recognize() {
   recognition.start();
 
-  return getRecognitionResult();
+  return map((event) => event.results[0][0].transcript)(
+    fromEvent(recognition, 'result'),
+  );
 }
 
-// TODO: delete this
-export function xx() {}
+export function soundStart() {
+  return fromEvent(recognition, 'soundstart');
+}
+
+export function soundEnd() {
+  return fromEvent(recognition, 'soundend');
+}
+
+export function start() {
+  return fromEvent(recognition, 'start');
+}
+
+export function end() {
+  return fromEvent(recognition, 'end');
+}
