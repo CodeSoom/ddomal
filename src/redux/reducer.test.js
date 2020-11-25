@@ -1,6 +1,6 @@
 import reducer, {
   setSpokenSentence,
-  setSpeaking,
+  setSpeakStatus,
   setPrompt,
   saveAnswer,
   clearAnswers,
@@ -19,14 +19,12 @@ describe('reducer', () => {
     });
   });
 
-  describe('setSpeaking', () => {
-    it('changes speaking', () => {
-      const state = reducer({
-        speaking: false,
-      }, setSpeaking(true));
+  test('setSpeakStatus', () => {
+    const state = reducer({
+      speakStatus: 'MIC_OFF',
+    }, setSpeakStatus('MIC_ON'));
 
-      expect(state.speaking).toBe(true);
-    });
+    expect(state.speakStatus).toBe('MIC_ON');
   });
 
   test('setPrompt', () => {

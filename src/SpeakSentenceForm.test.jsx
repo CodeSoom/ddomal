@@ -12,11 +12,11 @@ describe('SpeakSentenceForm', () => {
 
   const handleClick = jest.fn();
 
-  const renderSpeakSentenceForm = ({ sentence, speaking } = {}) => render(
+  const renderSpeakSentenceForm = ({ sentence, speakStatus } = {}) => render(
     <SpeakSentenceForm
       spokenSentence={sentence}
       onClick={handleClick}
-      speaking={speaking}
+      speakStatus={speakStatus}
     />,
   );
 
@@ -42,9 +42,9 @@ describe('SpeakSentenceForm', () => {
     });
   });
 
-  it('renders loading sign while speaking', () => {
+  it('renders loading sign while mic is on', () => {
     const { container } = renderSpeakSentenceForm({
-      speaking: true,
+      speakStatus: 'MIC_ON',
     });
 
     expect(container).toHaveTextContent(loadingSign);
