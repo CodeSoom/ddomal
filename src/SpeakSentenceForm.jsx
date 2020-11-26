@@ -25,7 +25,7 @@ const StyledMic = styled(MdMic)`
 `;
 
 export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick }) {
-  const sentence = spokenSentence ?? '생각한 문장을 소리내어 말해보세요';
+  const sentence = spokenSentence ?? '문장을 소리내어 말해보세요';
 
   return (
     <Container>
