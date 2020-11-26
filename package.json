@@ -41,6 +41,7 @@
         "jest": "^26.6.3",
         "jest-plugin-context": "^2.9.0",
         "redux-mock-store": "^1.5.4",
+        "start-server-and-test": "^1.11.6",
         "webpack": "^4.32.2",
         "webpack-cli": "^3.3.0",
         "webpack-dev-server": "^3.11.0"
@@ -54,12 +55,8 @@
         "deploy": "gh-pages -d dist",
         "deploy_cache_clean": "gh-pages-clean",
         "coverage": "jest --coverage",
-        "codeceptjs": "codeceptjs run --steps",
-        "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps",
-        "codeceptjs:ui": "codecept-ui --app",
-        "codeceptjs:demo": "codeceptjs run --steps -c node_modules/@codeceptjs/examples",
-        "codeceptjs:demo:headless": "HEADLESS=true codeceptjs run --steps -c node_modules/@codeceptjs/examples",
-        "codeceptjs:demo:ui": "codecept-ui --app  -c node_modules/@codeceptjs/examples"
+        "test:e2e": "codeceptjs run --steps",
+        "test": "start-server-and-test start:dev http://localhost:8080 test:e2e"
     },
     "repository": {
         "type": "git",
