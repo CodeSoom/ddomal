@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MakeSentencePage from './MakeSentencePage';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognition.js');
+jest.mock('./services/speechRecognitionService.js');
 
 describe('MakeSentencePage', () => {
   const prompt = '사과';

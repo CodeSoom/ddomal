@@ -9,7 +9,7 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognition.js');
+jest.mock('./services/speechRecognitionService.js');
 
 describe('App', () => {
   const prompt = '사과';
