@@ -20,6 +20,8 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test:unit
+      - name: e2e Test
+        run: npm run test
         env:
           HEADLESS: true
       - name: Lint
