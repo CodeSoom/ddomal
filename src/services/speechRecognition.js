@@ -9,9 +9,8 @@ recognition.lang = 'ko';
 export function recognize() {
   recognition.start();
 
-  return map((event) => event.results[0][0].transcript)(
-    fromEvent(recognition, 'result'),
-  );
+  return fromEvent(recognition, 'result')
+    .pipe(map((event) => event.results[0][0].transcript));
 }
 
 export function soundStart() {
