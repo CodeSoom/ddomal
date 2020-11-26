@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getNextPrompt } from '../services/prompt';
+import { getNextPrompt } from '../services/promptService';
 import {
   recognize,
   soundStart,
   soundEnd,
   start,
   end,
-} from '../services/speechRecognition';
+} from '../services/speechRecognitionService';
 
 const { reducer, actions } = createSlice({
   name: 'application',

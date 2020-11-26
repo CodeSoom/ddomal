@@ -9,7 +9,7 @@ import given from 'given2';
 import MakeSentenceContainer from './MakeSentenceContainer';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognition.js');
+jest.mock('./services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 

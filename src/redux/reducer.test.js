@@ -6,7 +6,7 @@ import reducer, {
   clearAnswers,
 } from './slice';
 
-jest.mock('../services/speechRecognition');
+jest.mock('../services/speechRecognitionService');
 
 describe('reducer', () => {
   describe('setSpokenSentence', () => {

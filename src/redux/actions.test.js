@@ -8,8 +8,8 @@ import {
   recognizeVoice,
 } from './slice';
 
-jest.mock('../services/speechRecognition.js');
-jest.mock('../services/prompt.js');
+jest.mock('../services/speechRecognitionService.js');
+jest.mock('../services/promptService.js');
 
 const middleWares = getDefaultMiddleware();
 const mockStore = configureStore(middleWares);
