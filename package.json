@@ -5,6 +5,7 @@
     "main": "index.js",
     "homepage": "https://codesoom.github.io/project-react-2-gringrape/",
     "dependencies": {
+        "@codeceptjs/configure": "^0.6.2",
         "@emotion/react": "^11.1.1",
         "@emotion/styled": "^11.0.0",
         "@reduxjs/toolkit": "^1.4.0",
