@@ -1,4 +1,4 @@
-import prompts from '../data/prompts';
+import prompts from '../../data/prompts';
 
 import { getNextPrompt } from './promptService';
 
