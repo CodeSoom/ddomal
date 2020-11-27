@@ -8,12 +8,10 @@ const Container = styled.p({
   fontSize: '2rem',
 });
 
-export default function SpokenSentence({ prompt, spokenSentence, micState }) {
-  const waiting = '...';
-  const defaultMessage = '문장을 소리내어 말해보세요';
+const waiting = '...';
+const placeholder = '문장을 소리내어 말해보세요';
 
-  const sentence = spokenSentence ?? defaultMessage;
-
+export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   const isInputting = micState !== MicState.OFF;
 
   const highligtedPrompt = (
@@ -22,12 +20,19 @@ export default function SpokenSentence({ prompt, spokenSentence, micState }) {
     </b>
   );
 
-  const [leftPart, rightPart] = sentence.split(prompt);
-  const highligtedSentence = [leftPart, highligtedPrompt, rightPart];
+  const sentence = spokenSentence ?? placeholder;
+
+  const highlightSentence = () => {
+    const [leftPart, rightPart] = sentence.split(prompt);
+
+    return rightPart
+      ? [leftPart, highligtedPrompt, rightPart]
+      : [leftPart];
+  };
 
   return (
     <Container>
-      {isInputting ? waiting : highligtedSentence}
+      {isInputting ? waiting : highlightSentence()}
     </Container>
   );
 }
