@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import AnswersContainer from './AnswersContainer';
+import SentenceAnswersContainer from './SentenceAnswersContainer';
 
 import { flexBoxCenter } from './styles/common';
 
@@ -15,14 +15,14 @@ const Box = styled.div({
   marginTop: '1rem',
 });
 
-export default function AnswersPage() {
+export default function SentenceAnswersPage() {
   return (
     <Container>
       <h1>
         결과 확인
       </h1>
       <Box>
-        <AnswersContainer />
+        <SentenceAnswersContainer />
       </Box>
     </Container>
   );

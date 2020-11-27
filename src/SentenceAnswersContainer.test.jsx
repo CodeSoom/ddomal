@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import AnswersContainer from './AnswersContainer';
+import SentenceAnswersContainer from './SentenceAnswersContainer';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-describe('AnswersContainer', () => {
+describe('SentenceAnswersContainer', () => {
   const goHomeButton = '처음으로';
 
   const answers = [
@@ -39,7 +39,7 @@ describe('AnswersContainer', () => {
   });
 
   it('renders answers', () => {
-    const { container } = render(<AnswersContainer />);
+    const { container } = render(<SentenceAnswersContainer />);
 
     answers.forEach(({ prompt, spokenSentence }) => {
       expect(container).toHaveTextContent(prompt);
@@ -48,7 +48,7 @@ describe('AnswersContainer', () => {
   });
 
   it('renders go home button', () => {
-    const { getByText } = render(<AnswersContainer />);
+    const { getByText } = render(<SentenceAnswersContainer />);
 
     fireEvent.click(getByText(goHomeButton));
 

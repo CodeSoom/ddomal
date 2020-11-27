@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { getNext } from './redux/slice';
 
-import MakeSentenceContainer from './MakeSentenceContainer';
+import SentenceSpeakContainer from './SentenceSpeakContainer';
 
 const HeadingBox = styled.div({
   textAlign: 'center',
@@ -17,7 +17,7 @@ const Paragraph = styled.p({
   marginBottom: '1rem',
 });
 
-export default function MakeSentencePage() {
+export default function SentenceSpeakPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function MakeSentencePage() {
           제시어를 보고 문장을 만들어 보세요!
         </Paragraph>
       </HeadingBox>
-      <MakeSentenceContainer />
+      <SentenceSpeakContainer />
     </div>
   );
 }

@@ -50,7 +50,7 @@ const Sentence = styled.span({
   marginLeft: '1rem',
 });
 
-export default function MakeSentenceContainer() {
+export default function SentenceAnswersContainer() {
   const answers = useSelector(get('answers'));
 
   const dispatch = useDispatch();

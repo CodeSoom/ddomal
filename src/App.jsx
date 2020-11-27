@@ -8,8 +8,8 @@ import {
 import styled from '@emotion/styled';
 
 import MainPage from './MainPage';
-import MakeSentencePage from './MakeSentencePage';
-import AnswersPage from './AnswersPage';
+import MakeSentencePage from './SentenceSpeakPage';
+import AnswersPage from './SentenceAnswersPage';
 
 import { flexBoxCenter } from './styles/common';
 

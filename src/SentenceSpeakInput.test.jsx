@@ -2,17 +2,18 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import SpeakSentenceForm from './SpeakSentenceInput';
+import SentenceSpeakInput from './SentenceSpeakInput';
+
 import MicState from './enums/MicState';
 
-describe('SpeakSentenceForm', () => {
+describe('SentenceSpeakInput', () => {
   const spokenSentence = '사과가 맛있네요';
   const micButton = 'mic';
 
   const handleClick = jest.fn();
 
-  const renderSpeakSentenceForm = ({ sentence, micState = MicState.OFF } = {}) => render(
-    <SpeakSentenceForm
+  const renderSentenceSpeakInput = ({ sentence, micState = MicState.OFF } = {}) => render(
+    <SentenceSpeakInput
       spokenSentence={sentence}
       onClick={handleClick}
       micState={micState}
@@ -24,7 +25,7 @@ describe('SpeakSentenceForm', () => {
   });
 
   it('renders spoken sentence with sentence', () => {
-    const { container } = renderSpeakSentenceForm({
+    const { container } = renderSentenceSpeakInput({
       sentence: spokenSentence,
     });
 
@@ -32,7 +33,7 @@ describe('SpeakSentenceForm', () => {
   });
 
   it('renders speak sentence button', () => {
-    const { getByTitle } = renderSpeakSentenceForm();
+    const { getByTitle } = renderSentenceSpeakInput();
 
     fireEvent.click(getByTitle(micButton));
 

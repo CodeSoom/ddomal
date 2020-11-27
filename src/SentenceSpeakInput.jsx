@@ -5,7 +5,9 @@ import { MdMic } from 'react-icons/md';
 import styled from '@emotion/styled';
 
 import { flexBoxCenter } from './styles/common';
+
 import SpokenSentence from './SpokenSentence';
+
 import MicState from './enums/MicState';
 
 const Container = styled.div({
@@ -22,7 +24,7 @@ const StyledMic = styled(MdMic)`
   color: ${({ speaking }) => (speaking ? 'green' : 'black')};
 `;
 
-export default function SpeakSentenceForm({
+export default function SentenceSpeakInput({
   prompt, spokenSentence, micState, onClick,
 }) {
   return (

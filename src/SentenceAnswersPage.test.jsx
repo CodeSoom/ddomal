@@ -4,12 +4,12 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
-import AnswersPage from './AnswersPage';
+import SentenceAnswersPage from './SentenceAnswersPage';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
 
-describe('AnswersPage', () => {
+describe('SentenceAnswersPage', () => {
   const answer = {
     prompt: '사과',
     spokenSentence: '사과는 맛있다',
@@ -22,7 +22,7 @@ describe('AnswersPage', () => {
   });
 
   it('renders answer', () => {
-    const { container } = render(<AnswersPage />);
+    const { container } = render(<SentenceAnswersPage />);
 
     expect(container).toHaveTextContent(answer.prompt);
     expect(container).toHaveTextContent(answer.spokenSentence);
