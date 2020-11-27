@@ -47,19 +47,17 @@
         "webpack-dev-server": "^3.11.0"
     },
     "scripts": {
-        "test:unit": "jest",
         "start:dev": "webpack-dev-server",
         "build": "webpack",
         "predeploy": "npm run build",
-        "lint": "eslint --ext js,jsx .",
         "deploy": "gh-pages -d dist",
-        "deploy_cache_clean": "gh-pages-clean",
+        "lint": "eslint --ext js,jsx .",
         "coverage": "jest --coverage",
+        "test:unit": "jest",
         "test:e2e": "codeceptjs run --steps",
         "test": "start-server-and-test start:dev http://localhost:8080 test:e2e"
     },
     "repository": {
-        "type": "git",
         "url": "git+https://github.com/gringrape/project-react-2-gringrape.git"
     },
     "keywords": [],
