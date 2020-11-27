@@ -10,6 +10,7 @@
         "@emotion/styled": "^11.0.0",
         "@reduxjs/toolkit": "^1.4.0",
         "codeceptjs": "^3.0.2",
+        "lodash": "^4.17.20",
         "playwright": "^1.6.2",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",

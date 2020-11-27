@@ -2,6 +2,8 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import _ from 'lodash';
+
 import MicState from './enums/MicState';
 
 const Container = styled.p({
@@ -25,7 +27,7 @@ export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   const highlightSentence = () => {
     const [leftPart, rightPart] = sentence.split(prompt);
 
-    return rightPart
+    return _.isString(rightPart)
       ? [leftPart, highligtedPrompt, rightPart]
       : [leftPart];
   };
