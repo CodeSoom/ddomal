@@ -7,9 +7,11 @@ import SpokenSentence from './SpokenSentence';
 describe('Sentence', () => {
   const defaultMessage = '문장을 소리내어 말해보세요';
   const loadingSign = '...';
+  const highlightColor = 'blue';
 
-  const renderSpokenSentence = ({ sentence, speakStatus }) => (
+  const renderSpokenSentence = ({ prompt, sentence, speakStatus }) => (
     render(<SpokenSentence
+      prompt={prompt}
       spokenSentence={sentence}
       speakStatus={speakStatus}
     />)
@@ -51,5 +53,15 @@ describe('Sentence', () => {
     });
 
     expect(container).not.toHaveTextContent(loadingSign);
+  });
+
+  it('highlight prompt in the spoken sentence', () => {
+    const { getByText } = renderSpokenSentence({
+      speakStatus: 'MIC_OFF',
+      sentence: '사과는 맛있다',
+      prompt: '사과',
+    });
+
+    expect(getByText('사과')).toHaveStyle(`color: ${highlightColor}`);
   });
 });
