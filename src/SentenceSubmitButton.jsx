@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from './styles/Button';
 
-export default function SubmitSentenceButton({ onClickExit, onClickNext, isComplete }) {
+export default function SentenceSubmitButton({ onClickExit, onClickNext, isComplete }) {
   return (
     isComplete
       ? (

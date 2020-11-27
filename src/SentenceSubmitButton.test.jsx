@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import SubmitSentenceButton from './SubmitSentenceButton';
+import SentenceSubmitButton from './SentenceSubmitButton';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-describe('SubmitSentenceButton', () => {
+describe('SentenceSubmitButton', () => {
   const nextButton = '다음 문제';
   const exitButton = '종료';
 
@@ -27,8 +27,8 @@ describe('SubmitSentenceButton', () => {
     jest.clearAllMocks();
   });
 
-  const renderSubmitSentenceButton = ({ isComplete }) => render(
-    <SubmitSentenceButton
+  const renderSentenceSubmitButton = ({ isComplete }) => render(
+    <SentenceSubmitButton
       onClickNext={handleClickNext}
       onClickExit={handleClickExit}
       isComplete={isComplete}
@@ -39,7 +39,7 @@ describe('SubmitSentenceButton', () => {
     const isComplete = false;
 
     it('renders next button', () => {
-      const { getByText } = renderSubmitSentenceButton({ isComplete });
+      const { getByText } = renderSentenceSubmitButton({ isComplete });
 
       fireEvent.click(getByText(nextButton));
 
@@ -51,7 +51,7 @@ describe('SubmitSentenceButton', () => {
     const isComplete = true;
 
     it('renders exit button', () => {
-      const { getByText } = renderSubmitSentenceButton({ isComplete });
+      const { getByText } = renderSentenceSubmitButton({ isComplete });
 
       fireEvent.click(getByText(exitButton));
 

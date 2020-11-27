@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import SpeakSentenceInput from './SpeakSentenceInput';
+import SentenceSpeakInput from './SentenceSpeakInput';
 
 import { flexBoxCenter } from './styles/common';
 
@@ -15,7 +15,8 @@ import {
   saveAnswer,
   getNext,
 } from './redux/slice';
-import SubmitSentenceButton from './SubmitSentenceButton';
+
+import SentenceSubmitButton from './SentenceSubmitButton';
 
 const Container = styled.div({
   display: 'flex',
@@ -42,7 +43,7 @@ const SubmitButtonBox = styled.div({
 
 const MAX_ANSWERS = 5;
 
-export default function MakeSentenceContainer() {
+export default function SentenceSpeakContainer() {
   const {
     prompt, spokenSentence, micState, answers,
   } = useSelector((state) => state);
@@ -74,14 +75,14 @@ export default function MakeSentenceContainer() {
           {prompt}
         </Prompt>
       </PromptBox>
-      <SpeakSentenceInput
+      <SentenceSpeakInput
         prompt={prompt}
         spokenSentence={spokenSentence}
         micState={micState}
         onClick={handleClickSpeak}
       />
       <SubmitButtonBox>
-        <SubmitSentenceButton
+        <SentenceSubmitButton
           onClickNext={handleClickNext}
           onClickExit={handleClickExit}
           isComplete={isAnsweringComplete}

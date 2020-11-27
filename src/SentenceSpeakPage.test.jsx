@@ -4,12 +4,12 @@ import { render } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import MakeSentencePage from './MakeSentencePage';
+import SentenceSpeakPage from './SentenceSpeakPage';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
 
-describe('MakeSentencePage', () => {
+describe('SentenceSpeakPage', () => {
   const prompt = '사과';
   const explanation = '제시어를 보고 문장을 만들어 보세요!';
 
@@ -28,19 +28,19 @@ describe('MakeSentencePage', () => {
   });
 
   it('get first prompt on mount', () => {
-    render(<MakeSentencePage />);
+    render(<SentenceSpeakPage />);
 
     expect(dispatch).toBeCalled();
   });
 
   it('renders prompt', () => {
-    const { queryByText } = render(<MakeSentencePage />);
+    const { queryByText } = render(<SentenceSpeakPage />);
 
     expect(queryByText(prompt)).not.toBeNull();
   });
 
   it('renders text contents', () => {
-    const { container } = render(<MakeSentencePage />);
+    const { container } = render(<SentenceSpeakPage />);
 
     expect(container).toHaveTextContent(explanation);
   });

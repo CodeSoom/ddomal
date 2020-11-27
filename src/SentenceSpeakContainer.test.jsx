@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import given from 'given2';
 
-import MakeSentenceContainer from './MakeSentenceContainer';
+import SentenceSpeakContainer from './SentenceSpeakContainer';
+
 import MicState from './enums/MicState';
 
 jest.mock('react-redux');
@@ -21,7 +22,7 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
-describe('MakeSentenceContainer', () => {
+describe('SentenceSpeakContainer', () => {
   const prompt = '사과';
   const micButton = 'mic';
   const spokenSentence = '사과가 맛있네요';
@@ -31,8 +32,8 @@ describe('MakeSentenceContainer', () => {
 
   const dispatch = jest.fn();
 
-  const renderMakeSentenceContainer = () => render(
-    <MakeSentenceContainer />,
+  const renderSentenceSpeakContainer = () => render(
+    <SentenceSpeakContainer />,
   );
 
   beforeEach(() => {
@@ -49,19 +50,19 @@ describe('MakeSentenceContainer', () => {
   });
 
   it('renders prompt', () => {
-    const { queryAllByText } = renderMakeSentenceContainer();
+    const { queryAllByText } = renderSentenceSpeakContainer();
 
     expect(queryAllByText(prompt)).not.toEqual([]);
   });
 
   it('renders spoken sentence', () => {
-    const { container } = renderMakeSentenceContainer();
+    const { container } = renderSentenceSpeakContainer();
 
     expect(container).toHaveTextContent(spokenSentence);
   });
 
   it('renders speak sentence button', () => {
-    const { getByTitle } = renderMakeSentenceContainer();
+    const { getByTitle } = renderSentenceSpeakContainer();
 
     fireEvent.click(getByTitle(micButton));
 
@@ -72,7 +73,7 @@ describe('MakeSentenceContainer', () => {
     given('answers', () => new Array(MAX_ANSWERS - 2));
 
     it('renders next button', () => {
-      const { getByText } = renderMakeSentenceContainer();
+      const { getByText } = renderSentenceSpeakContainer();
 
       fireEvent.click(getByText(nextButton));
 
@@ -87,7 +88,7 @@ describe('MakeSentenceContainer', () => {
     given('answers', () => new Array(MAX_ANSWERS - 1));
 
     it('renders exit button', () => {
-      const { getByText } = renderMakeSentenceContainer();
+      const { getByText } = renderSentenceSpeakContainer();
 
       fireEvent.click(getByText(exitButton));
 
