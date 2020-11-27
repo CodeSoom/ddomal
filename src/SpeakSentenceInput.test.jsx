@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import SpeakSentenceForm from './SpeakSentenceForm';
+import SpeakSentenceForm from './SpeakSentenceInput';
 import MicState from './enums/MicState';
 
 describe('SpeakSentenceForm', () => {

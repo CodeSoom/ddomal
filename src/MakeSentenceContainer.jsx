@@ -6,16 +6,16 @@ import { useHistory } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import SpeakSentenceForm from './SpeakSentenceForm';
+import SpeakSentenceInput from './SpeakSentenceInput';
 
 import { flexBoxCenter } from './styles/common';
-import Button from './styles/Button';
 
 import {
   recognizeVoice,
   saveAnswer,
   getNext,
 } from './redux/slice';
+import SubmitSentenceButton from './SubmitSentenceButton';
 
 const Container = styled.div({
   display: 'flex',
@@ -36,20 +36,18 @@ const Prompt = styled.p({
   fontSize: '1.7rem',
 });
 
-const ButtonBox = styled.div({
+const SubmitButtonBox = styled.div({
   marginTop: '2rem',
 });
 
-export default function MakeSentenceContainer() {
-  const MAX_ANSWERS = 5;
+const MAX_ANSWERS = 5;
 
+export default function MakeSentenceContainer() {
   const {
     prompt, spokenSentence, micState, answers,
   } = useSelector((state) => state);
 
   const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
-
-  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -61,6 +59,8 @@ export default function MakeSentenceContainer() {
     dispatch(saveAnswer({ prompt, spokenSentence }));
     dispatch(getNext());
   };
+
+  const history = useHistory();
 
   const handleClickExit = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
@@ -74,27 +74,19 @@ export default function MakeSentenceContainer() {
           {prompt}
         </Prompt>
       </PromptBox>
-      <SpeakSentenceForm
+      <SpeakSentenceInput
         prompt={prompt}
         spokenSentence={spokenSentence}
         micState={micState}
         onClick={handleClickSpeak}
       />
-      <ButtonBox>
-        {
-          isAnsweringComplete
-            ? (
-              <Button type="button" onClick={handleClickExit}>
-                종료
-              </Button>
-            )
-            : (
-              <Button type="button" onClick={handleClickNext}>
-                다음 문제
-              </Button>
-            )
-        }
-      </ButtonBox>
+      <SubmitButtonBox>
+        <SubmitSentenceButton
+          onClickNext={handleClickNext}
+          onClickExit={handleClickExit}
+          isComplete={isAnsweringComplete}
+        />
+      </SubmitButtonBox>
     </Container>
   );
 }
