@@ -14,7 +14,7 @@ export default function SpokenSentence({ prompt, spokenSentence, speakStatus }) 
 
   const sentence = spokenSentence ?? defaultMessage;
 
-  const highlightPrompt = () => sentence.split(prompt)
+  const highligtedSentence = sentence.split(prompt)
     .reduce((previous, current, i) => (
       i === 0
         ? [current]
@@ -23,7 +23,7 @@ export default function SpokenSentence({ prompt, spokenSentence, speakStatus }) 
 
   return (
     <Container>
-      {isInputting ? loadingSign : highlightPrompt()}
+      {isInputting ? loadingSign : highligtedSentence}
     </Container>
   );
 }
