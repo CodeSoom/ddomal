@@ -28,9 +28,9 @@ const SentenceBox = styled.div({
 const WarningMessage = styled.div({
   fontSize: '.9rem',
   fontWeight: '600',
-  color: '#5555DD',
   marginBottom: 0,
   height: '.9rem',
+  color: '#5555DD',
 });
 
 const StyledMic = styled(MdMic)`

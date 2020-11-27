@@ -21,11 +21,11 @@ const ButtonBox = styled.div({
 const AnswersBox = styled.div({
   position: 'relative',
   minWidth: '23rem',
+  padding: '1rem 2rem',
   border: '#DDD 1px solid',
   borderTop: '#555 4px solid',
   borderBottom: '#444 4px solid',
   borderRadius: '3px',
-  padding: '1rem 2rem',
 });
 
 const AnswerBox = styled.div({
@@ -37,12 +37,12 @@ const Answer = styled.p({
 });
 
 const Prompt = styled.span({
-  width: '5rem',
-  display: 'inline-block',
   textAlign: 'center',
-  borderBottom: '1px solid #EEE',
+  display: 'inline-block',
+  width: '5rem',
   padding: '0 .5rem',
   marginRight: '.5rem',
+  borderBottom: '1px solid #EEE',
 });
 
 const Sentence = styled.span({
