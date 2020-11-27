@@ -75,6 +75,7 @@ export default function MakeSentenceContainer() {
         </Prompt>
       </PromptBox>
       <SpeakSentenceForm
+        prompt={prompt}
         spokenSentence={spokenSentence}
         speakStatus={speakStatus}
         onClick={handleClickSpeak}

@@ -47,9 +47,9 @@ describe('MakeSentenceContainer', () => {
   });
 
   it('renders prompt', () => {
-    const { queryByText } = renderMakeSentenceContainer();
+    const { queryAllByText } = renderMakeSentenceContainer();
 
-    expect(queryByText(prompt)).not.toBeNull();
+    expect(queryAllByText(prompt)).not.toEqual([]);
   });
 
   it('renders spoken sentence', () => {

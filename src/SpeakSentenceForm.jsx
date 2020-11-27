@@ -21,11 +21,17 @@ const StyledMic = styled(MdMic)`
   color: ${({ speaking }) => (speaking ? 'green' : 'black')};
 `;
 
-export default function SpeakSentenceForm({ spokenSentence, speakStatus, onClick }) {
+export default function SpeakSentenceForm({
+  prompt, spokenSentence, speakStatus, onClick,
+}) {
   return (
     <Container>
       <SentenceBox>
-        <SpokenSentence spokenSentence={spokenSentence} speakStatus={speakStatus} />
+        <SpokenSentence
+          prompt={prompt}
+          spokenSentence={spokenSentence}
+          speakStatus={speakStatus}
+        />
       </SentenceBox>
       <StyledMic
         title="mic"
