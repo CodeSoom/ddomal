@@ -12,8 +12,13 @@ describe('SentenceSpeakInput', () => {
 
   const handleClick = jest.fn();
 
-  const renderSentenceSpeakInput = ({ sentence, micState = MicState.OFF } = {}) => render(
+  const playStub = jest
+    .spyOn(window.HTMLAudioElement.prototype, 'play')
+    .mockImplementation(() => {});
+
+  const renderSentenceSpeakInput = ({ prompt, sentence, micState = MicState.OFF } = {}) => render(
     <SentenceSpeakInput
+      prompt={prompt}
       spokenSentence={sentence}
       onClick={handleClick}
       micState={micState}
@@ -21,6 +26,7 @@ describe('SentenceSpeakInput', () => {
   );
 
   beforeEach(() => {
+    playStub.mockClear();
     handleClick.mockClear();
   });
 
@@ -38,5 +44,27 @@ describe('SentenceSpeakInput', () => {
     fireEvent.click(getByTitle(micButton));
 
     expect(handleClick).toBeCalled();
+  });
+
+  context('when spoken sentence contains prompt', () => {
+    it('play correct sound ', () => {
+      renderSentenceSpeakInput({
+        prompt: '사과',
+        sentence: '사과는 맛있다',
+      });
+
+      expect(playStub).toBeCalled();
+    });
+  });
+
+  context('when spoken sentence does not contain prompt', () => {
+    it('does not play correct sound', () => {
+      renderSentenceSpeakInput({
+        prompt: '사과',
+        sentence: '포도는 맛있다',
+      });
+
+      expect(playStub).not.toBeCalled();
+    });
   });
 });

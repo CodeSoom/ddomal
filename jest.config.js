@@ -6,4 +6,7 @@ module.exports = {
     './jest.setup',
     'given2/setup',
   ],
+  moduleNameMapper: {
+    '\\.mp3$': '<rootDir>/__mocks__/fileMock.js',
+  },
 };

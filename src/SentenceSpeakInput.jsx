@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { MdMic } from 'react-icons/md';
 
+import _ from 'lodash';
+
 import styled from '@emotion/styled';
+
+import correctSound from '../sounds/CorrectAnswer.mp3';
 
 import { flexBoxCenter } from './styles/common';
 
@@ -24,9 +28,17 @@ const StyledMic = styled(MdMic)`
   color: ${({ speaking }) => (speaking ? 'green' : 'black')};
 `;
 
+const sound = new Audio(correctSound);
+
 export default function SentenceSpeakInput({
   prompt, spokenSentence, micState, onClick,
 }) {
+  useEffect(() => {
+    if (_.isString(spokenSentence) && spokenSentence.includes(prompt)) {
+      sound.play();
+    }
+  }, [spokenSentence]);
+
   return (
     <Container>
       <SentenceBox>
@@ -38,6 +50,7 @@ export default function SentenceSpeakInput({
       </SentenceBox>
       <StyledMic
         title="mic"
+        testid="mic"
         type="button"
         onClick={onClick}
         size={70}
