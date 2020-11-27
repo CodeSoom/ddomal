@@ -1,6 +1,7 @@
+import MicState from '../enums/MicState';
 import reducer, {
   setSpokenSentence,
-  setSpeakStatus,
+  setMicState,
   setPrompt,
   saveAnswer,
   clearAnswers,
@@ -19,12 +20,12 @@ describe('reducer', () => {
     });
   });
 
-  test('setSpeakStatus', () => {
+  test('setMicState', () => {
     const state = reducer({
-      speakStatus: 'MIC_OFF',
-    }, setSpeakStatus('MIC_ON'));
+      micState: MicState.OFF,
+    }, setMicState(MicState.ON));
 
-    expect(state.speakStatus).toBe('MIC_ON');
+    expect(state.micState).toBe(MicState.ON);
   });
 
   test('setPrompt', () => {

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import MicState from '../enums/MicState';
+
 import { getNextPrompt } from '../services/promptService';
 import {
   recognize,
@@ -13,7 +15,7 @@ const { reducer, actions } = createSlice({
   name: 'application',
   initialState: {
     prompt: null,
-    speakStatus: 'MIC_OFF',
+    micState: MicState.OFF,
     answers: [],
   },
   reducers: {
@@ -23,10 +25,10 @@ const { reducer, actions } = createSlice({
         spokenSentence,
       };
     },
-    setSpeakStatus(state, { payload: speakStatus }) {
+    setMicState(state, { payload: micState }) {
       return {
         ...state,
-        speakStatus,
+        micState,
       };
     },
     setPrompt(state, { payload: prompt }) {
@@ -57,7 +59,7 @@ const { reducer, actions } = createSlice({
 
 export const {
   setSpokenSentence,
-  setSpeakStatus,
+  setMicState,
   setPrompt,
   saveAnswer,
   clearAnswers,
@@ -68,7 +70,7 @@ function changeSpeaking() {
     const soundStarts$ = soundStart();
 
     soundStarts$.subscribe(() => {
-      dispatch(setSpeakStatus('SPEAKING'));
+      dispatch(setMicState(MicState.SPEAKING));
     });
   };
 }
@@ -78,7 +80,7 @@ function changeNotSpeaking() {
     const soundEnds$ = soundEnd();
 
     soundEnds$.subscribe(() => {
-      dispatch(setSpeakStatus('MIC_ON'));
+      dispatch(setMicState(MicState.ON));
     });
   };
 }
@@ -88,7 +90,7 @@ function changeMicOn() {
     const starts$ = start();
 
     starts$.subscribe(() => {
-      dispatch(setSpeakStatus('MIC_ON'));
+      dispatch(setMicState(MicState.ON));
     });
   };
 }
@@ -98,7 +100,7 @@ function changeMicOff() {
     const ends$ = end();
 
     ends$.subscribe(() => {
-      dispatch(setSpeakStatus('MIC_OFF'));
+      dispatch(setMicState(MicState.OFF));
     });
   };
 }
@@ -132,7 +134,7 @@ export function initialize() {
     dispatch(setPrompt(null));
     dispatch(setSpokenSentence(null));
     dispatch(clearAnswers());
-    dispatch(setSpeakStatus('MIC_OFF'));
+    dispatch(setMicState(MicState.OFF));
   };
 }
 

@@ -4,16 +4,18 @@ import { render } from '@testing-library/react';
 
 import SpokenSentence from './SpokenSentence';
 
+import MicState from './enums/MicState';
+
 describe('Sentence', () => {
   const defaultMessage = '문장을 소리내어 말해보세요';
-  const loadingSign = '...';
+  const waiting = '...';
   const highlightColor = 'blue';
 
-  const renderSpokenSentence = ({ prompt, sentence, speakStatus }) => (
+  const renderSpokenSentence = ({ prompt, sentence, micState = MicState.OFF }) => (
     render(<SpokenSentence
       prompt={prompt}
       spokenSentence={sentence}
-      speakStatus={speakStatus}
+      micState={micState}
     />)
   );
 
@@ -37,27 +39,26 @@ describe('Sentence', () => {
     });
   });
 
-  it('renders loading sign while user is inputting', () => {
-    ['SPEAKING', 'MIC_ON'].forEach((inputStatus) => {
+  it('renders waiting while user is inputting', () => {
+    [MicState.SPEAKING, MicState.ON].forEach((micState) => {
       const { container } = renderSpokenSentence({
-        speakStatus: inputStatus,
+        micState,
       });
 
-      expect(container).toHaveTextContent(loadingSign);
+      expect(container).toHaveTextContent(waiting);
     });
   });
 
   it('doesnt render loading sign while user is not inputting', () => {
     const { container } = renderSpokenSentence({
-      speakStatus: 'MIC_OFF',
+      micState: MicState.OFF,
     });
 
-    expect(container).not.toHaveTextContent(loadingSign);
+    expect(container).not.toHaveTextContent(waiting);
   });
 
   it('highlight prompt in the spoken sentence', () => {
     const { getByText } = renderSpokenSentence({
-      speakStatus: 'MIC_OFF',
       sentence: '사과는 맛있다',
       prompt: '사과',
     });

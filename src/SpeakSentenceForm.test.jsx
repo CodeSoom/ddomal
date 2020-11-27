@@ -3,6 +3,7 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 
 import SpeakSentenceForm from './SpeakSentenceForm';
+import MicState from './enums/MicState';
 
 describe('SpeakSentenceForm', () => {
   const spokenSentence = '사과가 맛있네요';
@@ -10,11 +11,11 @@ describe('SpeakSentenceForm', () => {
 
   const handleClick = jest.fn();
 
-  const renderSpeakSentenceForm = ({ sentence, speakStatus } = {}) => render(
+  const renderSpeakSentenceForm = ({ sentence, micState = MicState.OFF } = {}) => render(
     <SpeakSentenceForm
       spokenSentence={sentence}
       onClick={handleClick}
-      speakStatus={speakStatus}
+      micState={micState}
     />,
   );
 

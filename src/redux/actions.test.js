@@ -7,6 +7,7 @@ import {
   initialize,
   recognizeVoice,
 } from './slice';
+import MicState from '../enums/MicState';
 
 jest.mock('../services/speechRecognitionService.js');
 jest.mock('../services/promptService.js');
@@ -32,20 +33,20 @@ describe('actions', () => {
         payload: '',
       },
       {
-        type: 'application/setSpeakStatus',
-        payload: 'SPEAKING',
+        type: 'application/setMicState',
+        payload: MicState.SPEAKING,
       },
       {
-        type: 'application/setSpeakStatus',
-        payload: 'MIC_ON',
+        type: 'application/setMicState',
+        payload: MicState.ON,
       },
       {
-        type: 'application/setSpeakStatus',
-        payload: 'MIC_ON',
+        type: 'application/setMicState',
+        payload: MicState.ON,
       },
       {
-        type: 'application/setSpeakStatus',
-        payload: 'MIC_OFF',
+        type: 'application/setMicState',
+        payload: MicState.OFF,
       },
     ]);
   });
@@ -85,8 +86,8 @@ describe('actions', () => {
         type: 'application/clearAnswers',
       },
       {
-        type: 'application/setSpeakStatus',
-        payload: 'MIC_OFF',
+        type: 'application/setMicState',
+        payload: MicState.OFF,
       },
     ]);
   });
