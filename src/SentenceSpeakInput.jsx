@@ -20,7 +20,17 @@ const Container = styled.div({
 });
 
 const SentenceBox = styled.div({
+  ...flexBoxCenter,
+  flexDirection: 'column',
   padding: '12vh 0',
+});
+
+const WarningMessage = styled.div({
+  fontSize: '.9rem',
+  fontWeight: '600',
+  color: '#5555DD',
+  marginBottom: 0,
+  height: '.9rem',
 });
 
 const StyledMic = styled(MdMic)`
@@ -33,8 +43,10 @@ const sound = new Audio(correctSound);
 export default function SentenceSpeakInput({
   prompt, spokenSentence, micState, onClick,
 }) {
+  const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
+
   useEffect(() => {
-    if (_.isString(spokenSentence) && spokenSentence.includes(prompt)) {
+    if (isCorrectSentence) {
       sound.play();
     }
   }, [spokenSentence]);
@@ -42,6 +54,13 @@ export default function SentenceSpeakInput({
   return (
     <Container>
       <SentenceBox>
+        {(isCorrectSentence || _.isNull(spokenSentence))
+          ? <WarningMessage />
+          : (
+            <WarningMessage>
+              제시어를 사용해서 문장을 말해보세요~
+            </WarningMessage>
+          )}
         <SpokenSentence
           prompt={prompt}
           spokenSentence={spokenSentence}
