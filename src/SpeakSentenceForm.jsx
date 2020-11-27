@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 
 import { flexBoxCenter } from './styles/common';
 import SpokenSentence from './SpokenSentence';
+import MicState from './enums/MicState';
 
 const Container = styled.div({
   ...flexBoxCenter,
@@ -22,7 +23,7 @@ const StyledMic = styled(MdMic)`
 `;
 
 export default function SpeakSentenceForm({
-  prompt, spokenSentence, speakStatus, onClick,
+  prompt, spokenSentence, micState, onClick,
 }) {
   return (
     <Container>
@@ -30,7 +31,7 @@ export default function SpeakSentenceForm({
         <SpokenSentence
           prompt={prompt}
           spokenSentence={spokenSentence}
-          speakStatus={speakStatus}
+          micState={micState}
         />
       </SentenceBox>
       <StyledMic
@@ -38,7 +39,7 @@ export default function SpeakSentenceForm({
         type="button"
         onClick={onClick}
         size={70}
-        speaking={speakStatus === 'SPEAKING' ? 1 : 0}
+        speaking={micState === MicState.SPEAKING ? 1 : 0}
       />
     </Container>
   );

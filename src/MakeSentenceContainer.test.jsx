@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import given from 'given2';
 
 import MakeSentenceContainer from './MakeSentenceContainer';
+import MicState from './enums/MicState';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
@@ -43,6 +44,7 @@ describe('MakeSentenceContainer', () => {
       prompt,
       spokenSentence,
       answers: given.answers || [],
+      micState: MicState.OFF,
     }));
   });
 

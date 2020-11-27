@@ -2,15 +2,17 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import MicState from './enums/MicState';
+
 const Container = styled.p({
   fontSize: '2rem',
 });
 
-export default function SpokenSentence({ prompt, spokenSentence, speakStatus }) {
+export default function SpokenSentence({ prompt, spokenSentence, micState }) {
   const defaultMessage = '문장을 소리내어 말해보세요';
-  const loadingSign = '...';
+  const waiting = '...';
 
-  const isInputting = speakStatus === 'SPEAKING' || speakStatus === 'MIC_ON';
+  const isInputting = micState !== MicState.OFF;
 
   const sentence = spokenSentence ?? defaultMessage;
 
@@ -23,7 +25,7 @@ export default function SpokenSentence({ prompt, spokenSentence, speakStatus }) 
 
   return (
     <Container>
-      {isInputting ? loadingSign : highligtedSentence}
+      {isInputting ? waiting : highligtedSentence}
     </Container>
   );
 }
