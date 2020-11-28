@@ -21,10 +21,10 @@ export function soundEnd() {
   return fromEvent(recognition, 'soundend');
 }
 
-export function start() {
+export function recognitionStart() {
   return fromEvent(recognition, 'start');
 }
 
-export function end() {
+export function recognitionEnd() {
   return fromEvent(recognition, 'end');
 }

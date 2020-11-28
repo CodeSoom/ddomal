@@ -12,10 +12,10 @@ export function soundEnd() {
   return of('');
 }
 
-export function start() {
+export function recognitionStart() {
   return of('');
 }
 
-export function end() {
+export function recognitionEnd() {
   return of('');
 }

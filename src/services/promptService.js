@@ -4,7 +4,7 @@ import prompts from '../../data/prompts';
 
 const getRandomIndex = uniqueRandom(0, prompts.length - 1);
 
-export function getNextPrompt() {
+export function fetchNextPrompt() {
   return prompts[getRandomIndex()];
 }
 

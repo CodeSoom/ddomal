@@ -2,22 +2,25 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import MicState from '../enums/MicState';
 
-import { getNextPrompt } from '../services/promptService';
+import { fetchNextPrompt } from '../services/promptService';
+
 import {
   recognize,
   soundStart,
   soundEnd,
-  start,
-  end,
+  recognitionStart,
+  recognitionEnd,
 } from '../services/speechRecognitionService';
+
+const initialState = {
+  prompt: null,
+  micState: MicState.OFF,
+  answers: [],
+};
 
 const { reducer, actions } = createSlice({
   name: 'application',
-  initialState: {
-    prompt: null,
-    micState: MicState.OFF,
-    answers: [],
-  },
+  initialState,
   reducers: {
     setSpokenSentence(state, { payload: spokenSentence }) {
       return {
@@ -54,6 +57,9 @@ const { reducer, actions } = createSlice({
         answers: [],
       };
     },
+    initializeState() {
+      return initialState;
+    },
   },
 });
 
@@ -63,45 +69,55 @@ export const {
   setPrompt,
   saveAnswer,
   clearAnswers,
+  initializeState,
 } = actions;
 
-function changeSpeaking() {
+function listenSoundStart() {
   return (dispatch) => {
-    const soundStarts$ = soundStart();
+    const events$ = soundStart();
 
-    soundStarts$.subscribe(() => {
+    events$.subscribe(() => {
       dispatch(setMicState(MicState.SPEAKING));
     });
   };
 }
 
-function changeNotSpeaking() {
+function listenSoundEnd() {
   return (dispatch) => {
-    const soundEnds$ = soundEnd();
+    const events$ = soundEnd();
 
-    soundEnds$.subscribe(() => {
+    events$.subscribe(() => {
       dispatch(setMicState(MicState.ON));
     });
   };
 }
 
-function changeMicOn() {
+function listenRecognitionStart() {
   return (dispatch) => {
-    const starts$ = start();
+    const events$ = recognitionStart();
 
-    starts$.subscribe(() => {
+    events$.subscribe(() => {
       dispatch(setMicState(MicState.ON));
     });
   };
 }
 
-function changeMicOff() {
+function listenRecognitionEnd() {
   return (dispatch) => {
-    const ends$ = end();
+    const events$ = recognitionEnd();
 
-    ends$.subscribe(() => {
+    events$.subscribe(() => {
       dispatch(setMicState(MicState.OFF));
     });
+  };
+}
+
+function listenRecognitionEvents() {
+  return (dispatch) => {
+    dispatch(listenSoundStart());
+    dispatch(listenSoundEnd());
+    dispatch(listenRecognitionStart());
+    dispatch(listenRecognitionEnd());
   };
 }
 
@@ -113,28 +129,16 @@ export function recognizeVoice() {
       dispatch(setSpokenSentence(sentence));
     });
 
-    dispatch(changeSpeaking());
-    dispatch(changeNotSpeaking());
-    dispatch(changeMicOn());
-    dispatch(changeMicOff());
+    dispatch(listenRecognitionEvents());
   };
 }
 
-export function getNext() {
+export function getNextQuestion() {
   return (dispatch) => {
-    const nextPrompt = getNextPrompt();
+    const nextPrompt = fetchNextPrompt();
 
     dispatch(setPrompt(nextPrompt));
     dispatch(setSpokenSentence(null));
-  };
-}
-
-export function initialize() {
-  return (dispatch) => {
-    dispatch(setPrompt(null));
-    dispatch(setSpokenSentence(null));
-    dispatch(clearAnswers());
-    dispatch(setMicState(MicState.OFF));
   };
 }
 

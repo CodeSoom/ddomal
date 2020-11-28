@@ -1,7 +1,7 @@
 import prompts from '../../data/prompts';
 
-import { getNextPrompt } from './promptService';
+import { fetchNextPrompt } from './promptService';
 
-test('getNextPrompt', () => {
-  expect(prompts).toContain(getNextPrompt());
+test('fetchNextPrompt', () => {
+  expect(prompts).toContain(fetchNextPrompt());
 });

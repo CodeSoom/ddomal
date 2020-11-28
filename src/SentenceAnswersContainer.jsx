@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { initialize } from './redux/slice';
+import { initializeState } from './redux/slice';
 
 import { get } from './utils';
 
@@ -28,7 +28,7 @@ export default function SentenceAnswersContainer() {
   const history = useHistory();
 
   const handleClick = () => {
-    dispatch(initialize());
+    dispatch(initializeState());
     history.push('/');
   };
 

@@ -3,10 +3,10 @@ import configureStore from 'redux-mock-store';
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import {
-  getNext,
-  initialize,
   recognizeVoice,
+  getNextQuestion,
 } from './slice';
+
 import MicState from '../enums/MicState';
 
 jest.mock('../services/speechRecognitionService.js');
@@ -51,8 +51,8 @@ describe('actions', () => {
     ]);
   });
 
-  test('getNext', async () => {
-    await store.dispatch(getNext());
+  test('getNextQuestion', async () => {
+    await store.dispatch(getNextQuestion());
 
     const actions = store.getActions();
 
@@ -64,30 +64,6 @@ describe('actions', () => {
       {
         type: 'application/setSpokenSentence',
         payload: null,
-      },
-    ]);
-  });
-
-  test('initialize', async () => {
-    await store.dispatch(initialize());
-
-    const actions = store.getActions();
-
-    expect(actions).toEqual([
-      {
-        type: 'application/setPrompt',
-        payload: null,
-      },
-      {
-        type: 'application/setSpokenSentence',
-        payload: null,
-      },
-      {
-        type: 'application/clearAnswers',
-      },
-      {
-        type: 'application/setMicState',
-        payload: MicState.OFF,
       },
     ]);
   });
