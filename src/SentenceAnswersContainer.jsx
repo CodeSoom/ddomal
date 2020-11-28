@@ -10,44 +10,14 @@ import { initialize } from './redux/slice';
 
 import { get } from './utils';
 
+import SentenceAnswers from './SentenceAnswers';
+
 import { flexBoxCenter } from './styles/common';
 import Button from './styles/Button';
 
 const ButtonBox = styled.div({
   ...flexBoxCenter,
   marginTop: '2rem',
-});
-
-const AnswersBox = styled.div({
-  position: 'relative',
-  minWidth: '23rem',
-  padding: '1rem 2rem',
-  border: '#DDD 1px solid',
-  borderTop: '#555 4px solid',
-  borderBottom: '#444 4px solid',
-  borderRadius: '3px',
-});
-
-const AnswerBox = styled.div({
-  marginTop: '.5rem',
-});
-
-const Answer = styled.p({
-  fontSize: '1.4rem',
-});
-
-const Prompt = styled.span({
-  textAlign: 'center',
-  display: 'inline-block',
-  width: '5rem',
-  padding: '0 .5rem',
-  marginRight: '.5rem',
-  borderBottom: '1px solid #EEE',
-});
-
-const Sentence = styled.span({
-  display: 'inline-block',
-  marginLeft: '1rem',
 });
 
 export default function SentenceAnswersContainer() {
@@ -64,21 +34,7 @@ export default function SentenceAnswersContainer() {
 
   return (
     <>
-      <AnswersBox>
-        {answers.map(({ prompt, spokenSentence }) => (
-          <AnswerBox key={prompt}>
-            <Answer>
-              <Prompt>
-                {prompt}
-              </Prompt>
-              :
-              <Sentence>
-                {spokenSentence}
-              </Sentence>
-            </Answer>
-          </AnswerBox>
-        ))}
-      </AnswersBox>
+      <SentenceAnswers answers={answers} />
       <ButtonBox>
         <Button type="button" onClick={handleClick}>
           처음으로
