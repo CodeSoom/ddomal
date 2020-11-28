@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import SentenceSpeakInput from './SentenceSpeakInput';
+import SentenceSubmitButton from './SentenceSubmitButton';
 
 import { flexBoxCenter } from './styles/common';
 
@@ -16,8 +17,6 @@ import {
   getNext,
 } from './redux/slice';
 
-import SentenceSubmitButton from './SentenceSubmitButton';
-
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -25,16 +24,13 @@ const Container = styled.div({
 });
 
 const PromptBox = styled.div({
-  ...flexBoxCenter,
-  marginTop: '.5rem',
-  padding: '2rem 0',
-  backgroundColor: '#DDD',
-  width: '18rem',
-  borderRadius: '6px',
-});
-
-const Prompt = styled.p({
   fontSize: '1.7rem',
+  ...flexBoxCenter,
+  width: '18rem',
+  padding: '3.7rem 0',
+  marginTop: '.5rem',
+  borderRadius: '6px',
+  backgroundColor: '#DDD',
 });
 
 const SubmitButtonBox = styled.div({
@@ -71,9 +67,7 @@ export default function SentenceSpeakContainer() {
   return (
     <Container>
       <PromptBox>
-        <Prompt>
-          {prompt}
-        </Prompt>
+        {prompt}
       </PromptBox>
       <SentenceSpeakInput
         prompt={prompt}

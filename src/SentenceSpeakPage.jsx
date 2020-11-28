@@ -8,13 +8,10 @@ import { getNext } from './redux/slice';
 
 import SentenceSpeakContainer from './SentenceSpeakContainer';
 
-const HeadingBox = styled.div({
-  textAlign: 'center',
-});
-
 const Paragraph = styled.p({
   fontSize: '.8rem',
   marginBottom: '1rem',
+  textAlign: 'center',
 });
 
 export default function SentenceSpeakPage() {
@@ -26,11 +23,9 @@ export default function SentenceSpeakPage() {
 
   return (
     <div>
-      <HeadingBox>
-        <Paragraph>
-          제시어를 보고 문장을 만들어 보세요!
-        </Paragraph>
-      </HeadingBox>
+      <Paragraph>
+        제시어를 보고 문장을 만들어 보세요!
+      </Paragraph>
       <SentenceSpeakContainer />
     </div>
   );
