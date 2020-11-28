@@ -14,7 +14,7 @@ import { flexBoxCenter } from './styles/common';
 import {
   recognizeVoice,
   saveAnswer,
-  getNext,
+  getNextQuestion,
 } from './redux/slice';
 
 const Container = styled.div({
@@ -54,7 +54,7 @@ export default function SentenceSpeakContainer() {
 
   const handleClickNext = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
-    dispatch(getNext());
+    dispatch(getNextQuestion());
   };
 
   const history = useHistory();

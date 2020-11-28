@@ -1,10 +1,12 @@
 import MicState from '../enums/MicState';
+
 import reducer, {
   setSpokenSentence,
   setMicState,
   setPrompt,
   saveAnswer,
   clearAnswers,
+  initializeState,
 } from './slice';
 
 jest.mock('../services/speechRecognitionService');
@@ -52,5 +54,19 @@ describe('reducer', () => {
     }, clearAnswers());
 
     expect(state.answers).toEqual([]);
+  });
+
+  test('initializeState', () => {
+    const initialState = {
+      prompt: null,
+      micState: MicState.OFF,
+      answers: [],
+    };
+
+    const state = reducer({
+      answers: [{ prompt: '사과', sentence: '사과가 맛있다' }],
+    }, initializeState());
+
+    expect(state).toEqual(initialState);
   });
 });

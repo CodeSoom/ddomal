@@ -1,4 +1,4 @@
-export function getNextPrompt() {
+export function fetchNextPrompt() {
   return '';
 }
 

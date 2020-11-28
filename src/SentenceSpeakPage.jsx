@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { useDispatch } from 'react-redux';
 
-import { getNext } from './redux/slice';
+import { getNextQuestion } from './redux/slice';
 
 import SentenceSpeakContainer from './SentenceSpeakContainer';
 
@@ -18,7 +18,7 @@ export default function SentenceSpeakPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getNext());
+    dispatch(getNextQuestion());
   }, []);
 
   return (
