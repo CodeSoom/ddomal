@@ -1,8 +1,6 @@
 import { of } from 'rxjs';
 
-export function recognize() {
-  return of('');
-}
+export const recognize = jest.fn();
 
 export function soundStart() {
   return of('');

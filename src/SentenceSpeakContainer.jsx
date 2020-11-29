@@ -12,9 +12,7 @@ import SentenceSubmitButton from './SentenceSubmitButton';
 import { flexBoxCenter } from './styles/common';
 
 import {
-  recognizeVoice,
   saveAnswer,
-  getNextQuestion,
 } from './redux/slice';
 
 const Container = styled.div({
@@ -49,12 +47,12 @@ export default function SentenceSpeakContainer() {
   const dispatch = useDispatch();
 
   const handleClickSpeak = () => {
-    dispatch(recognizeVoice());
+    dispatch({ type: 'recognizeSpeech' });
   };
 
   const handleClickNext = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
-    dispatch(getNextQuestion());
+    dispatch({ type: 'getNextQuestion' });
   };
 
   const history = useHistory();
