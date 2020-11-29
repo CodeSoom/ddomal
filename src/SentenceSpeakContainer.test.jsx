@@ -66,7 +66,7 @@ describe('SentenceSpeakContainer', () => {
 
     fireEvent.click(getByTitle(micButton));
 
-    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({ type: 'recognizeSpeech' });
   });
 
   context('when answering is not complete', () => {
