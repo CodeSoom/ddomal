@@ -21,6 +21,7 @@ export const getNextQuestionEpic = (action$) => action$.pipe(
   ofType('getNextQuestion'),
   mergeMap(() => {
     const nextPrompt = fetchNextPrompt();
+
     return of(
       setPrompt(nextPrompt),
       setSpokenSentence(null),
@@ -32,6 +33,7 @@ export const recognizeSpeechEpic = (action$) => action$.pipe(
   ofType('recognizeSpeech'),
   mergeMap(() => {
     const sentence$ = recognize();
+
     return merge(
       of({ type: 'listenRecognitionEvents' }),
       sentence$.pipe(
