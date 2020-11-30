@@ -16,6 +16,7 @@ describe('App', () => {
   const mainPageButton = '시작하기';
   const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
   const answersPage = '결과 확인';
+  const yesnoPageTitle = 'Yes No';
 
   const dispatch = jest.fn();
 
@@ -51,5 +52,11 @@ describe('App', () => {
     const { container } = renderApp({ path: '/answers' });
 
     expect(container).toHaveTextContent(answersPage);
+  });
+
+  it('shows YesNo page on route /yesno', () => {
+    const { container } = renderApp({ path: '/yesno' });
+
+    expect(container).toHaveTextContent(yesnoPageTitle);
   });
 });
