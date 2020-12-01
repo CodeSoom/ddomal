@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function App() {
+export default function YesNoPage() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
