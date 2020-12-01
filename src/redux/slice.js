@@ -41,6 +41,12 @@ const { reducer, actions } = createSlice({
         ],
       };
     },
+    setYesNoQuestion(state, { payload: yesNoQuestion }) {
+      return {
+        ...state,
+        yesNoQuestion,
+      };
+    },
     clearAnswers(state) {
       return {
         ...state,
@@ -59,6 +65,7 @@ export const {
   setPrompt,
   saveAnswer,
   clearAnswers,
+  setYesNoQuestion,
   initializeState,
 } = actions;
 

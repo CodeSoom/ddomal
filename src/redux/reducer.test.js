@@ -6,6 +6,7 @@ import reducer, {
   setPrompt,
   saveAnswer,
   clearAnswers,
+  setYesNoQuestion,
   initializeState,
 } from './slice';
 
@@ -54,6 +55,17 @@ describe('reducer', () => {
     }, clearAnswers());
 
     expect(state.answers).toEqual([]);
+  });
+
+  test('setYesNoQuestion', () => {
+    const state = reducer({
+      yesNoQuestion: null,
+    }, setYesNoQuestion({
+      question: '지구는 둥급니까?',
+      answer: '네',
+    }));
+
+    expect(state.yesNoQuestion.question).toBe('지구는 둥급니까?');
   });
 
   test('initializeState', () => {

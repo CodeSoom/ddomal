@@ -1,6 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch({
+      type: 'getNextYesNoQuestion',
+    });
+  };
+
   return (
     <div>
       <h1>Yes No</h1>
@@ -12,6 +21,9 @@ export default function App() {
       &nbsp;
       <button type="button">
         아니오
+      </button>
+      <button type="button" onClick={handleClick}>
+        재생
       </button>
     </div>
   );
