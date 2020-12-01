@@ -1,8 +1,8 @@
 const webpack = require('webpack');
-
 const path = require('path');
 
-module.exports = (env) => ({
+module.exports = {
+  mode: 'production',
   entry: './src/index.jsx',
   output: {
     filename: 'main.js',
@@ -38,8 +38,10 @@ module.exports = (env) => ({
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.AWS_REGION': JSON.stringify(env.AWS_REGION),
-      'process.env.AWS_ID': JSON.stringify(env.AWS_ID),
+      'process.env': {
+        AWS_REGION: JSON.stringify(process.env.AWS_REGION),
+        AWS_ID: JSON.stringify(process.env.AWS_ID),
+      },
     }),
   ],
-});
+};
