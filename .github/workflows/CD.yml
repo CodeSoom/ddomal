@@ -13,6 +13,9 @@ jobs:
         run: |
           npm ci
           npm run build
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ID: ${{ secrets.AWS_ID }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
