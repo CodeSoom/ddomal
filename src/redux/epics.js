@@ -15,7 +15,14 @@ import {
   soundEnd,
 } from '../services/speechRecognitionService';
 
-import { setMicState, setPrompt, setSpokenSentence } from './slice';
+import { fetchNextYesNoQuestion, playQuestion } from '../services/yesNoQuestionService';
+
+import {
+  setMicState,
+  setPrompt,
+  setSpokenSentence,
+  setYesNoQuestion,
+} from './slice';
 
 export const getNextQuestionEpic = (action$) => action$.pipe(
   ofType('getNextQuestion'),
@@ -60,10 +67,32 @@ export const listenRecognitionEvents = (action$) => action$.pipe(
   }),
 );
 
+export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
+  ofType('getNextYesNoQuestion'),
+  mergeMap(() => {
+    const question = fetchNextYesNoQuestion();
+
+    return of(
+      setYesNoQuestion(question),
+      { type: 'playYesNoQuestion', payload: question.question },
+    );
+  }),
+);
+
+export const playNextYesNoQuestionEpic = (action$) => action$.pipe(
+  ofType('playYesNoQuestion'),
+  map(({ payload }) => {
+    playQuestion(payload);
+    return { type: '' };
+  }),
+);
+
 const rootEpic = combineEpics(
   getNextQuestionEpic,
   listenRecognitionEvents,
   recognizeSpeechEpic,
+  getNextYesNoQuestionEpic,
+  playNextYesNoQuestionEpic,
 );
 
 export default rootEpic;
