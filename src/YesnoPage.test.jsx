@@ -15,14 +15,6 @@ describe('YesNoPage', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('plays yes no question on entering', () => {
-    render(<YesNoPage />);
-
-    expect(dispatch).toBeCalledWith({
-      type: 'playYesNoQuestion',
-    });
-  });
-
   it('renders Yes button', () => {
     const { getByText } = render(<YesNoPage />);
 
@@ -33,5 +25,16 @@ describe('YesNoPage', () => {
     const { getByText } = render(<YesNoPage />);
 
     fireEvent.click(getByText('아니오'));
+  });
+
+  // TODO: Fix this to click or touch screen
+  it('renders play button', () => {
+    const { getByText } = render(<YesNoPage />);
+
+    fireEvent.click(getByText('재생'));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'getNextYesNoQuestion',
+    });
   });
 });
