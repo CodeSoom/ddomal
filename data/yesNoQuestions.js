@@ -1,6 +1,6 @@
 const yesNoQuestions = [
   {
-    question: '쥐는 코끼리보다 큰가요?',
+    question: '쥐는 코끼리 보다 큰 가요?',
     answer: 'N',
   },
   {
@@ -16,11 +16,11 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '창문을 열 수 있나요?',
+    question: '창문은 열 수 있나요?',
     answer: 'Y',
   },
   {
-    question: '불은 뜨 겁나요?',
+    question: '불은 뜨겁나요?',
     answer: 'Y',
   },
   {
@@ -28,15 +28,11 @@ const yesNoQuestions = [
     answer: 'Y',
   },
   {
-    question: '배료를 웃길 수 있나요?',
-    answer: 'N',
-  },
-  {
-    question: '기린은 목이 긴가요?',
+    question: '기린은 목이, 기이인 가요?',
     answer: 'Y',
   },
   {
-    question: '레몬은 매운가요?',
+    question: '레몬은 맛이 매운가요?',
     answer: 'N',
   },
   {
@@ -68,11 +64,11 @@ const yesNoQuestions = [
     answer: 'Y',
   },
   {
-    question: '연필깍이로 무를 자를 수 있나요?',
+    question: '연필깎이로 무를 자를 수 있나요?',
     answer: 'N',
   },
   {
-    question: '컴퓨터로 그림을 그릴 수 있나요?',
+    question: '컴퓨터를 이용해서 그림을 그릴 수 있나요??',
     answer: 'Y',
   },
   {
@@ -88,11 +84,11 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '상처가나면 소독을 하나요?',
+    question: '상처가 나면 소독을 하나요?',
     answer: 'Y',
   },
   {
-    question: '전자렌지와 대화를 할 수 있나요?',
+    question: '전자레인지와 대화를 할 수 있을까요?',
     answer: 'N',
   },
   {
@@ -100,7 +96,7 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '옷은 보통 장농에 보관하나요?',
+    question: '옷은 보통, 장농에 보관하나요?',
     answer: 'Y',
   },
   {
@@ -108,7 +104,7 @@ const yesNoQuestions = [
     answer: 'Y',
   },
   {
-    question: '옷을 빨 수 있나요?',
+    question: '옷은, 빨 수 있나아요?',
     answer: 'Y',
   },
   {
@@ -116,23 +112,19 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '야구는 공을 차나요?',
+    question: '야구는 공을, 차는 운동인가요?',
     answer: 'N',
   },
   {
-    question: '더울 때 선풍기를 사용하나요?',
+    question: '날씨가 더울 때, 성풍기를 사용하나요?',
     answer: 'Y',
   },
   {
-    question: '추울 때 에어컨을 사용하나요?',
+    question: '날씨가 추울 때 에어컨을 사용하나요?',
     answer: 'N',
   },
   {
-    question: '냄비로 설거지를 할 수 있나요?',
-    answer: 'N',
-  },
-  {
-    question: '호랑이가 쥐한테 잡아 먹히나요?',
+    question: '호랑이가 쥐한테, 잡아 먹히나요?',
     answer: 'N',
   },
   {
@@ -140,35 +132,35 @@ const yesNoQuestions = [
     answer: 'Y',
   },
   {
-    question: '닭은 알을 낳나요?',
+    question: '닥은 알을 낳나요?',
     answer: 'Y',
   },
   {
-    question: '휴대폰으로 전화를 걸 수 있나요?',
+    question: '휴대폰으로 전화를 걸 수 있을까요?',
     answer: 'Y',
   },
   {
-    question: '자로 길이를 잴 수 있나요?',
+    question: '자를 이용해서 길이를 잴 수 있나요?',
     answer: 'Y',
   },
   {
-    question: '소년이 할아버지보다 나이가 많나요?',
+    question: '소년이, 할아버지보다, 나이가 많나요?',
     answer: 'N',
   },
   {
-    question: '할머니가 소녀보다 나이가 적나요?',
+    question: '할머니가 소녀보다, 나이가 적나요?',
     answer: 'N',
   },
   {
-    question: '수요일 다음 금요일인가요?',
+    question: '수요일 다음날은 금요일이 맞습니까?',
     answer: 'N',
   },
   {
-    question: '비행기는 하늘을 날 수 있나요?',
+    question: '비행기는 하늘을 날 수 있습니까?',
     answer: 'Y',
   },
   {
-    question: '우리나라의 계절은 사계절인가요?',
+    question: '우리나라의 계절은 사게절 인가요?',
     answer: 'Y',
   },
   {
@@ -176,7 +168,7 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '가방을 신고 다닐 수 있나요?',
+    question: '가방을 신고, 다닐 수 있나요?',
     answer: 'N',
   },
   {
@@ -188,7 +180,7 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '빙판은 미끄러운가요?',
+    question: '빙판은, 미끄러운가요?',
     answer: 'Y',
   },
   {
@@ -196,7 +188,7 @@ const yesNoQuestions = [
     answer: 'N',
   },
   {
-    question: '컴퓨터로 옷을 살 수 있나요?',
+    question: '컴퓨터를 이용해서 옷을 살 수 있나요?',
     answer: 'N',
   },
 ];
