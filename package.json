@@ -53,8 +53,8 @@
         "webpack-dev-server": "^3.11.0"
     },
     "scripts": {
-        "start:dev": "webpack-dev-server",
-        "build": "webpack",
+        "start:dev": "webpack-dev-server --config webpack.config.dev.js",
+        "build": "webpack --config webpack.config.build.js",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist",
         "lint": "eslint --ext js,jsx .",
