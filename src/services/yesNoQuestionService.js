@@ -17,10 +17,14 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({ IdentityPoolId: pr
 
 function synthesizeQuestion(context, question) {
   const speechParams = {
-    Text: question,
+    Text: `
+      <speak>
+        <prosody rate="91%">${question}</prosody>
+      </speak>
+    `,
     OutputFormat: 'mp3',
     SampleRate: '24000',
-    TextType: 'text',
+    TextType: 'ssml',
     VoiceId: 'Seoyeon',
   };
 
