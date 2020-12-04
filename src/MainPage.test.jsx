@@ -1,21 +1,12 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import MainPage from './MainPage';
 
-const mockPush = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useHistory() {
-    return { push: mockPush };
-  },
-}));
-
 describe('MainPage', () => {
-  const title = '문장 만들기';
-  const startButton = '시작하기';
+  const title = '또 다시 말해요';
+  const startButton = '시작 하기';
 
   it('renders title', () => {
     const { container } = render(<MainPage />);
@@ -27,7 +18,5 @@ describe('MainPage', () => {
     const { getByText } = render(<MainPage />);
 
     fireEvent.click(getByText(startButton));
-
-    expect(mockPush).toBeCalledWith('/sentence');
   });
 });
