@@ -13,7 +13,7 @@ jest.mock('./services/speechRecognitionService.js');
 
 describe('App', () => {
   const prompt = '사과';
-  const mainPageButton = '시작하기';
+  const mainPageButton = '시작 하기';
   const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
   const answersPage = '결과 확인';
   const yesnoPageTitle = 'Yes No';
