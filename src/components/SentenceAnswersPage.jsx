@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import SentenceAnswersContainer from './SentenceAnswersContainer';
+import SentenceAnswersContainer from '../containers/SentenceAnswersContainer';
 
-import { flexBoxCenter } from './styles/common';
+import { flexBoxCenter } from '../styles/common';
 
 const Container = styled.div({
   ...flexBoxCenter,

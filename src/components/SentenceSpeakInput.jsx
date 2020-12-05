@@ -6,15 +6,15 @@ import _ from 'lodash';
 
 import styled from '@emotion/styled';
 
-import correctSound from '../assets/sounds/CorrectAnswer.mp3';
+import correctSound from '../../assets/sounds/CorrectAnswer.mp3';
 
-import { flexBoxCenter } from './styles/common';
+import { flexBoxCenter } from '../styles/common';
 
 import SpokenSentence from './SpokenSentence';
 
-import MicState from './enums/MicState';
+import MicState from '../enums/MicState';
 
-import { normalColor, primaryColor } from './styles/colors';
+import { normalColor, primaryColor } from '../styles/colors';
 
 const Container = styled.div({
   ...flexBoxCenter,

@@ -5,7 +5,7 @@ import { fireEvent, render } from '@testing-library/react';
 import SentenceSubmitButton from './SentenceSubmitButton';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognitionService.js');
+jest.mock('../services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 

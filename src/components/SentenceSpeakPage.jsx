@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import SentenceSpeakContainer from './SentenceSpeakContainer';
+import SentenceSpeakContainer from '../containers/SentenceSpeakContainer';
 
 export default function SentenceSpeakPage() {
   const dispatch = useDispatch();

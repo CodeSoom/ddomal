@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import Button from './styles/CommonButton';
+import Button from '../styles/CommonButton';
 
 const Container = styled.div({
   display: 'flex',

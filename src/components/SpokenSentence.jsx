@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import MicState from './enums/MicState';
+import MicState from '../enums/MicState';
 
-import { normalColor } from './styles/colors';
+import { normalColor } from '../styles/colors';
 
 const Container = styled.p({
   fontSize: '1.5rem',

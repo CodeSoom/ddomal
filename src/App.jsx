@@ -7,13 +7,13 @@ import {
 
 import styled from '@emotion/styled';
 
-import MakeSentencePage from './SentenceSpeakPage';
-import AnswersPage from './SentenceAnswersPage';
-import YesNoPage from './YesNoPage';
-import SelectPage from './SelectPage';
+import MakeSentencePage from './components/SentenceSpeakPage';
+import AnswersPage from './components/SentenceAnswersPage';
+import YesNoPage from './components/YesNoPage';
+import SelectPage from './components/SelectPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
-import MainPage from './MainPage';
+import MainPage from './components/MainPage';
 
 const Container = styled.div({
   width: '100%',

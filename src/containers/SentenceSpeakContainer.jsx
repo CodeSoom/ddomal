@@ -6,18 +6,18 @@ import { useHistory } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
-import SentenceSpeakInput from './SentenceSpeakInput';
-import SentenceSubmitButton from './SentenceSubmitButton';
+import SentenceSpeakInput from '../components/SentenceSpeakInput';
+import SentenceSubmitButton from '../components/SentenceSubmitButton';
+import ProgressBar from '../components/ProgressBar';
 
-import { flexBoxCenter } from './styles/common';
+import { flexBoxCenter } from '../styles/common';
 
 import {
   saveAnswer,
-} from './redux/slice';
+} from '../redux/slice';
 
-import { titleFont } from './styles/fonts';
-import { normalColor } from './styles/colors';
-import ProgressBar from './ProgressBar';
+import { titleFont } from '../styles/fonts';
+import { normalColor } from '../styles/colors';
 
 const Container = styled.div({
   display: 'flex',
