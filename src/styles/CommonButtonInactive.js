@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { primaryColor, normalColor } from './colors';
+import { normalColor, inactiveColor } from './colors';
 
 import { normalFont } from './fonts';
 
@@ -10,14 +10,14 @@ const Button = styled.button({
   ...flexBoxCenter,
   width: '20rem',
   height: '3.25rem',
-  backgroundColor: `${normalColor}`,
-  color: `${primaryColor}`,
+  backgroundColor: 'transparent',
+  color: `${inactiveColor}`,
   fontFamily: `${normalFont}`,
   fontSize: '1.31rem',
-  fontWeight: '700',
+  fontWeight: '400',
   borderRadius: '4px',
   cursor: 'pointer',
-  border: 'none',
+  border: `2px solid ${normalColor}`,
   outline: 'none',
 });
 

@@ -60,6 +60,7 @@ export default function SentenceSpeakContainer() {
         {prompt}
       </PromptBox>
       <SentenceSpeakInput
+        prompt={prompt}
         isCorrectSentence={isCorrectSentence}
         spokenSentence={spokenSentence}
         micState={micState}
@@ -70,6 +71,7 @@ export default function SentenceSpeakContainer() {
           onClickNext={handleClickNext}
           onClickExit={handleClickExit}
           isComplete={isAnsweringComplete}
+          isCorrectSentence={isCorrectSentence}
         />
       </SubmitButtonBox>
     </Container>

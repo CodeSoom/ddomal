@@ -6,10 +6,12 @@ import SpokenSentence from './SpokenSentence';
 
 import MicState from '../enums/MicState';
 
+import { emphasisColor } from '../styles/colors';
+
 describe('Sentence', () => {
   const defaultMessage = '문장을 소리내어 말해보세요';
   const waiting = '...';
-  const highlightColor = 'blue';
+  const highlightColor = emphasisColor;
 
   const renderSpokenSentence = ({ prompt, sentence, micState = MicState.OFF }) => (
     render(<SpokenSentence

@@ -1,8 +1,13 @@
 import React from 'react';
 
-import Button from '../styles/CommonButton';
+import ActiveButton from '../styles/CommonButton';
+import InactiveButton from '../styles/CommonButtonInactive';
 
-export default function SentenceSubmitButton({ onClickExit, onClickNext, isComplete }) {
+export default function SentenceSubmitButton({
+  onClickExit, onClickNext, isComplete, isCorrectSentence,
+}) {
+  const Button = isCorrectSentence ? ActiveButton : InactiveButton;
+
   return (
     isComplete
       ? (
