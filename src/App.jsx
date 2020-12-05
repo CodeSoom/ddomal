@@ -10,7 +10,7 @@ import styled from '@emotion/styled';
 import MakeSentencePage from './SentenceSpeakPage';
 import AnswersPage from './SentenceAnswersPage';
 import YesNoPage from './YesNoPage';
-import MainPage from './MainPage';
+import SelectPage from './SelectPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
 
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <Container>
       <Switch>
-        <Route exact path="/" component={MainPage} />
+        <Route exact path="/" component={SelectPage} />
         <Route path="/sentence" component={MakeSentencePage} />
         <Route path="/answers" component={AnswersPage} />
         <Route path="/yesno" component={YesNoPage} />
