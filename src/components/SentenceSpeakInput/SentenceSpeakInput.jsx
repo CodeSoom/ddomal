@@ -1,54 +1,23 @@
 import React, { useEffect } from 'react';
 
-import { MdMic } from 'react-icons/md';
-
 import _ from 'lodash';
 
-import styled from '@emotion/styled';
+import SpokenSentence from '../SpokenSentence';
 
-import { flexBoxCenter } from '../styles/common';
+import MicState from '../../enums/MicState';
 
-import SpokenSentence from './SpokenSentence';
+import { useAudio } from '../../hooks/audio';
 
-import MicState from '../enums/MicState';
-
-import { normalColor, primaryColor } from '../styles/colors';
-
-import { useAudio } from '../hooks/audio';
-
-const Container = styled.div({
-  ...flexBoxCenter,
-  flexDirection: 'column',
-});
-
-const SentenceBox = styled.div({
-  marginTop: '12.3vh',
-});
-
-const WarningMessage = styled.div({
-  fontSize: '.9rem',
-  fontWeight: '600',
-  marginBottom: 0,
-  // height: '.9rem',
-  color: '#5555DD',
-});
-
-const MicBox = styled.div({
-  backgroundColor: normalColor,
-  ...flexBoxCenter,
-  marginTop: '10vh',
-  width: '4.6rem',
-  height: '4.6rem',
-  borderRadius: '6px',
-});
-
-const StyledMic = styled(MdMic)`
-  cursor: pointer;
-  color: ${primaryColor};
-`;
+import {
+  Container,
+  SentenceBox,
+  WarningMessage,
+  MicBox,
+  StyledMic,
+} from './styled';
 
 export default function SentenceSpeakInput({
-  isCorrectSentence, spokenSentence, micState, onClick,
+  isCorrectSentence, prompt, spokenSentence, micState, onClick,
 }) {
   const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
 

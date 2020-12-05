@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import MicState from '../enums/MicState';
 
-import { normalColor } from '../styles/colors';
+import { emphasisColor, normalColor } from '../styles/colors';
 
 const Container = styled.p({
   fontSize: '1.5rem',
@@ -18,7 +18,7 @@ export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   const isInputting = micState !== MicState.OFF;
 
   const highligtPrompt = (key) => (
-    <b key={key} style={{ color: 'blue' }}>
+    <b key={key} style={{ color: emphasisColor }}>
       {prompt}
     </b>
   );
