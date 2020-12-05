@@ -6,8 +6,6 @@ import _ from 'lodash';
 
 import styled from '@emotion/styled';
 
-import correctSound from '../../assets/sounds/CorrectAnswer.mp3';
-
 import { flexBoxCenter } from '../styles/common';
 
 import SpokenSentence from './SpokenSentence';
@@ -15,6 +13,8 @@ import SpokenSentence from './SpokenSentence';
 import MicState from '../enums/MicState';
 
 import { normalColor, primaryColor } from '../styles/colors';
+
+import { useAudio } from '../hooks/audio';
 
 const Container = styled.div({
   ...flexBoxCenter,
@@ -47,16 +47,14 @@ const StyledMic = styled(MdMic)`
   color: ${primaryColor};
 `;
 
-const sound = new Audio(correctSound);
-
 export default function SentenceSpeakInput({
-  prompt, spokenSentence, micState, onClick,
+  isCorrectSentence, spokenSentence, micState, onClick,
 }) {
-  const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
+  const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
 
   useEffect(() => {
     if (isCorrectSentence) {
-      sound.play();
+      play();
     }
   }, [spokenSentence]);
 

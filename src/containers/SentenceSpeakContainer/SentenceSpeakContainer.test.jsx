@@ -6,12 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import given from 'given2';
 
+import { useAudio } from '../../hooks/audio';
+
 import SentenceSpeakContainer from './SentenceSpeakContainer';
 
-import MicState from '../enums/MicState';
+import MicState from '../../enums/MicState';
 
 jest.mock('react-redux');
-jest.mock('../services/speechRecognitionService.js');
+jest.mock('../../services/speechRecognitionService.js');
+jest.mock('../../hooks/audio.js');
 
 const mockPush = jest.fn();
 
@@ -38,6 +41,8 @@ describe('SentenceSpeakContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
+    useAudio.mockImplementation(() => ['', () => {}]);
 
     useDispatch.mockImplementation(() => dispatch);
 

@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 // eslint-disable-next-line new-cap
 const recognition = new window.webkitSpeechRecognition();
 
+console.log(1);
+
 recognition.lang = 'ko';
 
 export function recognize() {

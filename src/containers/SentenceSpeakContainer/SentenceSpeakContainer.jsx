@@ -4,42 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import styled from '@emotion/styled';
+import _ from 'lodash';
 
-import SentenceSpeakInput from '../components/SentenceSpeakInput';
-import SentenceSubmitButton from '../components/SentenceSubmitButton';
-import ProgressBar from '../components/ProgressBar';
+import SentenceSpeakInput from '../../components/SentenceSpeakInput';
+import SentenceSubmitButton from '../../components/SentenceSubmitButton';
+import ProgressBar from '../../components/ProgressBar';
 
-import { flexBoxCenter } from '../styles/common';
+import {
+  Container,
+  BarBox,
+  PromptBox,
+  SubmitButtonBox,
+} from './styled';
 
 import {
   saveAnswer,
-} from '../redux/slice';
-
-import { titleFont } from '../styles/fonts';
-import { normalColor } from '../styles/colors';
-
-const Container = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-});
-
-const BarBox = styled.div({
-  marginTop: '2.3vh',
-});
-
-const PromptBox = styled.div({
-  fontFamily: titleFont,
-  fontSize: '4.5rem',
-  ...flexBoxCenter,
-  marginTop: '10.6vh',
-  color: normalColor,
-});
-
-const SubmitButtonBox = styled.div({
-  marginTop: '10vh',
-});
+} from '../../redux/slice';
 
 const MAX_ANSWERS = 5;
 
@@ -48,9 +28,11 @@ export default function SentenceSpeakContainer() {
     prompt, spokenSentence, micState, answers,
   } = useSelector((state) => state);
 
-  const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
-
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
+  const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
 
   const handleClickSpeak = () => {
     dispatch({ type: 'recognizeSpeech' });
@@ -60,8 +42,6 @@ export default function SentenceSpeakContainer() {
     dispatch(saveAnswer({ prompt, spokenSentence }));
     dispatch({ type: 'getNextQuestion' });
   };
-
-  const history = useHistory();
 
   const handleClickExit = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
@@ -80,7 +60,7 @@ export default function SentenceSpeakContainer() {
         {prompt}
       </PromptBox>
       <SentenceSpeakInput
-        prompt={prompt}
+        isCorrectSentence={isCorrectSentence}
         spokenSentence={spokenSentence}
         micState={micState}
         onClick={handleClickSpeak}
