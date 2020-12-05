@@ -14,28 +14,37 @@ import SpokenSentence from './SpokenSentence';
 
 import MicState from './enums/MicState';
 
+import { normalColor, primaryColor } from './styles/colors';
+
 const Container = styled.div({
   ...flexBoxCenter,
   flexDirection: 'column',
 });
 
 const SentenceBox = styled.div({
-  ...flexBoxCenter,
-  flexDirection: 'column',
-  padding: '12vh 0',
+  marginTop: '12.3vh',
 });
 
 const WarningMessage = styled.div({
   fontSize: '.9rem',
   fontWeight: '600',
   marginBottom: 0,
-  height: '.9rem',
+  // height: '.9rem',
   color: '#5555DD',
+});
+
+const MicBox = styled.div({
+  backgroundColor: normalColor,
+  ...flexBoxCenter,
+  marginTop: '10vh',
+  width: '4.6rem',
+  height: '4.6rem',
+  borderRadius: '6px',
 });
 
 const StyledMic = styled(MdMic)`
   cursor: pointer;
-  color: ${({ speaking }) => (speaking ? 'green' : 'black')};
+  color: ${primaryColor};
 `;
 
 const sound = new Audio(correctSound);
@@ -67,14 +76,16 @@ export default function SentenceSpeakInput({
           micState={micState}
         />
       </SentenceBox>
-      <StyledMic
-        title="mic"
-        testid="mic"
-        type="button"
-        onClick={onClick}
-        size={70}
-        speaking={micState === MicState.SPEAKING ? 1 : 0}
-      />
+      <MicBox>
+        <StyledMic
+          title="mic"
+          testid="mic"
+          type="button"
+          onClick={onClick}
+          size={55}
+          speaking={micState === MicState.SPEAKING ? 1 : 0}
+        />
+      </MicBox>
     </Container>
   );
 }

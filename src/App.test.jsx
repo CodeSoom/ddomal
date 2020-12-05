@@ -14,7 +14,6 @@ jest.mock('./services/speechRecognitionService.js');
 describe('App', () => {
   const prompt = '사과';
   const mainPageButton = '시작 하기';
-  const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
   const answersPage = '결과 확인';
   const yesnoPageTitle = 'Yes No';
   const selectPageTitle = '무엇을 연습해 볼까요';
@@ -32,7 +31,7 @@ describe('App', () => {
 
     useSelector.mockImplementation((selector) => selector({
       prompt,
-      spokenSentence: '',
+      spokenSentence: null,
       answers: [],
     }));
   });
@@ -52,7 +51,7 @@ describe('App', () => {
   it('shows make sentence page on route /sentence', () => {
     const { container } = renderApp({ path: '/sentence' });
 
-    expect(container).toHaveTextContent(makeSentencePageParagraph);
+    expect(container).toHaveTextContent(prompt);
   });
 
   it('shows results page on route /results', () => {

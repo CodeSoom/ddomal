@@ -11,7 +11,6 @@ jest.mock('./services/speechRecognitionService.js');
 
 describe('SentenceSpeakPage', () => {
   const prompt = '사과';
-  const explanation = '제시어를 보고 문장을 만들어 보세요!';
 
   const dispatch = jest.fn();
 
@@ -37,11 +36,5 @@ describe('SentenceSpeakPage', () => {
     const { queryByText } = render(<SentenceSpeakPage />);
 
     expect(queryByText(prompt)).not.toBeNull();
-  });
-
-  it('renders text contents', () => {
-    const { container } = render(<SentenceSpeakPage />);
-
-    expect(container).toHaveTextContent(explanation);
   });
 });

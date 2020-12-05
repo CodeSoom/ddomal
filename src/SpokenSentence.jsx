@@ -4,8 +4,11 @@ import styled from '@emotion/styled';
 
 import MicState from './enums/MicState';
 
+import { normalColor } from './styles/colors';
+
 const Container = styled.p({
-  fontSize: '2rem',
+  fontSize: '1.5rem',
+  color: normalColor,
 });
 
 const waiting = '...';
