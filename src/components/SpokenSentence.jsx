@@ -17,8 +17,8 @@ const placeholder = '문장을 소리내어 말해보세요';
 export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   const isInputting = micState !== MicState.OFF;
 
-  const highligtedPrompt = (
-    <b style={{ color: 'blue' }}>
+  const highligtPrompt = (key) => (
+    <b key={key} style={{ color: 'blue' }}>
       {prompt}
     </b>
   );
@@ -33,7 +33,7 @@ export default function SpokenSentence({ micState, prompt, spokenSentence }) {
     }
 
     return splitted
-      .flatMap((part) => [part, highligtedPrompt])
+      .flatMap((part, index) => [part, highligtPrompt(`${index + part}`)])
       .slice(0, -1);
   };
 
