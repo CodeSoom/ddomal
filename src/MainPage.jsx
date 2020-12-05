@@ -1,15 +1,21 @@
 import React from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import styled from '@emotion/styled';
-import { normalColor, primaryColor } from './styles/colors';
-import { normalFont } from './styles/fonts';
-import { flexBoxCenter } from './styles/common';
+
+import Button from './styles/CommonButton';
 
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   position: 'relative',
+});
+
+const ButtonBox = styled.div({
+  position: 'absolute',
+  top: '73vh',
 });
 
 const Title = styled.div({
@@ -21,28 +27,21 @@ const Title = styled.div({
   width: '19.5rem',
 });
 
-const Button = styled.div({
-  ...flexBoxCenter,
-  position: 'absolute',
-  top: '73vh',
-  width: '20rem',
-  height: '3.25rem',
-  backgroundColor: `${normalColor}`,
-  color: `${primaryColor}`,
-  fontFamily: `${normalFont}`,
-  fontSize: '1.31rem',
-  fontWeight: '700',
-  borderRadius: '4px',
-  cursor: 'pointer',
-});
-
 export default function MainPage() {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push('/select');
+  };
+
   return (
     <Container>
       <Title />
-      <Button type="button">
-        시작 하기
-      </Button>
+      <ButtonBox>
+        <Button type="button" onClick={handleClick}>
+          시작 하기
+        </Button>
+      </ButtonBox>
     </Container>
   );
 }
