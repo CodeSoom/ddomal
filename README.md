@@ -14,5 +14,5 @@
 5 개의 말을 만들고 어떤 말들을 만들었는지 확인해보세요. 
 
 ## 주소
-> https://codesoom.github.io/project-react-2-gringrape/
+> https://www.ddomal.com/
 > - Chrome 브라우저, 스마트폰은 안드로이드 계열에서만 동작합니다
