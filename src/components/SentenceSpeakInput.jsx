@@ -50,7 +50,7 @@ const StyledMic = styled(MdMic)`
 export default function SentenceSpeakInput({
   isCorrectSentence, spokenSentence, micState, onClick,
 }) {
-  const [play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
+  const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
 
   useEffect(() => {
     if (isCorrectSentence) {

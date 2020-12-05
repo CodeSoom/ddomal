@@ -1,5 +1,3 @@
-import R from 'ramda';
-
 import { useState, useEffect } from 'react';
 
 export const useAudio = (url) => {
@@ -9,11 +7,11 @@ export const useAudio = (url) => {
   const toggle = () => setPlaying(!playing);
 
   useEffect(() => {
-    R.ifElse(
-      () => playing,
-      audio.play,
-      audio.pause,
-    );
+    if (playing) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
   }, [playing, audio]);
 
   useEffect(() => {

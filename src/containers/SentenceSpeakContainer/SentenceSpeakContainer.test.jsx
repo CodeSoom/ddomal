@@ -42,7 +42,7 @@ describe('SentenceSpeakContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
 
-    useAudio.mockImplementation(() => [() => {}]);
+    useAudio.mockImplementation(() => ['', () => {}]);
 
     useDispatch.mockImplementation(() => dispatch);
 
