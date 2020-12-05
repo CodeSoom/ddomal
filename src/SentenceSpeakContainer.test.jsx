@@ -100,4 +100,14 @@ describe('SentenceSpeakContainer', () => {
       expect(mockPush).toBeCalledWith('/answers');
     });
   });
+
+  it('renders progress bar', () => {
+    const questionNumber = 3;
+
+    given('answers', () => new Array(questionNumber));
+
+    const { container } = renderSentenceSpeakContainer();
+
+    expect(container).toHaveTextContent(questionNumber);
+  });
 });
