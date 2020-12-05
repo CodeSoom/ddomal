@@ -17,6 +17,7 @@ const Button = styled.button({
   fontWeight: '700',
   borderRadius: '4px',
   cursor: 'pointer',
+  border: 'none',
 });
 
 export default Button;
