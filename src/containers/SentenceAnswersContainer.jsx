@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { initializeState } from './redux/slice';
+import { initializeState } from '../redux/slice';
 
-import { get } from './utils';
+import { get } from '../utils';
 
-import SentenceAnswers from './SentenceAnswers';
+import SentenceAnswers from '../components/SentenceAnswers';
 
-import { flexBoxCenter } from './styles/common';
-import Button from './styles/Button';
+import { flexBoxCenter } from '../styles/common';
+import Button from '../styles/Button';
 
 const ButtonBox = styled.div({
   ...flexBoxCenter,

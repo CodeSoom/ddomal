@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SentenceAnswersContainer from './SentenceAnswersContainer';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognitionService.js');
+jest.mock('../services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 

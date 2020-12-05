@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 
 import { useHistory } from 'react-router-dom';
 
-import { flexBoxCenter } from './styles/common';
-import Button from './styles/CommonButton';
-import { normalColor } from './styles/colors';
+import { flexBoxCenter } from '../styles/common';
+import Button from '../styles/CommonButton';
+import { normalColor } from '../styles/colors';
 
 const Container = styled.div({
   ...flexBoxCenter,

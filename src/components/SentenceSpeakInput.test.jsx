@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import SentenceSpeakInput from './SentenceSpeakInput';
 
-import MicState from './enums/MicState';
+import MicState from '../enums/MicState';
 
 describe('SentenceSpeakInput', () => {
   const spokenSentence = '사과가 맛있네요';

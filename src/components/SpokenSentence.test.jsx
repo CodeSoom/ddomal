@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import SpokenSentence from './SpokenSentence';
 
-import MicState from './enums/MicState';
+import MicState from '../enums/MicState';
 
 describe('Sentence', () => {
   const defaultMessage = '문장을 소리내어 말해보세요';

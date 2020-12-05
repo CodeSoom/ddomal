@@ -8,10 +8,10 @@ import given from 'given2';
 
 import SentenceSpeakContainer from './SentenceSpeakContainer';
 
-import MicState from './enums/MicState';
+import MicState from '../enums/MicState';
 
 jest.mock('react-redux');
-jest.mock('./services/speechRecognitionService.js');
+jest.mock('../services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 

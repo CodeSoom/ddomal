@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { normalColor, tertiaryColor } from './styles/colors';
+import { normalColor, tertiaryColor } from '../styles/colors';
 
 const Container = styled.div({
   transform: 'translateX(.5rem)',
