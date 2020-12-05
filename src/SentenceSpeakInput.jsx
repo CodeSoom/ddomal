@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import styled from '@emotion/styled';
 
-import correctSound from '../sounds/CorrectAnswer.mp3';
+import correctSound from '../assets/sounds/CorrectAnswer.mp3';
 
 import { flexBoxCenter } from './styles/common';
 

@@ -7,17 +7,18 @@ import {
 
 import styled from '@emotion/styled';
 
-import SelectPage from './SelectPage';
 import MakeSentencePage from './SentenceSpeakPage';
 import AnswersPage from './SentenceAnswersPage';
 import YesNoPage from './YesNoPage';
+import SelectPage from './SelectPage';
 
-import { flexBoxCenter } from './styles/common';
+import { primaryColor, tertiaryColor } from './styles/colors';
 
 const Container = styled.div({
-  ...flexBoxCenter,
+  width: '100%',
   height: '100vh',
-  transform: 'translateY(-5%)',
+  // backgroundColor: `${primaryColor}`,
+  backgroundImage: `linear-gradient(130deg, ${primaryColor}, ${tertiaryColor})`,
 });
 
 export default function App() {
