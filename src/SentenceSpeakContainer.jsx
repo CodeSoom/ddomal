@@ -17,6 +17,7 @@ import {
 
 import { titleFont } from './styles/fonts';
 import { normalColor } from './styles/colors';
+import ProgressBar from './ProgressBar';
 
 const Container = styled.div({
   display: 'flex',
@@ -24,11 +25,15 @@ const Container = styled.div({
   alignItems: 'center',
 });
 
+const BarBox = styled.div({
+  marginTop: '2.3vh',
+});
+
 const PromptBox = styled.div({
   fontFamily: titleFont,
   fontSize: '4.5rem',
   ...flexBoxCenter,
-  marginTop: '18vh',
+  marginTop: '10.6vh',
   color: normalColor,
 });
 
@@ -65,6 +70,12 @@ export default function SentenceSpeakContainer() {
 
   return (
     <Container>
+      <BarBox>
+        <ProgressBar
+          maxNumber={MAX_ANSWERS}
+          currentNumber={answers.length}
+        />
+      </BarBox>
       <PromptBox>
         {prompt}
       </PromptBox>

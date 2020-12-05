@@ -11,8 +11,7 @@ import App from './App';
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <BrowserRouter basename="/project-react-2-gringrape"> */}
-    <BrowserRouter>
+    <BrowserRouter basename="/project-react-2-gringrape">
       <App />
     </BrowserRouter>
   </Provider>,
