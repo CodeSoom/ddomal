@@ -13,10 +13,11 @@ jest.mock('./services/speechRecognitionService.js');
 
 describe('App', () => {
   const prompt = '사과';
-  const mainPageButton = '시작하기';
+  const mainPageButton = '시작 하기';
   const makeSentencePageParagraph = '제시어를 보고 문장을 만들어 보세요!';
   const answersPage = '결과 확인';
   const yesnoPageTitle = 'Yes No';
+  const selectPageTitle = '무엇을 연습해 볼까요';
 
   const dispatch = jest.fn();
 
@@ -40,6 +41,12 @@ describe('App', () => {
     const { queryByText } = renderApp({ path: '/' });
 
     expect(queryByText(mainPageButton)).not.toBeNull();
+  });
+
+  it('shows select page on route /select', () => {
+    const { container } = renderApp({ path: '/select' });
+
+    expect(container).toHaveTextContent(selectPageTitle);
   });
 
   it('shows make sentence page on route /sentence', () => {

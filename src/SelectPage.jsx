@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { useHistory } from 'react-router-dom';
 
 import { flexBoxCenter } from './styles/common';
-import Button from './styles/Button';
+import Button from './styles/CommonButton';
 
 const Container = styled.div({
   ...flexBoxCenter,
@@ -26,11 +26,14 @@ export default function SelectPage() {
   return (
     <Container>
       <h1>
-        문장 만들기
+        무엇을 연습해 볼까요?
       </h1>
       <ButtonBox>
         <Button type="button" onClick={handleClickStart}>
-          시작하기
+          문장 만들기
+        </Button>
+        <Button type="button" onClick={handleClickStart}>
+          듣고 이해하기
         </Button>
       </ButtonBox>
     </Container>

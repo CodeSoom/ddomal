@@ -14,8 +14,13 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SelectPage', () => {
-  const title = '문장 만들기';
-  const startButton = '시작하기';
+  const title = '무엇을 연습해 볼까요?';
+  const speakSentenceButton = '문장 만들기';
+  const yesnoButton = '듣고 이해하기';
+
+  beforeEach(() => {
+    mockPush.mockClear();
+  });
 
   it('renders title', () => {
     const { container } = render(<SelectPage />);
@@ -23,11 +28,17 @@ describe('SelectPage', () => {
     expect(container).toHaveTextContent(title);
   });
 
-  it('renders start button', () => {
+  it('renders sentence speak page link button', () => {
     const { getByText } = render(<SelectPage />);
 
-    fireEvent.click(getByText(startButton));
+    fireEvent.click(getByText(speakSentenceButton));
 
     expect(mockPush).toBeCalledWith('/sentence');
+  });
+
+  it('renders yesno page link button', () => {
+    const { getByText } = render(<SelectPage />);
+
+    fireEvent.click(getByText(yesnoButton));
   });
 });
