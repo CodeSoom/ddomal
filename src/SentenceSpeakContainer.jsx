@@ -15,6 +15,9 @@ import {
   saveAnswer,
 } from './redux/slice';
 
+import { titleFont } from './styles/fonts';
+import { normalColor } from './styles/colors';
+
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
@@ -22,17 +25,15 @@ const Container = styled.div({
 });
 
 const PromptBox = styled.div({
-  fontSize: '1.7rem',
+  fontFamily: titleFont,
+  fontSize: '4.5rem',
   ...flexBoxCenter,
-  width: '18rem',
-  padding: '3.7rem 0',
-  marginTop: '.5rem',
-  borderRadius: '6px',
-  backgroundColor: '#DDD',
+  marginTop: '18vh',
+  color: normalColor,
 });
 
 const SubmitButtonBox = styled.div({
-  marginTop: '2rem',
+  marginTop: '10vh',
 });
 
 const MAX_ANSWERS = 5;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from './styles/Button';
+import Button from './styles/CommonButton';
 
 export default function SentenceSubmitButton({ onClickExit, onClickNext, isComplete }) {
   return (
