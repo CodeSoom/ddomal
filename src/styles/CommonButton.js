@@ -6,7 +6,7 @@ import { normalFont } from './fonts';
 
 import { flexBoxCenter } from './common';
 
-const Button = styled.div({
+const Button = styled.button({
   ...flexBoxCenter,
   width: '20rem',
   height: '3.25rem',
