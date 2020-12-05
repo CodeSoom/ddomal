@@ -18,7 +18,6 @@ Scenario('Select Page', ({ I }) => {
 
 Scenario('Sentence Page', ({ I }) => {
   I.amOnPage('/sentence');
-  I.see('제시어를 보고 문장을 만들어 보세요');
   I.see('문장을 소리내어 말해보세요');
   I.see('다음 문제');
   I.click('다음 문제');
