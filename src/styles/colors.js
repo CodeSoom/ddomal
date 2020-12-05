@@ -1,12 +1,8 @@
-const colors = {
-  primaryColor: '#1CB0F6',
-  secondaryColor: '#5CC6F9',
-  tertiaryColor: '#33B8F7',
-  normalColor: '#FFF',
-  emphasisColor: 'FFC33F',
+export const primaryColor = '#1CB0F6';
+export const secondaryColor = '#5CC6F9';
+export const tertiaryColor = '#116D99';
+export const normalColor = '#FFF';
+export const emphasisColor = 'FFC33F';
 
-  correctColor: 'green',
-  wrongColor: 'red',
-};
-
-export default colors;
+export const correctColor = 'green';
+export const wrongColor = 'red';

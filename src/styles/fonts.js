@@ -1,6 +1,2 @@
-const fonts = {
-  titleFont: '"Gamja Flower", cursive',
-  normalFont: '"Sunflower", sans-serif',
-};
-
-export default fonts;
+export const titleFont = '"Gamja Flower", cursive';
+export const normalFont = '"Sunflower", sans-serif';
