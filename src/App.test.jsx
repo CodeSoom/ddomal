@@ -14,7 +14,7 @@ jest.mock('./services/speechRecognitionService.js');
 describe('App', () => {
   const prompt = '사과';
   const mainPageButton = '시작 하기';
-  const answersPage = '결과 확인';
+  const answersPage = '오늘';
   const yesnoPageTitle = 'Yes No';
   const selectPageTitle = '무엇을 연습해 볼까요';
 
