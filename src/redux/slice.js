@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 import MicState from '../enums/MicState';
 
@@ -30,7 +30,7 @@ const { reducer, actions } = createSlice({
         prompt,
       };
     },
-    saveAnswer(state, { payload: answer }) {
+    addAnswer(state, { payload: answer }) {
       const { answers } = state;
 
       return {
@@ -41,16 +41,16 @@ const { reducer, actions } = createSlice({
         ],
       };
     },
-    setYesNoQuestion(state, { payload: yesNoQuestion }) {
-      return {
-        ...state,
-        yesNoQuestion,
-      };
-    },
     clearAnswers(state) {
       return {
         ...state,
         answers: [],
+      };
+    },
+    setYesNoQuestion(state, { payload: yesNoQuestion }) {
+      return {
+        ...state,
+        yesNoQuestion,
       };
     },
     initializeState() {
@@ -63,10 +63,14 @@ export const {
   setSpokenSentence,
   setMicState,
   setPrompt,
-  saveAnswer,
+  addAnswer,
   clearAnswers,
   setYesNoQuestion,
   initializeState,
 } = actions;
+
+export const recognizeSpeech = createAction('recognizeSpeech');
+export const getNextQuestion = createAction('getNextQuestion');
+export const saveAnswer = createAction('saveAnswer');
 
 export default reducer;

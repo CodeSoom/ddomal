@@ -1,4 +1,5 @@
 import uniqueRandom from 'unique-random';
+import examples from '../../data/examples';
 
 import prompts from '../../data/prompts';
 
@@ -8,7 +9,6 @@ export function fetchNextPrompt() {
   return prompts[getRandomIndex()];
 }
 
-// TODO: delete this
-export function xx() {
-
+export function getExamples(prompt) {
+  return examples[prompt] || [];
 }

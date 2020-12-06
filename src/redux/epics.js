@@ -5,7 +5,7 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import MicState from '../enums/MicState';
 
-import { fetchNextPrompt } from '../services/promptService';
+import { fetchNextPrompt, getExamples } from '../services/promptService';
 
 import {
   recognize,
@@ -18,6 +18,7 @@ import {
 import { fetchNextYesNoQuestion, playQuestion } from '../services/yesNoQuestionService';
 
 import {
+  addAnswer,
   setMicState,
   setPrompt,
   setSpokenSentence,
@@ -87,7 +88,18 @@ export const playNextYesNoQuestionEpic = (action$) => action$.pipe(
   }),
 );
 
+export const saveAnswerEpic = (action$) => action$.pipe(
+  ofType('saveAnswer'),
+  map(({ payload }) => (
+    addAnswer({
+      ...payload,
+      examples: getExamples(prompt),
+    })
+  )),
+);
+
 const rootEpic = combineEpics(
+  saveAnswerEpic,
   getNextQuestionEpic,
   listenRecognitionEvents,
   recognizeSpeechEpic,

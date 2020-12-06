@@ -4,7 +4,12 @@ import { of } from 'rxjs';
 import { toArray } from 'rxjs/operators';
 
 import {
-  setMicState, setPrompt, setSpokenSentence, setYesNoQuestion,
+  addAnswer,
+  saveAnswer,
+  setPrompt,
+  setMicState,
+  setSpokenSentence,
+  setYesNoQuestion,
 } from './slice';
 
 import {
@@ -13,9 +18,10 @@ import {
   listenRecognitionEvents,
   getNextYesNoQuestionEpic,
   playNextYesNoQuestionEpic,
+  saveAnswerEpic,
 } from './epics';
 
-import { fetchNextPrompt } from '../services/promptService';
+import { fetchNextPrompt, getExamples } from '../services/promptService';
 import { recognize } from '../services/speechRecognitionService';
 import { fetchNextYesNoQuestion, playQuestion } from '../services/yesNoQuestionService';
 
@@ -129,6 +135,33 @@ describe('epics', () => {
 
       playNextYesNoQuestionEpic(action$).subscribe(() => {
         expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
+        done();
+      });
+    });
+  });
+
+  describe('saveAnswerEpic', () => {
+    const fakeExamples = [
+      '자두는 맛이 없다',
+      '자두는 맛이 있다',
+    ];
+
+    beforeEach(() => {
+      getExamples.mockImplementation(() => fakeExamples);
+    });
+
+    it('returns add answer action with fake examples', (done) => {
+      const action$ = ActionsObservable.of(saveAnswer({
+        prompt: '자두',
+        spokenSentence: '자두는',
+      }));
+
+      saveAnswerEpic(action$).subscribe((action) => {
+        expect(action).toEqual(addAnswer({
+          prompt: '자두',
+          spokenSentence: '자두는',
+          examples: fakeExamples,
+        }));
         done();
       });
     });

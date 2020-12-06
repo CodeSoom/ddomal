@@ -83,7 +83,7 @@ describe('SentenceSpeakContainer', () => {
       fireEvent.click(getByText(nextButton));
 
       expect(dispatch).toBeCalledWith({
-        type: 'application/saveAnswer',
+        type: 'saveAnswer',
         payload: { prompt, spokenSentence },
       });
     });
@@ -98,7 +98,7 @@ describe('SentenceSpeakContainer', () => {
       fireEvent.click(getByText(exitButton));
 
       expect(dispatch).toBeCalledWith({
-        type: 'application/saveAnswer',
+        type: 'saveAnswer',
         payload: { prompt, spokenSentence },
       });
 

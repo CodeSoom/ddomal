@@ -22,8 +22,8 @@ describe('SentenceAnswersContainer', () => {
   const goHomeButton = '처음으로';
 
   const answers = [
-    { prompt: '사과', spokenSentence: '사과는 맛있다' },
-    { prompt: '양파', spokenSentence: '양파는 맛없다' },
+    { prompt: '사과', spokenSentence: '사과는 맛있다', examples: [] },
+    { prompt: '양파', spokenSentence: '양파는 맛없다', examples: [] },
   ];
 
   const dispatch = jest.fn();
