@@ -6,6 +6,13 @@ import SentenceAnswersContainer from '../containers/SentenceAnswersContainer';
 
 import { flexBoxCenter } from '../styles/common';
 
+import { inactiveColor } from '../styles/colors';
+
+const Title = styled.h2({
+  marginTop: '5vh',
+  color: inactiveColor,
+});
+
 const Container = styled.div({
   ...flexBoxCenter,
   flexDirection: 'column',
@@ -18,9 +25,9 @@ const Box = styled.div({
 export default function SentenceAnswersPage() {
   return (
     <Container>
-      <h1>
-        결과 확인
-      </h1>
+      <Title>
+        오늘 말해본 문장
+      </Title>
       <Box>
         <SentenceAnswersContainer />
       </Box>

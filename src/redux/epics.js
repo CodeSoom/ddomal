@@ -93,7 +93,7 @@ export const saveAnswerEpic = (action$) => action$.pipe(
   map(({ payload }) => (
     addAnswer({
       ...payload,
-      examples: getExamples(prompt),
+      examples: getExamples(payload.prompt),
     })
   )),
 );

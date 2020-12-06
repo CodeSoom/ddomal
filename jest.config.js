@@ -8,5 +8,6 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\\.mp3$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.css$': '<rootDir>/__mocks__/fileMock.js',
   },
 };

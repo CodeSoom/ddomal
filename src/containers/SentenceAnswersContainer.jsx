@@ -13,7 +13,7 @@ import { get } from '../utils';
 import SentenceAnswers from '../components/SentenceAnswers';
 
 import { flexBoxCenter } from '../styles/common';
-import Button from '../styles/Button';
+import Button from '../styles/CommonButton';
 
 const ButtonBox = styled.div({
   ...flexBoxCenter,
