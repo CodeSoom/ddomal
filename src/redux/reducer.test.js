@@ -4,7 +4,7 @@ import reducer, {
   setSpokenSentence,
   setMicState,
   setPrompt,
-  saveAnswer,
+  addAnswer,
   clearAnswers,
   setYesNoQuestion,
   initializeState,
@@ -39,10 +39,10 @@ describe('reducer', () => {
     expect(state.prompt).toBe('마늘');
   });
 
-  test('saveAnswer', () => {
+  test('addAnswer', () => {
     const state = reducer({
       answers: [],
-    }, saveAnswer({ prompt: '사과', sentence: '사과가 맛있다' }));
+    }, addAnswer({ prompt: '사과', sentence: '사과가 맛있다' }));
 
     expect(state.answers).toEqual([
       { prompt: '사과', sentence: '사과가 맛있다' },

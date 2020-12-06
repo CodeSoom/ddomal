@@ -13,6 +13,7 @@ describe('SentenceAnswersPage', () => {
   const answer = {
     prompt: '사과',
     spokenSentence: '사과는 맛있다',
+    examples: [],
   };
 
   beforeEach(() => {

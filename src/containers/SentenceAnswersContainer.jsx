@@ -24,7 +24,6 @@ export default function SentenceAnswersContainer() {
   const answers = useSelector(get('answers'));
 
   const dispatch = useDispatch();
-
   const history = useHistory();
 
   const handleClick = () => {

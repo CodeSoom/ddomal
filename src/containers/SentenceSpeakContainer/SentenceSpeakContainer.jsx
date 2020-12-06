@@ -18,6 +18,8 @@ import {
 } from './styled';
 
 import {
+  recognizeSpeech,
+  getNextQuestion,
   saveAnswer,
 } from '../../redux/slice';
 
@@ -35,12 +37,12 @@ export default function SentenceSpeakContainer() {
   const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
 
   const handleClickSpeak = () => {
-    dispatch({ type: 'recognizeSpeech' });
+    dispatch(recognizeSpeech());
   };
 
   const handleClickNext = () => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
-    dispatch({ type: 'getNextQuestion' });
+    dispatch(getNextQuestion());
   };
 
   const handleClickExit = () => {

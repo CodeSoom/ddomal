@@ -1,6 +1,3 @@
 export const fetchNextPrompt = jest.fn();
 
-// TODO: delete this
-export function xx() {
-
-}
+export const getExamples = jest.fn();
