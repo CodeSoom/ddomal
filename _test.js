@@ -30,7 +30,7 @@ Scenario('Sentence Page', ({ I }) => {
 
 Scenario('Answers Page', ({ I }) => {
   I.amOnPage('/answers');
-  I.see('결과 확인');
+  I.see('오늘 말해본 문장');
   I.see('처음으로');
   I.click('처음으로');
   I.see('시작 하기');
