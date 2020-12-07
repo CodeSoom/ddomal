@@ -7,6 +7,7 @@ import reducer, {
   addAnswer,
   clearAnswers,
   setYesNoQuestion,
+  startPlaying,
   endGame,
   initializeState,
 } from './slice';
@@ -67,6 +68,14 @@ describe('reducer', () => {
     }));
 
     expect(state.yesNoQuestion.question).toBe('지구는 둥급니까?');
+  });
+
+  test('startPlaying', () => {
+    const state = reducer({
+      isPlaying: false,
+    }, startPlaying());
+
+    expect(state.isPlaying).toBe(true);
   });
 
   test('endGame', () => {

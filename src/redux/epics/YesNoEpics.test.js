@@ -3,7 +3,7 @@ import { ActionsObservable } from 'redux-observable';
 import { toArray } from 'rxjs/operators';
 
 import {
-  setYesNoQuestion,
+  setYesNoQuestion, startPlaying,
 } from '../slice';
 
 import {
@@ -60,8 +60,9 @@ describe('epics', () => {
         payload: fakeQuestion,
       });
 
-      playNextYesNoQuestionEpic(action$).subscribe(() => {
+      playNextYesNoQuestionEpic(action$).subscribe((action) => {
         expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
+        expect(action).toEqual(startPlaying());
         done();
       });
     });
