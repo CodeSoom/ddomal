@@ -7,6 +7,7 @@ const initialState = {
   micState: MicState.OFF,
   answers: [],
   isGameEnd: false,
+  isPlaying: false,
 };
 
 const { reducer, actions } = createSlice({
@@ -95,5 +96,8 @@ export const {
 export const recognizeSpeech = createAction('recognizeSpeech');
 export const getNextQuestion = createAction('getNextQuestion');
 export const saveAnswer = createAction('saveAnswer');
+
+export const getNextYesNoQuestion = createAction('getNextYesNoQuestion');
+export const playYesNoQuestion = createAction('playYesNoQuestion');
 
 export default reducer;

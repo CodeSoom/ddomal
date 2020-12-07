@@ -9,7 +9,7 @@ import {
 
 import {
   getNextYesNoQuestionEpic,
-  playNextYesNoQuestionEpic,
+  playYesNoQuestionEpic,
   listenYesNoEndEventEpic,
 } from './YesNoEpics';
 
@@ -19,7 +19,7 @@ const rootEpic = combineEpics(
   listenRecognitionEvents,
   recognizeSpeechEpic,
   getNextYesNoQuestionEpic,
-  playNextYesNoQuestionEpic,
+  playYesNoQuestionEpic,
   listenYesNoEndEventEpic,
 );
 
