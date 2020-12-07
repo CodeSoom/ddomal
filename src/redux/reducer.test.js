@@ -101,6 +101,7 @@ describe('reducer', () => {
       micState: MicState.OFF,
       answers: [],
       isGameEnd: false,
+      isPlaying: false,
     };
 
     const state = reducer({

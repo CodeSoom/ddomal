@@ -2,7 +2,7 @@ import uniqueRandom from 'unique-random';
 
 import AWS from 'aws-sdk';
 
-import { Observable } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
 
 import yesNoQuestions from '../../data/yesNoQuestions';
 
@@ -47,10 +47,14 @@ export function playQuestion(question) {
   if (!context) {
     context = new AudioContext();
   }
+
+  const playSound = context.createBufferSource();
+
   synthesizeQuestion(context, question).subscribe((decodedData) => {
-    const playSound = context.createBufferSource();
     playSound.buffer = decodedData;
     playSound.connect(context.destination);
     playSound.start();
   });
+
+  return fromEvent(playSound, 'ended');
 }

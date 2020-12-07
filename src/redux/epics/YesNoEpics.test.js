@@ -11,7 +11,7 @@ import {
 import {
   getNextYesNoQuestionEpic,
   listenYesNoEndEventEpic,
-  playNextYesNoQuestionEpic,
+  playYesNoQuestionEpic,
 } from './YesNoEpics';
 
 import { fetchNextYesNoQuestion, playQuestion } from '../../services/yesNoQuestionService';
@@ -36,15 +36,10 @@ describe('epics', () => {
         type: 'getNextYesNoQuestion',
       });
 
-      getNextYesNoQuestionEpic(action$)
-        .pipe(toArray()).subscribe(([action1, action2]) => {
-          expect(action1).toEqual(setYesNoQuestion(fakeQuestion));
-          expect(action2).toEqual({
-            type: 'playYesNoQuestion',
-            payload: fakeQuestion.question,
-          });
-          done();
-        });
+      getNextYesNoQuestionEpic(action$).subscribe((action) => {
+        expect(action).toEqual(setYesNoQuestion(fakeQuestion));
+        done();
+      });
     });
   });
 
@@ -63,7 +58,7 @@ describe('epics', () => {
         payload: fakeQuestion,
       });
 
-      playNextYesNoQuestionEpic(action$)
+      playYesNoQuestionEpic(action$)
         .pipe(toArray()).subscribe(([action1, action2]) => {
           expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
           expect(action1).toEqual(startPlaying());

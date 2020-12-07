@@ -15,13 +15,10 @@ import {
 export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
   ofType('getNextYesNoQuestion'),
   map(fetchNextYesNoQuestion),
-  mergeMap((question) => of(
-    setYesNoQuestion(question),
-    { type: 'playYesNoQuestion', payload: question.question },
-  )),
+  map(setYesNoQuestion),
 );
 
-export const playNextYesNoQuestionEpic = (action$) => action$.pipe(
+export const playYesNoQuestionEpic = (action$) => action$.pipe(
   ofType('playYesNoQuestion'),
   map(({ payload }) => playQuestion(payload)),
   mergeMap((end$) => merge(

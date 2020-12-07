@@ -1,30 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { useDispatch } from 'react-redux';
+
+import { getNextYesNoQuestion } from '../redux/slice';
+
+import YesNoContainer from '../containers/YesNoContainer';
 
 export default function YesNoPage() {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch({
-      type: 'getNextYesNoQuestion',
-    });
-  };
+  useEffect(() => {
+    dispatch(getNextYesNoQuestion());
+  });
 
   return (
     <div>
       <h1>Yes No</h1>
-      <button type="button">
-        네
-      </button>
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      <button type="button">
-        아니오
-      </button>
-      <button type="button" onClick={handleClick}>
-        재생
-      </button>
+      <YesNoContainer />
     </div>
   );
 }
