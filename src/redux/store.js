@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { createEpicMiddleware } from 'redux-observable';
 
-import rootEpic from './epics';
+import rootEpic from './epics/index';
 
 import reducer from './slice';
 
