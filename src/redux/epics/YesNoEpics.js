@@ -1,12 +1,15 @@
 import { ofType } from 'redux-observable';
 
-import { of } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { of, merge } from 'rxjs';
+import {
+  map,
+  mergeMap,
+} from 'rxjs/operators';
 
 import { fetchNextYesNoQuestion, playQuestion } from '../../services/yesNoQuestionService';
 
 import {
-  setYesNoQuestion, startPlaying,
+  setYesNoQuestion, startPlaying, stopPlaying,
 } from '../slice';
 
 export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
@@ -20,6 +23,14 @@ export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
 
 export const playNextYesNoQuestionEpic = (action$) => action$.pipe(
   ofType('playYesNoQuestion'),
-  tap(({ payload }) => playQuestion(payload)),
-  map(() => startPlaying()),
+  map(({ payload }) => playQuestion(payload)),
+  mergeMap((end$) => merge(
+    of(startPlaying()),
+    end$.pipe(map(() => ({ type: 'listenYesNoEndEvent' }))),
+  )),
+);
+
+export const listenYesNoEndEventEpic = (action$) => action$.pipe(
+  ofType('listenYesNoEndEvent'),
+  map(() => stopPlaying()),
 );
