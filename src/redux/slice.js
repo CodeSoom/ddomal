@@ -60,6 +60,12 @@ const { reducer, actions } = createSlice({
         isGameEnd: true,
       };
     },
+    startPlaying(state) {
+      return {
+        ...state,
+        isPlaying: true,
+      };
+    },
     initializeState() {
       return initialState;
     },
@@ -75,6 +81,8 @@ export const {
   setYesNoQuestion,
   startGame,
   endGame,
+  startPlaying,
+  stopPlaying,
   initializeState,
 } = actions;
 
