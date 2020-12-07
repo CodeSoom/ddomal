@@ -51,5 +51,7 @@ describe('SelectPage', () => {
     const { getByText } = render(<SelectPage />);
 
     fireEvent.click(getByText(yesnoButton));
+
+    expect(mockPush).toBeCalledWith('/yesno');
   });
 });
