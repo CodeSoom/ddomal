@@ -1,40 +1,27 @@
 import React from 'react';
 
-import styled from '@emotion/styled';
-
 import { useHistory } from 'react-router-dom';
 
-import { flexBoxCenter } from '../styles/common';
-import Button from '../styles/CommonButton';
-import { normalColor } from '../styles/colors';
+import { useDispatch } from 'react-redux';
 
-const Container = styled.div({
-  ...flexBoxCenter,
-  flexDirection: 'column',
-});
+import { initializeState } from '../../redux/slice';
 
-const TitleBox = styled.div({
-  marginTop: '34.8vh',
-});
+import Button from '../../styles/CommonButton';
 
-const Title = styled.div({
-  fontSize: '1.5rem',
-  color: normalColor,
-});
-
-const ButtonBox = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  height: '7.5rem',
-  justifyContent: 'space-between',
-  marginTop: '2.38rem',
-});
+import {
+  Container,
+  TitleBox,
+  Title,
+  ButtonBox,
+} from './styled';
 
 export default function SelectPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleClickStart = () => {
     history.push('/sentence');
+    dispatch(initializeState());
   };
 
   return (

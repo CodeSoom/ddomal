@@ -6,6 +6,7 @@ const initialState = {
   prompt: null,
   micState: MicState.OFF,
   answers: [],
+  isGameEnd: false,
 };
 
 const { reducer, actions } = createSlice({
@@ -53,6 +54,12 @@ const { reducer, actions } = createSlice({
         yesNoQuestion,
       };
     },
+    endGame(state) {
+      return {
+        ...state,
+        isGameEnd: true,
+      };
+    },
     initializeState() {
       return initialState;
     },
@@ -66,6 +73,8 @@ export const {
   addAnswer,
   clearAnswers,
   setYesNoQuestion,
+  startGame,
+  endGame,
   initializeState,
 } = actions;
 

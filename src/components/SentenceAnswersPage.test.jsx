@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SentenceAnswersPage from './SentenceAnswersPage';
 
@@ -20,6 +20,8 @@ describe('SentenceAnswersPage', () => {
     useSelector.mockImplementation((selector) => selector({
       answers: [answer],
     }));
+
+    useDispatch.mockImplementation(() => jest.fn());
   });
 
   it('renders answer', () => {
