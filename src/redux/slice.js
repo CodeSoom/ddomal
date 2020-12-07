@@ -66,6 +66,12 @@ const { reducer, actions } = createSlice({
         isPlaying: true,
       };
     },
+    stopPlaying(state) {
+      return {
+        ...state,
+        isPlaying: false,
+      };
+    },
     initializeState() {
       return initialState;
     },

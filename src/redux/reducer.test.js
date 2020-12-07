@@ -8,6 +8,7 @@ import reducer, {
   clearAnswers,
   setYesNoQuestion,
   startPlaying,
+  stopPlaying,
   endGame,
   initializeState,
 } from './slice';
@@ -76,6 +77,14 @@ describe('reducer', () => {
     }, startPlaying());
 
     expect(state.isPlaying).toBe(true);
+  });
+
+  test('stopPlaying', () => {
+    const state = reducer({
+      isPlaying: true,
+    }, stopPlaying());
+
+    expect(state.isPlaying).toBe(false);
   });
 
   test('endGame', () => {

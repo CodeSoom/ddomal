@@ -2,12 +2,15 @@ import { ActionsObservable } from 'redux-observable';
 
 import { toArray } from 'rxjs/operators';
 
+import { of } from 'rxjs';
+
 import {
-  setYesNoQuestion, startPlaying,
+  setYesNoQuestion, startPlaying, stopPlaying,
 } from '../slice';
 
 import {
   getNextYesNoQuestionEpic,
+  listenYesNoEndEventEpic,
   playNextYesNoQuestionEpic,
 } from './YesNoEpics';
 
@@ -51,7 +54,7 @@ describe('epics', () => {
     const playYesNoQuestion = playQuestion;
 
     beforeEach(() => {
-      playQuestion.mockImplementation(async () => '');
+      playQuestion.mockImplementation(() => of(''));
     });
 
     it('plays yesNoQuestion', (done) => {
@@ -60,9 +63,24 @@ describe('epics', () => {
         payload: fakeQuestion,
       });
 
-      playNextYesNoQuestionEpic(action$).subscribe((action) => {
-        expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
-        expect(action).toEqual(startPlaying());
+      playNextYesNoQuestionEpic(action$)
+        .pipe(toArray()).subscribe(([action1, action2]) => {
+          expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
+          expect(action1).toEqual(startPlaying());
+          expect(action2).toEqual({ type: 'listenYesNoEndEvent' });
+          done();
+        });
+    });
+  });
+
+  describe('listenYesNoEndEventEpic', () => {
+    it('stops playing yes no question', (done) => {
+      const action$ = ActionsObservable.of({
+        type: 'listenYesNoEndEvent',
+      });
+
+      listenYesNoEndEventEpic(action$).subscribe((action) => {
+        expect(action).toEqual(stopPlaying());
         done();
       });
     });
