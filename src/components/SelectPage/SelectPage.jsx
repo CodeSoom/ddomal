@@ -19,9 +19,13 @@ export default function SelectPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleClickStart = () => {
+  const handleClickSpeakSentence = () => {
     history.push('/sentence');
     dispatch(initializeState());
+  };
+
+  const handleClickYesno = () => {
+    history.push('/yesno');
   };
 
   return (
@@ -32,10 +36,10 @@ export default function SelectPage() {
         </Title>
       </TitleBox>
       <ButtonBox>
-        <Button type="button" onClick={handleClickStart}>
+        <Button type="button" onClick={handleClickSpeakSentence}>
           문장 만들기
         </Button>
-        <Button type="button" onClick={handleClickStart}>
+        <Button type="button" onClick={handleClickYesno}>
           듣고 이해하기
         </Button>
       </ButtonBox>

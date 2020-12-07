@@ -11,7 +11,7 @@ import SentenceSpeakPage from './components/SentenceSpeakPage';
 import SentenceAnswersPage from './components/SentenceAnswersPage';
 import YesNoPage from './components/YesNoPage';
 import SelectPage from './components/SelectPage/index';
-import MainPage from './components/MainPage';
+import MainPage from './components/MainPage/index';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
 
