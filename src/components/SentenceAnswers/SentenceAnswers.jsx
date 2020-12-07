@@ -1,8 +1,12 @@
 import React from 'react';
 
-import { Carousel } from 'react-responsive-carousel';
+import { useDispatch } from 'react-redux';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import CustomCarousel from '../../customs/CustomCarousel';
+
+import { endGame } from '../../redux/slice';
 
 import SentenceAnswer from '../SentenceAnswer';
 
@@ -12,15 +16,25 @@ import {
 } from './styled';
 
 export default function SentenceAnswers({ answers }) {
+  const dispatch = useDispatch();
+
+  const handleLastSlide = () => {
+    dispatch(endGame());
+  };
+
   return (
     <Container>
-      <Carousel showStatus={false} showThumbs={false} thumbWidth={0}>
+      <CustomCarousel
+        showStatus={false}
+        showThumbs={false}
+        onLast={handleLastSlide}
+      >
         {answers.map((answer) => (
           <AnswerBox key={answer.prompt}>
             <SentenceAnswer answer={answer} />
           </AnswerBox>
         ))}
-      </Carousel>
+      </CustomCarousel>
     </Container>
   );
 }

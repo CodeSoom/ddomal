@@ -13,7 +13,8 @@ import { get } from '../utils';
 import SentenceAnswers from '../components/SentenceAnswers';
 
 import { flexBoxCenter } from '../styles/common';
-import Button from '../styles/CommonButton';
+import ActiveButton from '../styles/CommonButton';
+import InactiveButton from '../styles/CommonButtonInactive';
 
 const ButtonBox = styled.div({
   ...flexBoxCenter,
@@ -22,6 +23,9 @@ const ButtonBox = styled.div({
 
 export default function SentenceAnswersContainer() {
   const answers = useSelector(get('answers'));
+  const isGameEnd = useSelector(get('isGameEnd'));
+
+  const Button = isGameEnd ? ActiveButton : InactiveButton;
 
   const dispatch = useDispatch();
   const history = useHistory();

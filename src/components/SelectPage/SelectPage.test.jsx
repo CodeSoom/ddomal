@@ -2,7 +2,11 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
+import { useDispatch } from 'react-redux';
+
 import SelectPage from './SelectPage';
+
+import { initializeState } from '../../redux/slice';
 
 const mockPush = jest.fn();
 
@@ -13,13 +17,19 @@ jest.mock('react-router-dom', () => ({
   },
 }));
 
+jest.mock('react-redux');
+
 describe('SelectPage', () => {
   const title = '무엇을 연습해 볼까요?';
   const speakSentenceButton = '문장 만들기';
   const yesnoButton = '듣고 이해하기';
 
+  const dispatch = jest.fn();
+
   beforeEach(() => {
-    mockPush.mockClear();
+    jest.clearAllMocks();
+
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   it('renders title', () => {
@@ -34,6 +44,7 @@ describe('SelectPage', () => {
     fireEvent.click(getByText(speakSentenceButton));
 
     expect(mockPush).toBeCalledWith('/sentence');
+    expect(dispatch).toBeCalledWith(initializeState());
   });
 
   it('renders yesno page link button', () => {
