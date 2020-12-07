@@ -1,11 +1,11 @@
-import { combineEpics, ofType } from 'redux-observable';
+import { ofType } from 'redux-observable';
 
 import { merge, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
-import MicState from '../enums/MicState';
+import MicState from '../../enums/MicState';
 
-import { fetchNextPrompt, getExamples } from '../services/promptService';
+import { fetchNextPrompt, getExamples } from '../../services/promptService';
 
 import {
   recognize,
@@ -13,17 +13,14 @@ import {
   recognitionEnd,
   soundStart,
   soundEnd,
-} from '../services/speechRecognitionService';
-
-import { fetchNextYesNoQuestion, playQuestion } from '../services/yesNoQuestionService';
+} from '../../services/speechRecognitionService';
 
 import {
   addAnswer,
   setMicState,
   setPrompt,
   setSpokenSentence,
-  setYesNoQuestion,
-} from './slice';
+} from '../slice';
 
 export const getNextQuestionEpic = (action$) => action$.pipe(
   ofType('getNextQuestion'),
@@ -68,26 +65,6 @@ export const listenRecognitionEvents = (action$) => action$.pipe(
   }),
 );
 
-export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
-  ofType('getNextYesNoQuestion'),
-  mergeMap(() => {
-    const question = fetchNextYesNoQuestion();
-
-    return of(
-      setYesNoQuestion(question),
-      { type: 'playYesNoQuestion', payload: question.question },
-    );
-  }),
-);
-
-export const playNextYesNoQuestionEpic = (action$) => action$.pipe(
-  ofType('playYesNoQuestion'),
-  map(({ payload }) => {
-    playQuestion(payload);
-    return { type: '' };
-  }),
-);
-
 export const saveAnswerEpic = (action$) => action$.pipe(
   ofType('saveAnswer'),
   map(({ payload }) => (
@@ -97,14 +74,3 @@ export const saveAnswerEpic = (action$) => action$.pipe(
     })
   )),
 );
-
-const rootEpic = combineEpics(
-  saveAnswerEpic,
-  getNextQuestionEpic,
-  listenRecognitionEvents,
-  recognizeSpeechEpic,
-  getNextYesNoQuestionEpic,
-  playNextYesNoQuestionEpic,
-);
-
-export default rootEpic;
