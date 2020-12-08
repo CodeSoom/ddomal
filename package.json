@@ -23,8 +23,7 @@
         "react-router-dom": "^5.2.0",
         "redux-observable": "^1.2.0",
         "rxjs": "^6.6.3",
-        "unique-random": "^2.1.0",
-        "use-sound": "^2.0.1"
+        "unique-random": "^2.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.12.3",
