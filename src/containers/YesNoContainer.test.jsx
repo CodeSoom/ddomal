@@ -7,7 +7,7 @@ import given from 'given2';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  getNextYesNoQuestion, idlePlaying, playYesNoQuestion, saveAnswer,
+  getNextYesNoQuestion, idlePlaying, playYesNoQuestion, saveAnswer, stopYesNoQuestion,
 } from '../redux/slice';
 
 import YesNoContainer from './YesNoContainer';
@@ -44,7 +44,7 @@ describe('YesNoContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      soundState: (given.soundState || SoundState.STOP),
+      soundState: (given.soundState || SoundState.END),
       yesNoQuestion: currentQuestion,
       answers: (given.answers || []),
     }));
@@ -73,7 +73,7 @@ describe('YesNoContainer', () => {
   });
 
   context('on not idle state', () => {
-    given('soundState', () => SoundState.STOP);
+    given('soundState', () => SoundState.END);
 
     it('rings correct sound when user click right button', () => {
       const { getByText } = render(<YesNoContainer />);
@@ -99,6 +99,7 @@ describe('YesNoContainer', () => {
 
         await fireEvent.click(getByText(button));
 
+        expect(dispatch).toBeCalledWith(stopYesNoQuestion());
         expect(dispatch).toBeCalledWith(getNextYesNoQuestion());
         expect(dispatch).toBeCalledWith(idlePlaying());
       });
@@ -135,7 +136,7 @@ describe('YesNoContainer', () => {
   });
 
   context('When question is not being played', () => {
-    given('soundState', () => SoundState.STOP);
+    given('soundState', () => SoundState.END);
 
     it('renders not playing sign', () => {
       const { container } = render(<YesNoContainer />);

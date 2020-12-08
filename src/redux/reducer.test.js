@@ -9,7 +9,7 @@ import reducer, {
   clearAnswers,
   setYesNoQuestion,
   startPlaying,
-  stopPlaying,
+  endPlaying,
   idlePlaying,
   endGame,
   initializeState,
@@ -84,9 +84,9 @@ describe('reducer', () => {
   test('stopPlaying', () => {
     const state = reducer({
       soundState: SoundState.PLAYING,
-    }, stopPlaying());
+    }, endPlaying());
 
-    expect(state.soundState).toBe(SoundState.STOP);
+    expect(state.soundState).toBe(SoundState.END);
   });
 
   test('idlePlaying', () => {

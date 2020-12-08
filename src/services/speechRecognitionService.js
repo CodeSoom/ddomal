@@ -1,10 +1,7 @@
 import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// eslint-disable-next-line new-cap
-const recognition = new window.webkitSpeechRecognition();
-
-recognition.lang = 'ko';
+import recognition from './instances/speechRecognition.instance';
 
 export function recognize() {
   recognition.start();

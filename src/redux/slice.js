@@ -68,10 +68,10 @@ const { reducer, actions } = createSlice({
         soundState: SoundState.PLAYING,
       };
     },
-    stopPlaying(state) {
+    endPlaying(state) {
       return {
         ...state,
-        soundState: SoundState.STOP,
+        soundState: SoundState.END,
       };
     },
     idlePlaying(state) {
@@ -96,7 +96,7 @@ export const {
   startGame,
   endGame,
   startPlaying,
-  stopPlaying,
+  endPlaying,
   idlePlaying,
   initializeState,
 } = actions;
@@ -107,5 +107,6 @@ export const saveAnswer = createAction('saveAnswer');
 
 export const getNextYesNoQuestion = createAction('getNextYesNoQuestion');
 export const playYesNoQuestion = createAction('playYesNoQuestion');
+export const stopYesNoQuestion = createAction('stopYesNoQuestion');
 
 export default reducer;
