@@ -36,7 +36,7 @@ export default function YesNoPage() {
     play();
   };
 
-  const fetchActions = (userAnswer) => {
+  const dispatchActions = (userAnswer) => {
     const actions = [
       getNextYesNoQuestion(),
       idlePlaying(),
@@ -52,7 +52,7 @@ export default function YesNoPage() {
 
   const handleClickYesNo = (userAnswer) => {
     playSound(userAnswer);
-    fetchActions(userAnswer);
+    dispatchActions(userAnswer);
   };
 
   return (
