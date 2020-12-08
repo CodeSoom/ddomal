@@ -7,11 +7,12 @@ import {
 
 import styled from '@emotion/styled';
 
-import SentenceSpeakPage from './components/SentenceSpeakPage';
-import SentenceAnswersPage from './components/SentenceAnswersPage';
-import YesNoPage from './components/YesNoPage';
-import SelectPage from './components/SelectPage/index';
-import MainPage from './components/MainPage/index';
+import MainPage from './pages/MainPage/index';
+import SelectPage from './pages/SelectPage/index';
+import SentenceSpeakPage from './pages/SentenceSpeakPage';
+import SentenceAnswersPage from './pages/SentenceAnswersPage';
+import YesNoPage from './pages/YesNoPage';
+import YesNoAnswersPage from './pages/YesNoAnswersPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/sentence" component={SentenceSpeakPage} />
         <Route path="/answers" component={SentenceAnswersPage} />
         <Route path="/yesno" component={YesNoPage} />
+        <Route path="/ynanswers" component={YesNoAnswersPage} />
       </Switch>
     </Container>
   );

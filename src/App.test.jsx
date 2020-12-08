@@ -17,6 +17,7 @@ describe('App', () => {
   const answersPage = '오늘';
   const yesnoPageTitle = 'Yes No';
   const selectPageTitle = '무엇을 연습해 볼까요';
+  const ynAnswersPage = '결과확인';
 
   const dispatch = jest.fn();
 
@@ -64,5 +65,11 @@ describe('App', () => {
     const { container } = renderApp({ path: '/yesno' });
 
     expect(container).toHaveTextContent(yesnoPageTitle);
+  });
+
+  it('shows yes no question answers page on route /ynanswers', () => {
+    const { container } = renderApp({ path: '/ynanswers' });
+
+    expect(container).toHaveTextContent(ynAnswersPage);
   });
 });

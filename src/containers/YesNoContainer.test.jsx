@@ -18,11 +18,21 @@ import { useAudio } from '../hooks/audio';
 
 jest.mock('../hooks/audio.js');
 
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
+
 describe('YesNoContainer', () => {
   const yesButton = '네';
   const noButton = '아니오';
   const playButton = '재생';
   const currentQuestion = { question: '쥐는 코끼리보다 무겁나요?', answer: 'N' };
+  const MAX_ANSWERS = 3;
 
   const dispatch = jest.fn();
   const playYes = jest.fn();
@@ -34,8 +44,9 @@ describe('YesNoContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      soundState: given.soundState,
+      soundState: (given.soundState || SoundState.STOP),
       yesNoQuestion: currentQuestion,
+      answers: (given.answers || []),
     }));
 
     useAudio.mockImplementation((path) => (
@@ -83,20 +94,20 @@ describe('YesNoContainer', () => {
     it('get next question when user click yes or no button', () => {
       const { getByText } = render(<YesNoContainer />);
 
-      [yesButton, noButton].forEach((button) => {
+      [yesButton, noButton].forEach(async (button) => {
         dispatch.mockClear();
 
-        fireEvent.click(getByText(button));
+        await fireEvent.click(getByText(button));
 
         expect(dispatch).toBeCalledWith(getNextYesNoQuestion());
         expect(dispatch).toBeCalledWith(idlePlaying());
       });
     });
 
-    it('save answer when user click button', () => {
+    it('save answer when user click button', async () => {
       const { getByText } = render(<YesNoContainer />);
 
-      fireEvent.click(getByText(yesButton));
+      await fireEvent.click(getByText(yesButton));
 
       expect(dispatch).toBeCalledWith(saveAnswer({
         ...currentQuestion,
@@ -146,6 +157,30 @@ describe('YesNoContainer', () => {
       fireEvent.click(getByText(playButton));
 
       expect(dispatch).toBeCalledWith(playYesNoQuestion(currentQuestion.question));
+    });
+  });
+
+  context('when answers number is max', () => {
+    given('answers', () => new Array(MAX_ANSWERS - 1));
+
+    it('go to answers page', async () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      await fireEvent.click(getByText(noButton));
+
+      expect(mockPush).toBeCalledWith('/ynanswers');
+    });
+  });
+
+  context('when answers number is not max', () => {
+    given('answers', () => new Array(MAX_ANSWERS - 2));
+
+    it('does not go to answers page', async () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      await fireEvent.click(getByText(noButton));
+
+      expect(mockPush).not.toBeCalled();
     });
   });
 });

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useHistory } from 'react-router-dom';
+
 import { useAudio } from '../hooks/audio';
 
 import SoundState from '../enums/SoundState';
@@ -15,7 +17,10 @@ import {
 
 import { get } from '../utils';
 
-export default function YesNoPage() {
+const MAX_ANSWERS = 3;
+
+export default function YesNoContainer() {
+  const answersNumber = useSelector(get('answers')).length;
   const { question, answer } = useSelector(get('yesNoQuestion')) || {};
   const soundState = useSelector(get('soundState'));
 
@@ -23,6 +28,7 @@ export default function YesNoPage() {
   const isIdle = soundState === SoundState.IDLE;
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [, playCorrect] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
   const [, playWrong] = useAudio('../../assets/sounds/IncorrectAnswer.mp3');
@@ -50,9 +56,13 @@ export default function YesNoPage() {
     actions.forEach((action) => dispatch(action));
   };
 
-  const handleClickYesNo = (userAnswer) => {
-    playSound(userAnswer);
+  const handleClickYesNo = async (userAnswer) => {
+    await playSound(userAnswer);
     dispatchActions(userAnswer);
+
+    if (answersNumber === MAX_ANSWERS - 1) {
+      history.push('/ynanswers');
+    }
   };
 
   return (
