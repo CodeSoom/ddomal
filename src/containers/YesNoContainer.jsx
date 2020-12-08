@@ -46,13 +46,13 @@ export default function YesNoContainer() {
   const dispatchActions = (userAnswer) => {
     const actions = [
       stopYesNoQuestion(),
-      getNextYesNoQuestion(),
       idlePlaying(),
       saveAnswer({
         question,
         answer,
         userAnswer,
       }),
+      getNextYesNoQuestion(),
     ];
 
     actions.forEach((action) => dispatch(action));

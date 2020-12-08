@@ -79,7 +79,7 @@ describe('epics', () => {
 
       const state$ = {
         value: {
-          soundState: SoundState.PLAYING, 
+          soundState: SoundState.PLAYING,
         },
       };
 
