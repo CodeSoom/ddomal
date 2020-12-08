@@ -1,13 +1,14 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 
 import MicState from '../enums/MicState';
+import SoundState from '../enums/SoundState';
 
 const initialState = {
   prompt: null,
   micState: MicState.OFF,
   answers: [],
   isGameEnd: false,
-  isPlaying: false,
+  soundState: SoundState.IDLE,
 };
 
 const { reducer, actions } = createSlice({
@@ -64,13 +65,19 @@ const { reducer, actions } = createSlice({
     startPlaying(state) {
       return {
         ...state,
-        isPlaying: true,
+        soundState: SoundState.PLAYING,
       };
     },
     stopPlaying(state) {
       return {
         ...state,
-        isPlaying: false,
+        soundState: SoundState.STOP,
+      };
+    },
+    idlePlaying(state) {
+      return {
+        ...state,
+        soundState: SoundState.IDLE,
       };
     },
     initializeState() {
@@ -90,6 +97,7 @@ export const {
   endGame,
   startPlaying,
   stopPlaying,
+  idlePlaying,
   initializeState,
 } = actions;
 

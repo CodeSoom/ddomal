@@ -1,4 +1,5 @@
 import MicState from '../enums/MicState';
+import SoundState from '../enums/SoundState';
 
 import reducer, {
   setSpokenSentence,
@@ -9,6 +10,7 @@ import reducer, {
   setYesNoQuestion,
   startPlaying,
   stopPlaying,
+  idlePlaying,
   endGame,
   initializeState,
 } from './slice';
@@ -73,18 +75,26 @@ describe('reducer', () => {
 
   test('startPlaying', () => {
     const state = reducer({
-      isPlaying: false,
+      soundState: SoundState.IDLE,
     }, startPlaying());
 
-    expect(state.isPlaying).toBe(true);
+    expect(state.soundState).toBe(SoundState.PLAYING);
   });
 
   test('stopPlaying', () => {
     const state = reducer({
-      isPlaying: true,
+      soundState: SoundState.PLAYING,
     }, stopPlaying());
 
-    expect(state.isPlaying).toBe(false);
+    expect(state.soundState).toBe(SoundState.STOP);
+  });
+
+  test('idlePlaying', () => {
+    const state = reducer({
+      soundState: SoundState.PLAYING,
+    }, idlePlaying());
+
+    expect(state.soundState).toBe(SoundState.IDLE);
   });
 
   test('endGame', () => {
@@ -101,7 +111,7 @@ describe('reducer', () => {
       micState: MicState.OFF,
       answers: [],
       isGameEnd: false,
-      isPlaying: false,
+      soundState: SoundState.IDLE,
     };
 
     const state = reducer({
