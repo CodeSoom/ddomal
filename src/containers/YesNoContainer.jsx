@@ -13,6 +13,7 @@ import {
   idlePlaying,
   playYesNoQuestion,
   saveAnswer,
+  stopYesNoQuestion,
 } from '../redux/slice';
 
 import { get } from '../utils';
@@ -44,13 +45,14 @@ export default function YesNoContainer() {
 
   const dispatchActions = (userAnswer) => {
     const actions = [
-      getNextYesNoQuestion(),
+      stopYesNoQuestion(),
       idlePlaying(),
       saveAnswer({
         question,
         answer,
         userAnswer,
       }),
+      getNextYesNoQuestion(),
     ];
 
     actions.forEach((action) => dispatch(action));

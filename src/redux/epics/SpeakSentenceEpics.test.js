@@ -18,14 +18,13 @@ import {
   saveAnswerEpic,
 } from './SpeakSentenceEpics';
 
-import { fetchNextPrompt, getExamples } from '../../services/promptService';
+import { fetchNextPrompt, getExamples } from '../../services/dataService';
 import { recognize } from '../../services/speechRecognitionService';
 
 import MicState from '../../enums/MicState';
 
 jest.mock('../../services/speechRecognitionService.js');
-jest.mock('../../services/promptService.js');
-jest.mock('../../services/yesNoQuestionService.js');
+jest.mock('../../services/dataService.js');
 
 describe('epics', () => {
   describe('getNextQuestionEpic', () => {

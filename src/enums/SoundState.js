@@ -1,7 +1,7 @@
 const SoundState = {
   IDLE: 'idle',
   PLAYING: 'playing',
-  STOP: 'stop',
+  END: 'end',
 };
 
 export default SoundState;

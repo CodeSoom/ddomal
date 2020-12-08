@@ -5,20 +5,23 @@ import { toArray } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import {
-  setYesNoQuestion, startPlaying, stopPlaying,
+  setYesNoQuestion, startPlaying, endPlaying,
 } from '../slice';
 
 import {
   getNextYesNoQuestionEpic,
   listenYesNoEndEventEpic,
   playYesNoQuestionEpic,
+  stopYesNoQuestionEpic,
 } from './YesNoEpics';
 
-import { fetchNextYesNoQuestion, playQuestion } from '../../services/yesNoQuestionService';
+import { fetchNextYesNoQuestion } from '../../services/dataService';
+import { play, stop } from '../../services/speechSynthesisService';
+import SoundState from '../../enums/SoundState';
 
 jest.mock('../../services/speechRecognitionService.js');
-jest.mock('../../services/promptService.js');
-jest.mock('../../services/yesNoQuestionService.js');
+jest.mock('../../services/speechSynthesisService.js');
+jest.mock('../../services/dataService.js');
 
 describe('epics', () => {
   describe('getNextYesNoQuestionEpic', () => {
@@ -46,10 +49,10 @@ describe('epics', () => {
   describe('playYesNoQuestionEpic', () => {
     const fakeQuestion = '안녕하세요';
 
-    const playYesNoQuestion = playQuestion;
+    const playYesNoQuestion = play;
 
     beforeEach(() => {
-      playQuestion.mockImplementation(() => of(''));
+      play.mockImplementation(() => of(''));
     });
 
     it('plays yesNoQuestion', (done) => {
@@ -69,13 +72,36 @@ describe('epics', () => {
   });
 
   describe('listenYesNoEndEventEpic', () => {
-    it('stops playing yes no question', (done) => {
+    it('ends playing yes no question', (done) => {
       const action$ = ActionsObservable.of({
         type: 'listenYesNoEndEvent',
       });
 
-      listenYesNoEndEventEpic(action$).subscribe((action) => {
-        expect(action).toEqual(stopPlaying());
+      const state$ = {
+        value: {
+          soundState: SoundState.PLAYING,
+        },
+      };
+
+      listenYesNoEndEventEpic(action$, state$).subscribe((action) => {
+        expect(action).toEqual(endPlaying());
+        done();
+      });
+    });
+  });
+
+  describe('stopPlayingYesNoQuestionEpic', () => {
+    beforeEach(() => {
+      stop.mockClear();
+    });
+
+    it('stops playing yes no question', (done) => {
+      const action$ = ActionsObservable.of({
+        type: 'stopYesNoQuestion',
+      });
+
+      stopYesNoQuestionEpic(action$).subscribe(() => {
+        expect(stop).toBeCalled();
         done();
       });
     });

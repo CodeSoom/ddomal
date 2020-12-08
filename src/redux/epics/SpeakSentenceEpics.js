@@ -5,7 +5,7 @@ import { map, mergeMap } from 'rxjs/operators';
 
 import MicState from '../../enums/MicState';
 
-import { fetchNextPrompt, getExamples } from '../../services/promptService';
+import { fetchNextPrompt, getExamples } from '../../services/dataService';
 
 import {
   recognize,

@@ -1,15 +1,22 @@
 import { ofType } from 'redux-observable';
 
-import { of, merge } from 'rxjs';
+import { of } from 'rxjs';
+
 import {
   map,
   mergeMap,
+  tap,
+  filter,
 } from 'rxjs/operators';
+import SoundState from '../../enums/SoundState';
 
-import { fetchNextYesNoQuestion, playQuestion } from '../../services/yesNoQuestionService';
+import { fetchNextYesNoQuestion } from '../../services/dataService';
+import { play, playEnded, stop } from '../../services/speechSynthesisService';
 
 import {
-  setYesNoQuestion, startPlaying, stopPlaying,
+  endPlaying,
+  idlePlaying,
+  setYesNoQuestion, startPlaying,
 } from '../slice';
 
 export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
@@ -20,14 +27,24 @@ export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
 
 export const playYesNoQuestionEpic = (action$) => action$.pipe(
   ofType('playYesNoQuestion'),
-  map(({ payload }) => playQuestion(payload)),
-  mergeMap((end$) => merge(
-    of(startPlaying()),
-    end$.pipe(map(() => ({ type: 'listenYesNoEndEvent' }))),
+  tap(({ payload }) => play(payload)),
+  mergeMap(() => of(
+    startPlaying(),
+    { type: 'listenYesNoEndEvent' },
   )),
 );
 
-export const listenYesNoEndEventEpic = (action$) => action$.pipe(
+export const stopYesNoQuestionEpic = (action$) => action$.pipe(
+  ofType('stopYesNoQuestion'),
+  tap(() => stop()),
+  map(() => idlePlaying()),
+);
+
+export const listenYesNoEndEventEpic = (action$, state$) => action$.pipe(
   ofType('listenYesNoEndEvent'),
-  map(() => stopPlaying()),
+  map(() => playEnded()),
+  mergeMap((end$) => end$.pipe(
+    filter(() => state$.value.soundState !== SoundState.IDLE),
+    map(() => endPlaying()),
+  )),
 );
