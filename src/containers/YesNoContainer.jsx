@@ -6,7 +6,7 @@ import { useAudio } from '../hooks/audio';
 
 import SoundState from '../enums/SoundState';
 
-import { playYesNoQuestion } from '../redux/slice';
+import { getNextYesNoQuestion, idlePlaying, playYesNoQuestion } from '../redux/slice';
 
 import { get } from '../utils';
 
@@ -31,6 +31,9 @@ export default function YesNoPage() {
     } else {
       playWrong();
     }
+
+    dispatch(getNextYesNoQuestion());
+    dispatch(idlePlaying());
   };
 
   return (
