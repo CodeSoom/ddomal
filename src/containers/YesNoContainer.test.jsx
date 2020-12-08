@@ -6,7 +6,9 @@ import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getNextYesNoQuestion, idlePlaying, playYesNoQuestion } from '../redux/slice';
+import {
+  getNextYesNoQuestion, idlePlaying, playYesNoQuestion, saveAnswer,
+} from '../redux/slice';
 
 import YesNoContainer from './YesNoContainer';
 
@@ -89,6 +91,17 @@ describe('YesNoContainer', () => {
         expect(dispatch).toBeCalledWith(getNextYesNoQuestion());
         expect(dispatch).toBeCalledWith(idlePlaying());
       });
+    });
+
+    it('save answer when user click button', () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      fireEvent.click(getByText(yesButton));
+
+      expect(dispatch).toBeCalledWith(saveAnswer({
+        ...currentQuestion,
+        userAnswer: 'Y',
+      }));
     });
   });
 

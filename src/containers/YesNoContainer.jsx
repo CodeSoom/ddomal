@@ -6,7 +6,12 @@ import { useAudio } from '../hooks/audio';
 
 import SoundState from '../enums/SoundState';
 
-import { getNextYesNoQuestion, idlePlaying, playYesNoQuestion } from '../redux/slice';
+import {
+  getNextYesNoQuestion,
+  idlePlaying,
+  playYesNoQuestion,
+  saveAnswer,
+} from '../redux/slice';
 
 import { get } from '../utils';
 
@@ -18,22 +23,36 @@ export default function YesNoPage() {
   const isIdle = soundState === SoundState.IDLE;
 
   const dispatch = useDispatch();
-  const [, playYes] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
+
+  const [, playCorrect] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
   const [, playWrong] = useAudio('../../assets/sounds/IncorrectAnswer.mp3');
 
-  const handleClick = () => {
+  const handleClickPlayQuestion = () => {
     dispatch(playYesNoQuestion(question));
   };
 
-  const handleClickYesNo = (userAnswer) => {
-    if (userAnswer === answer) {
-      playYes();
-    } else {
-      playWrong();
-    }
+  const playSound = (userAnswer) => {
+    const play = (userAnswer === answer) ? playCorrect : playWrong;
+    play();
+  };
 
-    dispatch(getNextYesNoQuestion());
-    dispatch(idlePlaying());
+  const fetchActions = (userAnswer) => {
+    const actions = [
+      getNextYesNoQuestion(),
+      idlePlaying(),
+      saveAnswer({
+        question,
+        answer,
+        userAnswer,
+      }),
+    ];
+
+    actions.forEach((action) => dispatch(action));
+  };
+
+  const handleClickYesNo = (userAnswer) => {
+    playSound(userAnswer);
+    fetchActions(userAnswer);
   };
 
   return (
@@ -53,7 +72,7 @@ export default function YesNoPage() {
             </button>
           </>
         )}
-      <button type="button" onClick={handleClick} disabled={isPlaying}>
+      <button type="button" onClick={handleClickPlayQuestion} disabled={isPlaying}>
         재생
       </button>
       <div>
