@@ -6,7 +6,7 @@ import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { playYesNoQuestion } from '../redux/slice';
+import { getNextYesNoQuestion, idlePlaying, playYesNoQuestion } from '../redux/slice';
 
 import YesNoContainer from './YesNoContainer';
 
@@ -76,6 +76,19 @@ describe('YesNoContainer', () => {
       fireEvent.click(getByText(yesButton));
 
       expect(playWrong).toBeCalled();
+    });
+
+    it('get next question when user click yes or no button', () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      [yesButton, noButton].forEach((button) => {
+        dispatch.mockClear();
+
+        fireEvent.click(getByText(button));
+
+        expect(dispatch).toBeCalledWith(getNextYesNoQuestion());
+        expect(dispatch).toBeCalledWith(idlePlaying());
+      });
     });
   });
 
