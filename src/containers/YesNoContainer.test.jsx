@@ -8,9 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import YesNoContainer from './YesNoContainer';
 
-import { playYesNoQuestion } from '../redux/slice';
+import SoundState from '../enums/SoundState';
 
 describe('YesNoContainer', () => {
+  const yesButton = '네';
+  const noButton = '아니오';
+  const playButton = '재생';
+
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -19,24 +23,28 @@ describe('YesNoContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      isPlaying: given.playing,
+      soundState: given.soundState,
     }));
   });
 
-  it('renders Yes button', () => {
-    const { getByText } = render(<YesNoContainer />);
+  context('on idle state', () => {
+    given('soundState', () => SoundState.IDLE);
 
-    fireEvent.click(getByText('네'));
-  });
+    it('does not render Yes button', () => {
+      const { queryByText } = render(<YesNoContainer />);
 
-  it('renders No button', () => {
-    const { getByText } = render(<YesNoContainer />);
+      expect(queryByText(yesButton)).toBeNull();
+    });
 
-    fireEvent.click(getByText('아니오'));
+    it('does not render No button', () => {
+      const { queryByText } = render(<YesNoContainer />);
+
+      expect(queryByText(noButton)).toBeNull();
+    });
   });
 
   context('When question is being played', () => {
-    given('playing', () => true);
+    given('soundState', () => SoundState.PLAYING);
 
     it('renders playing sign', () => {
       const { container } = render(<YesNoContainer />);
@@ -47,14 +55,14 @@ describe('YesNoContainer', () => {
     it('cannot click play button', () => {
       const { getByText } = render(<YesNoContainer />);
 
-      fireEvent.click(getByText('재생'));
+      fireEvent.click(getByText(playButton));
 
       expect(dispatch).not.toBeCalled();
     });
   });
 
   context('When question is not being played', () => {
-    given('playing', () => false);
+    given('soundState', () => SoundState.STOP);
 
     it('renders not playing sign', () => {
       const { container } = render(<YesNoContainer />);
@@ -65,9 +73,9 @@ describe('YesNoContainer', () => {
     it('can click play button', () => {
       const { getByText } = render(<YesNoContainer />);
 
-      fireEvent.click(getByText('재생'));
+      fireEvent.click(getByText(playButton));
 
-      expect(dispatch).toBeCalledWith(playYesNoQuestion('안녕하세요'));
+      expect(dispatch).toBeCalled();
     });
   });
 });
