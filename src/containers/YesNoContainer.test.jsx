@@ -6,25 +6,41 @@ import given from 'given2';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { playYesNoQuestion } from '../redux/slice';
+
 import YesNoContainer from './YesNoContainer';
 
 import SoundState from '../enums/SoundState';
+
+import { useAudio } from '../hooks/audio';
+
+jest.mock('../hooks/audio.js');
 
 describe('YesNoContainer', () => {
   const yesButton = '네';
   const noButton = '아니오';
   const playButton = '재생';
+  const currentQuestion = { question: '쥐는 코끼리보다 무겁나요?', answer: 'N' };
 
   const dispatch = jest.fn();
+  const playYes = jest.fn();
+  const playWrong = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       soundState: given.soundState,
+      yesNoQuestion: currentQuestion,
     }));
+
+    useAudio.mockImplementation((path) => (
+      path.includes('Correct')
+        ? ['', playYes]
+        : ['', playWrong]
+    ));
   });
 
   context('on idle state', () => {
@@ -40,6 +56,26 @@ describe('YesNoContainer', () => {
       const { queryByText } = render(<YesNoContainer />);
 
       expect(queryByText(noButton)).toBeNull();
+    });
+  });
+
+  context('on not idle state', () => {
+    given('soundState', () => SoundState.STOP);
+
+    it('rings correct sound when user click right button', () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      fireEvent.click(getByText(noButton));
+
+      expect(playYes).toBeCalled();
+    });
+
+    it('rings incorrect sound when user click wrong button', () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      fireEvent.click(getByText(yesButton));
+
+      expect(playWrong).toBeCalled();
     });
   });
 
@@ -76,6 +112,14 @@ describe('YesNoContainer', () => {
       fireEvent.click(getByText(playButton));
 
       expect(dispatch).toBeCalled();
+    });
+
+    it('plays current question', () => {
+      const { getByText } = render(<YesNoContainer />);
+
+      fireEvent.click(getByText(playButton));
+
+      expect(dispatch).toBeCalledWith(playYesNoQuestion(currentQuestion.question));
     });
   });
 });
