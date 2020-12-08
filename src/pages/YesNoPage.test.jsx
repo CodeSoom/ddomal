@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import YesNoPage from './YesNoPage';
 
@@ -15,6 +15,10 @@ describe('YesNoPage', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      answers: [],
+    }));
   });
 
   it('gets next question on mount', () => {
