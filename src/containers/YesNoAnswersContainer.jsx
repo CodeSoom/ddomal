@@ -1,11 +1,22 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
+import { initializeState } from '../redux/slice';
 
 export default function YesNoAnswersContainer() {
   const answers = useSelector(get('answers'));
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleClickGoHome = () => {
+    dispatch(initializeState());
+    history.push('/');
+  };
 
   return (
     <div>
@@ -17,6 +28,9 @@ export default function YesNoAnswersContainer() {
           <p>{`${question} | ${answer} | ${userAnswer}`}</p>
         </div>
       ))}
+      <button type="button" onClick={handleClickGoHome}>
+        처음으로
+      </button>
     </div>
   );
 }
