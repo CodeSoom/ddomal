@@ -189,7 +189,7 @@ const yesNoQuestions = [
   },
   {
     question: '컴퓨터를 이용해서 옷을 살 수 있나요?',
-    answer: 'N',
+    answer: 'Y',
   },
 ];
 

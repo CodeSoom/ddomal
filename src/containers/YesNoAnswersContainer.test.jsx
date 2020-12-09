@@ -1,14 +1,27 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import YesNoAnswersContainer from './YesNoAnswersContainer';
 
+import { initializeState } from '../redux/slice';
+
 jest.mock('react-redux');
 
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
+
 describe('YesNoAnswersContainer', () => {
+  const goHomeButton = '처음으로';
+
   const answers = [
     {
       question: '코끼리는 쥐보다 가볍나요?',
@@ -22,10 +35,16 @@ describe('YesNoAnswersContainer', () => {
     },
   ];
 
+  const dispatch = jest.fn();
+
   beforeEach(() => {
+    jest.clearAllMocks();
+
     useSelector.mockImplementation((selector) => selector({
       answers,
     }));
+
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   it('show answers', () => {
@@ -38,5 +57,14 @@ describe('YesNoAnswersContainer', () => {
       expect(container).toHaveTextContent(answer);
       expect(container).toHaveTextContent(userAnswer);
     });
+  });
+
+  it('renders go home button', () => {
+    const { getByText } = render(<YesNoAnswersContainer />);
+
+    fireEvent.click(getByText(goHomeButton));
+
+    expect(dispatch).toBeCalledWith(initializeState());
+    expect(mockPush).toBeCalledWith('/');
   });
 });
