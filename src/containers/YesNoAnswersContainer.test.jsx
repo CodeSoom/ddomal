@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 import YesNoAnswersContainer from './YesNoAnswersContainer';
 
-import { initializeState } from '../redux/slice';
+import { initializeState, playYesNoQuestion } from '../redux/slice';
 
 jest.mock('react-redux');
 
@@ -21,6 +21,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('YesNoAnswersContainer', () => {
   const goHomeButton = '처음으로';
+  const replayButton = '다시듣기';
 
   const answers = [
     {
@@ -56,6 +57,18 @@ describe('YesNoAnswersContainer', () => {
       expect(container).toHaveTextContent(question);
       expect(container).toHaveTextContent(answer);
       expect(container).toHaveTextContent(userAnswer);
+    });
+  });
+
+  it('renders replay button on each answer', () => {
+    const { getAllByText } = render(<YesNoAnswersContainer />);
+
+    answers.forEach(async ({ question }, idx) => {
+      dispatch.mockClear();
+
+      fireEvent.click(getAllByText(replayButton)[idx]);
+
+      await waitFor(() => expect(dispatch).toBeCalledWith(playYesNoQuestion(question)));
     });
   });
 

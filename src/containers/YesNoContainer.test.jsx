@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import given from 'given2';
 
@@ -97,23 +97,23 @@ describe('YesNoContainer', () => {
       [yesButton, noButton].forEach(async (button) => {
         dispatch.mockClear();
 
-        await fireEvent.click(getByText(button));
+        fireEvent.click(getByText(button));
 
-        expect(dispatch).toBeCalledWith(stopYesNoQuestion());
-        expect(dispatch).toBeCalledWith(getNextYesNoQuestion());
-        expect(dispatch).toBeCalledWith(idlePlaying());
+        await waitFor(() => expect(dispatch).toBeCalledWith(stopYesNoQuestion()));
+        await waitFor(() => expect(dispatch).toBeCalledWith(getNextYesNoQuestion()));
+        await waitFor(() => expect(dispatch).toBeCalledWith(idlePlaying()));
       });
     });
 
     it('save answer when user click button', async () => {
       const { getByText } = render(<YesNoContainer />);
 
-      await fireEvent.click(getByText(yesButton));
+      fireEvent.click(getByText(yesButton));
 
-      expect(dispatch).toBeCalledWith(saveAnswer({
+      await waitFor(() => expect(dispatch).toBeCalledWith(saveAnswer({
         ...currentQuestion,
         userAnswer: 'Y',
-      }));
+      })));
     });
   });
 
@@ -167,9 +167,9 @@ describe('YesNoContainer', () => {
     it('go to answers page', async () => {
       const { getByText } = render(<YesNoContainer />);
 
-      await fireEvent.click(getByText(noButton));
+      fireEvent.click(getByText(noButton));
 
-      expect(mockPush).toBeCalledWith('/ynanswers');
+      await waitFor(() => expect(mockPush).toBeCalledWith('/ynanswers'));
     });
   });
 
@@ -179,9 +179,9 @@ describe('YesNoContainer', () => {
     it('does not go to answers page', async () => {
       const { getByText } = render(<YesNoContainer />);
 
-      await fireEvent.click(getByText(noButton));
+      fireEvent.click(getByText(noButton));
 
-      expect(mockPush).not.toBeCalled();
+      await waitFor(() => expect(mockPush).not.toBeCalled());
     });
   });
 });
