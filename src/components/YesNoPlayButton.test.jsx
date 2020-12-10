@@ -9,15 +9,38 @@ describe('YesNoPlayButton', () => {
 
   const handleClick = jest.fn();
 
+  const renderYesNoPlayButton = ({ isPlaying }) => render(
+    <YesNoPlayButton
+      isPlaying={isPlaying}
+      onClick={handleClick}
+    />,
+  );
+
   beforeEach(() => {
     handleClick.mockClear();
   });
 
-  it('renders play button', () => {
-    const { getByTitle } = render(<YesNoPlayButton onClick={handleClick} />);
+  context('when sound is not playing', () => {
+    const isPlaying = false;
 
-    fireEvent.click(getByTitle(playButton));
+    it('user can click play button', () => {
+      const { getByTitle } = renderYesNoPlayButton({ isPlaying });
 
-    expect(handleClick).toBeCalled();
+      fireEvent.click(getByTitle(playButton));
+
+      expect(handleClick).toBeCalled();
+    });
+  });
+
+  context('when sound is playing', () => {
+    const isPlaying = true;
+
+    it('user cannot click play button', () => {
+      const { getByTitle } = renderYesNoPlayButton({ isPlaying });
+
+      fireEvent.click(getByTitle(playButton));
+
+      expect(handleClick).not.toBeCalled();
+    });
   });
 });

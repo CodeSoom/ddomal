@@ -10,27 +10,51 @@ describe('YesNoSubmitButtons', () => {
 
   const handleClick = jest.fn();
 
-  const renderYesNoSubmitButtons = () => render(
-    <YesNoSubmitButtons onClick={handleClick} />,
+  const renderYesNoSubmitButtons = ({ isIdle }) => render(
+    <YesNoSubmitButtons onClick={handleClick} isIdle={isIdle} />,
   );
 
   beforeEach(() => {
     handleClick.mockClear();
   });
 
-  it('renders yes button', () => {
-    const { getByText } = renderYesNoSubmitButtons();
+  context('when sound has started', () => {
+    const isIdle = false;
 
-    fireEvent.click(getByText(yesButton));
+    it('user can click yes button', () => {
+      const { getByText } = renderYesNoSubmitButtons({ isIdle });
 
-    expect(handleClick).toBeCalled();
+      fireEvent.click(getByText(yesButton));
+
+      expect(handleClick).toBeCalledWith('Y');
+    });
+
+    it('user can click no button', () => {
+      const { getByText } = renderYesNoSubmitButtons({ isIdle });
+
+      fireEvent.click(getByText(noButton));
+
+      expect(handleClick).toBeCalledWith('N');
+    });
   });
 
-  it('renders no button', () => {
-    const { getByText } = renderYesNoSubmitButtons();
+  context('when sound has not started', () => {
+    const isIdle = true;
 
-    fireEvent.click(getByText(noButton));
+    it('user cannot click yes button', () => {
+      const { getByText } = renderYesNoSubmitButtons({ isIdle });
 
-    expect(handleClick).toBeCalled();
+      fireEvent.click(getByText(yesButton));
+
+      expect(handleClick).not.toBeCalled();
+    });
+
+    it('user cannot click no button', () => {
+      const { getByText } = renderYesNoSubmitButtons({ isIdle });
+
+      fireEvent.click(getByText(noButton));
+
+      expect(handleClick).not.toBeCalled();
+    });
   });
 });
