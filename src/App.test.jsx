@@ -15,7 +15,7 @@ describe('App', () => {
   const prompt = '사과';
   const mainPageButton = '시작 하기';
   const answersPage = '오늘';
-  const yesnoPageTitle = 'Yes No';
+  const yesnoPage = '잘 듣고 정답을 골라보세요';
   const selectPageTitle = '무엇을 연습해 볼까요';
   const ynAnswersPage = '결과확인';
 
@@ -64,7 +64,7 @@ describe('App', () => {
   it('shows YesNo page on route /yesno', () => {
     const { container } = renderApp({ path: '/yesno' });
 
-    expect(container).toHaveTextContent(yesnoPageTitle);
+    expect(container).toHaveTextContent(yesnoPage);
   });
 
   it('shows yes no question answers page on route /ynanswers', () => {

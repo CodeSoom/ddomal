@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActiveButton from '../styles/CommonButton';
+import ActiveButton from '../styles/CommonButtonActive';
 import InactiveButton from '../styles/CommonButtonInactive';
 
 export default function SentenceSubmitButton({

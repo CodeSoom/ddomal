@@ -8,15 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getNextYesNoQuestion, idlePlaying, playYesNoQuestion, saveAnswer, stopYesNoQuestion,
-} from '../redux/slice';
+} from '../../redux/slice';
 
 import YesNoContainer from './YesNoContainer';
 
-import SoundState from '../enums/SoundState';
+import SoundState from '../../enums/SoundState';
 
-import { useAudio } from '../hooks/audio';
+import { useAudio } from '../../hooks/audio';
 
-jest.mock('../hooks/audio.js');
+jest.mock('../../hooks/audio.js');
 
 const mockPush = jest.fn();
 

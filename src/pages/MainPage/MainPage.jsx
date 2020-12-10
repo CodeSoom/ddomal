@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import Button from '../../styles/CommonButton';
+import Button from '../../styles/CommonButtonActive';
 
 import {
   Container,

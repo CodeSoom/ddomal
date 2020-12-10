@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Message from '../styles/Message';
+
 export default function YesNoGuideMessage({ isIdle }) {
   return (
-    <h1>
+    <Message>
       {isIdle
         ? '버튼을 누르면 문제가 나와요'
         : '잘 듣고 정답을 골라보세요'}
-    </h1>
+    </Message>
   );
 }

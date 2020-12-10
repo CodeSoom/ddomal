@@ -1,10 +1,6 @@
-import { MdMic } from 'react-icons/md';
-
 import styled from '@emotion/styled';
 
 import { flexBoxCenter } from '../../styles/common';
-
-import { normalColor, primaryColor } from '../../styles/colors';
 
 export const Container = styled.div({
   ...flexBoxCenter,
@@ -24,15 +20,5 @@ export const WarningMessage = styled.div({
 });
 
 export const MicBox = styled.div({
-  backgroundColor: normalColor,
-  ...flexBoxCenter,
   marginTop: '10vh',
-  width: '4.6rem',
-  height: '4.6rem',
-  borderRadius: '6px',
 });
-
-export const StyledMic = styled(MdMic)`
-  cursor: pointer;
-  color: ${primaryColor};
-`;

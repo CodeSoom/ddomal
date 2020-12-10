@@ -1,15 +1,9 @@
 import React from 'react';
 
-import styled from '@emotion/styled';
-
 import MicState from '../enums/MicState';
 
-import { emphasisColor, normalColor } from '../styles/colors';
-
-const Container = styled.p({
-  fontSize: '1.5rem',
-  color: normalColor,
-});
+import { emphasisColor } from '../styles/colors';
+import Message from '../styles/Message';
 
 const waiting = '...';
 const placeholder = '문장을 소리내어 말해보세요';
@@ -38,8 +32,8 @@ export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   };
 
   return (
-    <Container>
+    <Message>
       {isInputting ? waiting : highlightSentence()}
-    </Container>
+    </Message>
   );
 }
