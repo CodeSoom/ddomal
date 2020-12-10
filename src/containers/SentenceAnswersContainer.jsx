@@ -13,7 +13,7 @@ import { get } from '../utils';
 import SentenceAnswers from '../components/SentenceAnswers';
 
 import { flexBoxCenter } from '../styles/common';
-import ActiveButton from '../styles/CommonButton';
+import ActiveButton from '../styles/CommonButtonActive';
 import InactiveButton from '../styles/CommonButtonInactive';
 
 const ButtonBox = styled.div({

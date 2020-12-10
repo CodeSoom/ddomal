@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { initializeState } from '../../redux/slice';
 
-import Button from '../../styles/CommonButton';
+import Button from '../../styles/CommonButtonActive';
 
 import {
   Container,

@@ -14,9 +14,6 @@ export default function YesNoPage() {
   });
 
   return (
-    <div>
-      <h1>Yes No</h1>
-      <YesNoContainer />
-    </div>
+    <YesNoContainer />
   );
 }

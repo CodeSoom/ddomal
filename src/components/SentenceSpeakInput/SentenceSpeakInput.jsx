@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 
 import _ from 'lodash';
 
-import SpokenSentence from '../SpokenSentence';
+import { MdMic } from 'react-icons/md';
 
-import MicState from '../../enums/MicState';
+import SpokenSentence from '../SpokenSentence';
 
 import { useAudio } from '../../hooks/audio';
 
@@ -13,8 +13,8 @@ import {
   SentenceBox,
   WarningMessage,
   MicBox,
-  StyledMic,
 } from './styled';
+import IconButton from '../../styles/IconButton';
 
 export default function SentenceSpeakInput({
   isCorrectSentence, prompt, spokenSentence, micState, onClick,
@@ -44,13 +44,11 @@ export default function SentenceSpeakInput({
         />
       </SentenceBox>
       <MicBox>
-        <StyledMic
-          title="mic"
-          testid="mic"
-          type="button"
+        <IconButton
+          Icon={MdMic}
+          iconTitle="mic"
+          iconSize={55}
           onClick={onClick}
-          size={55}
-          speaking={micState === MicState.SPEAKING ? 1 : 0}
         />
       </MicBox>
     </Container>

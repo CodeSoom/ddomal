@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { useAudio } from '../hooks/audio';
+import { useAudio } from '../../hooks/audio';
 
-import SoundState from '../enums/SoundState';
+import SoundState from '../../enums/SoundState';
 
 import {
   getNextYesNoQuestion,
@@ -14,13 +14,22 @@ import {
   playYesNoQuestion,
   saveAnswer,
   stopYesNoQuestion,
-} from '../redux/slice';
+} from '../../redux/slice';
 
-import { get } from '../utils';
-import ProgressBar from '../components/ProgressBar';
-import YesNoGuideMessage from '../components/YesNoGuideMessage';
-import YesNoPlayButton from '../components/YesNoPlayButton';
-import YesNoSubmitButtons from '../components/YesNoSubmitButtons';
+import { get } from '../../utils';
+
+import ProgressBar from '../../components/ProgressBar';
+import YesNoGuideMessage from '../../components/YesNoGuideMessage';
+import YesNoPlayButton from '../../components/YesNoPlayButton';
+import YesNoSubmitButtons from '../../components/YesNoSubmitButtons';
+
+import {
+  Container,
+  BarBox,
+  MessageBox,
+  PlayButtonBox,
+  SubmitButtonBox,
+} from './styled';
 
 const MAX_ANSWERS = 3;
 
@@ -73,13 +82,19 @@ export default function YesNoContainer() {
   };
 
   return (
-    <>
-      <ProgressBar currentNumber={answersNumber} maxNumber={MAX_ANSWERS} />
-      <YesNoGuideMessage isIdle={isIdle} />
-      <YesNoPlayButton onClick={handleClickPlay} isPlaying={isPlaying} />
-      <div>
+    <Container>
+      <BarBox>
+        <ProgressBar currentNumber={answersNumber} maxNumber={MAX_ANSWERS} />
+      </BarBox>
+      <MessageBox>
+        <YesNoGuideMessage isIdle={isIdle} />
+      </MessageBox>
+      <PlayButtonBox>
+        <YesNoPlayButton onClick={handleClickPlay} isPlaying={isPlaying} />
+      </PlayButtonBox>
+      <SubmitButtonBox>
         <YesNoSubmitButtons onClick={handleClickYesNo} isIdle={isIdle} />
-      </div>
-    </>
+      </SubmitButtonBox>
+    </Container>
   );
 }
