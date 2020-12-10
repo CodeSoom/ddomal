@@ -28,10 +28,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('YesNoContainer', () => {
-  const yesButton = '네';
-  const noButton = '아니오';
-  const playButton = '재생';
+  const yesButton = '맞아요';
+  const noButton = '아니에요';
+  const playButton = 'play';
+  const guideMessage = '잘 듣고 정답을 골라보세요';
   const currentQuestion = { question: '쥐는 코끼리보다 무겁나요?', answer: 'N' };
+  const currentAnswersNumber = 1;
   const MAX_ANSWERS = 3;
 
   const dispatch = jest.fn();
@@ -44,7 +46,7 @@ describe('YesNoContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      soundState: (given.soundState || SoundState.END),
+      soundState: SoundState.END,
       yesNoQuestion: currentQuestion,
       answers: (given.answers || []),
     }));
@@ -56,109 +58,70 @@ describe('YesNoContainer', () => {
     ));
   });
 
-  context('on idle state', () => {
-    given('soundState', () => SoundState.IDLE);
+  context('with currently answered quetion', () => {
+    given('answers', () => new Array(currentAnswersNumber));
 
-    it('does not render Yes button', () => {
-      const { queryByText } = render(<YesNoContainer />);
-
-      expect(queryByText(yesButton)).toBeNull();
-    });
-
-    it('does not render No button', () => {
-      const { queryByText } = render(<YesNoContainer />);
-
-      expect(queryByText(noButton)).toBeNull();
-    });
-  });
-
-  context('on not idle state', () => {
-    given('soundState', () => SoundState.END);
-
-    it('rings correct sound when user click right button', () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      fireEvent.click(getByText(noButton));
-
-      expect(playYes).toBeCalled();
-    });
-
-    it('rings incorrect sound when user click wrong button', () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      fireEvent.click(getByText(yesButton));
-
-      expect(playWrong).toBeCalled();
-    });
-
-    it('get next question when user click yes or no button', () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      [yesButton, noButton].forEach(async (button) => {
-        dispatch.mockClear();
-
-        fireEvent.click(getByText(button));
-
-        await waitFor(() => expect(dispatch).toBeCalledWith(stopYesNoQuestion()));
-        await waitFor(() => expect(dispatch).toBeCalledWith(getNextYesNoQuestion()));
-        await waitFor(() => expect(dispatch).toBeCalledWith(idlePlaying()));
-      });
-    });
-
-    it('save answer when user click button', async () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      fireEvent.click(getByText(yesButton));
-
-      await waitFor(() => expect(dispatch).toBeCalledWith(saveAnswer({
-        ...currentQuestion,
-        userAnswer: 'Y',
-      })));
-    });
-  });
-
-  context('When question is being played', () => {
-    given('soundState', () => SoundState.PLAYING);
-
-    it('renders playing sign', () => {
+    it('show progress bar', () => {
       const { container } = render(<YesNoContainer />);
 
-      expect(container).toHaveTextContent('재생중입니다');
-    });
-
-    it('cannot click play button', () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      fireEvent.click(getByText(playButton));
-
-      expect(dispatch).not.toBeCalled();
+      expect(container).toHaveTextContent(currentAnswersNumber);
+      expect(container).toHaveTextContent(MAX_ANSWERS);
     });
   });
 
-  context('When question is not being played', () => {
-    given('soundState', () => SoundState.END);
+  it('renders guide message', () => {
+    const { container } = render(<YesNoContainer />);
 
-    it('renders not playing sign', () => {
-      const { container } = render(<YesNoContainer />);
+    expect(container).toHaveTextContent(guideMessage);
+  });
 
-      expect(container).toHaveTextContent('재생중이 아닙니다');
+  it('renders play button', () => {
+    const { getByTitle } = render(<YesNoContainer />);
+
+    fireEvent.click(getByTitle(playButton));
+
+    expect(dispatch).toBeCalledWith(playYesNoQuestion(currentQuestion.question));
+  });
+
+  it('rings correct sound when user click right button', () => {
+    const { getByText } = render(<YesNoContainer />);
+
+    fireEvent.click(getByText(noButton));
+
+    expect(playYes).toBeCalled();
+  });
+
+  it('rings incorrect sound when user click wrong button', () => {
+    const { getByText } = render(<YesNoContainer />);
+
+    fireEvent.click(getByText(yesButton));
+
+    expect(playWrong).toBeCalled();
+  });
+
+  it('get next question when user click yes or no button', () => {
+    const { getByText } = render(<YesNoContainer />);
+
+    [yesButton, noButton].forEach(async (button) => {
+      dispatch.mockClear();
+
+      fireEvent.click(getByText(button));
+
+      await waitFor(() => expect(dispatch).toBeCalledWith(stopYesNoQuestion()));
+      await waitFor(() => expect(dispatch).toBeCalledWith(getNextYesNoQuestion()));
+      await waitFor(() => expect(dispatch).toBeCalledWith(idlePlaying()));
     });
+  });
 
-    it('can click play button', () => {
-      const { getByText } = render(<YesNoContainer />);
+  it('save answer when user click button', async () => {
+    const { getByText } = render(<YesNoContainer />);
 
-      fireEvent.click(getByText(playButton));
+    fireEvent.click(getByText(yesButton));
 
-      expect(dispatch).toBeCalled();
-    });
-
-    it('plays current question', () => {
-      const { getByText } = render(<YesNoContainer />);
-
-      fireEvent.click(getByText(playButton));
-
-      expect(dispatch).toBeCalledWith(playYesNoQuestion(currentQuestion.question));
-    });
+    await waitFor(() => expect(dispatch).toBeCalledWith(saveAnswer({
+      ...currentQuestion,
+      userAnswer: 'Y',
+    })));
   });
 
   context('when answers number is max', () => {

@@ -17,6 +17,10 @@ import {
 } from '../redux/slice';
 
 import { get } from '../utils';
+import ProgressBar from '../components/ProgressBar';
+import YesNoGuideMessage from '../components/YesNoGuideMessage';
+import YesNoPlayButton from '../components/YesNoPlayButton';
+import YesNoSubmitButtons from '../components/YesNoSubmitButtons';
 
 const MAX_ANSWERS = 3;
 
@@ -34,7 +38,7 @@ export default function YesNoContainer() {
   const [, playCorrect] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
   const [, playWrong] = useAudio('../../assets/sounds/IncorrectAnswer.mp3');
 
-  const handleClickPlayQuestion = () => {
+  const handleClickPlay = () => {
     dispatch(playYesNoQuestion(question));
   };
 
@@ -43,6 +47,7 @@ export default function YesNoContainer() {
     play();
   };
 
+  // TODO: 액션 조율은 Epic 에서 해야할 일
   const dispatchActions = (userAnswer) => {
     const actions = [
       stopYesNoQuestion(),
@@ -69,28 +74,11 @@ export default function YesNoContainer() {
 
   return (
     <>
-      {isIdle
-        ? <h1>버튼을 클릭해주세요</h1>
-        : (
-          <>
-            <button type="button" onClick={() => handleClickYesNo('Y')}>
-              네
-            </button>
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            <button type="button" onClick={() => handleClickYesNo('N')}>
-              아니오
-            </button>
-          </>
-        )}
-      <button type="button" onClick={handleClickPlayQuestion} disabled={isPlaying}>
-        재생
-      </button>
+      <ProgressBar currentNumber={answersNumber} maxNumber={MAX_ANSWERS} />
+      <YesNoGuideMessage isIdle={isIdle} />
+      <YesNoPlayButton onClick={handleClickPlay} isPlaying={isPlaying} />
       <div>
-        {isPlaying
-          ? <p>재생중입니다</p>
-          : <p>재생중이 아닙니다</p>}
+        <YesNoSubmitButtons onClick={handleClickYesNo} isIdle={isIdle} />
       </div>
     </>
   );
