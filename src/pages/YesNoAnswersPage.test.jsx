@@ -18,6 +18,6 @@ describe('YesNoPage', () => {
   it('gets next question on mount', () => {
     const { container } = render(<YesNoAnswersPage />);
 
-    expect(container).toHaveTextContent('정답확인');
+    expect(container).toHaveTextContent('정답 확인');
   });
 });
