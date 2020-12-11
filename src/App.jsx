@@ -24,6 +24,7 @@ const Container = styled.div({
   height: '100vh',
   backgroundImage: `linear-gradient(130deg, ${primaryColor}, ${tertiaryColor})`,
   fontFamily: normalFont,
+  zIndex: '0',
 });
 
 export default function App() {
