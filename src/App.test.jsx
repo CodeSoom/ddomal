@@ -17,7 +17,7 @@ describe('App', () => {
   const answersPage = '오늘';
   const yesnoPage = '잘 듣고 정답을 골라보세요';
   const selectPageTitle = '무엇을 연습해 볼까요';
-  const ynAnswersPage = '결과확인';
+  const ynAnswersPage = '정답확인';
 
   const dispatch = jest.fn();
 

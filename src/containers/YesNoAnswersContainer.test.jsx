@@ -23,6 +23,11 @@ describe('YesNoAnswersContainer', () => {
   const goHomeButton = '처음으로';
   const replayButton = '다시듣기';
 
+  const answerTextMap = {
+    Y: '맞아요',
+    N: '아니에요',
+  };
+
   const answers = [
     {
       question: '코끼리는 쥐보다 가볍나요?',
@@ -52,11 +57,10 @@ describe('YesNoAnswersContainer', () => {
     const { container } = render(<YesNoAnswersContainer />);
 
     answers.forEach((each) => {
-      const { question, answer, userAnswer } = each;
+      const { question, answer } = each;
 
       expect(container).toHaveTextContent(question);
-      expect(container).toHaveTextContent(answer);
-      expect(container).toHaveTextContent(userAnswer);
+      expect(container).toHaveTextContent(answerTextMap[answer]);
     });
   });
 
