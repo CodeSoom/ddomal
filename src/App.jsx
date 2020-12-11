@@ -5,6 +5,8 @@ import {
   Route,
 } from 'react-router-dom';
 
+import './styles/global.css';
+
 import styled from '@emotion/styled';
 
 import MainPage from './pages/MainPage/index';
@@ -15,11 +17,13 @@ import YesNoPage from './pages/YesNoPage';
 import YesNoAnswersPage from './pages/YesNoAnswersPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
+import { normalFont } from './styles/fonts';
 
 const Container = styled.div({
   width: '100%',
   height: '100vh',
   backgroundImage: `linear-gradient(130deg, ${primaryColor}, ${tertiaryColor})`,
+  fontFamily: normalFont,
 });
 
 export default function App() {

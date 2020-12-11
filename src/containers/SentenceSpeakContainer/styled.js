@@ -21,6 +21,7 @@ export const PromptBox = styled.div({
   ...flexBoxCenter,
   marginTop: '10.6vh',
   color: normalColor,
+  height: '5.5rem',
 });
 
 export const SubmitButtonBox = styled.div({
