@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get } from '../utils';
 
 import { initializeState, playYesNoQuestion } from '../redux/slice';
+import YesNoAnswer from '../components/YesNoAnswer';
 
 export default function YesNoAnswersContainer() {
   const answers = useSelector(get('answers'));
@@ -31,17 +32,14 @@ export default function YesNoAnswersContainer() {
 
   return (
     <div>
-      <div>
-        <p>문제 | 내가 고른답 | 정답</p>
-      </div>
       {answers.map(({ question, answer, userAnswer }) => (
         <div key={`${question}`}>
-          <p>
-            {`${question} | ${answer} | ${userAnswer}`}
-            <button type="button" onClick={() => handleClickReplay(question)}>
-              다시듣기
-            </button>
-          </p>
+          <YesNoAnswer
+            question={question}
+            answer={answer}
+            userAnswer={userAnswer}
+            onClick={handleClickReplay}
+          />
         </div>
       ))}
       <button type="button" onClick={handleClickGoHome}>
