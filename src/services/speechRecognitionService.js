@@ -10,6 +10,10 @@ export function recognize() {
     .pipe(map((event) => event.results[0][0].transcript));
 }
 
+export function abortRecognition() {
+  recognition.abort();
+}
+
 export function soundStart() {
   return fromEvent(recognition, 'soundstart');
 }

@@ -19,7 +19,7 @@ import {
 } from './SpeakSentenceEpics';
 
 import { fetchNextPrompt, getExamples } from '../../services/dataService';
-import { recognize } from '../../services/speechRecognitionService';
+import { abortRecognition, recognize } from '../../services/speechRecognitionService';
 
 import MicState from '../../enums/MicState';
 
@@ -31,6 +31,7 @@ describe('epics', () => {
     const fakePrompt = '사과';
 
     beforeEach(() => {
+      jest.clearAllMocks();
       fetchNextPrompt.mockImplementation(() => fakePrompt);
     });
 
@@ -43,6 +44,7 @@ describe('epics', () => {
         .pipe(toArray()).subscribe(([action1, action2]) => {
           expect(action1).toEqual(setPrompt(fakePrompt));
           expect(action2).toEqual(setSpokenSentence(null));
+          expect(abortRecognition).toBeCalled();
           done();
         });
     });
