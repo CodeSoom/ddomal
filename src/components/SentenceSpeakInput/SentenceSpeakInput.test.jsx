@@ -14,7 +14,7 @@ jest.mock('../../services/instances/audioContext.instance.js');
 describe('SentenceSpeakInput', () => {
   const spokenSentence = '사과가 맛있네요';
   const micButton = 'mic';
-  const warningMessage = '제시어를 사용해서 문장을 말해보세요~';
+  const warningMessage = '제시어를 사용해서 문장을 말해보세요';
 
   const handleClick = jest.fn();
   const play = jest.fn();
@@ -62,14 +62,6 @@ describe('SentenceSpeakInput', () => {
       });
 
       expect(play).toBeCalled();
-    });
-
-    it('does not show warning message', () => {
-      const { container } = renderSentenceSpeakInput({
-        isCorrectSentence,
-      });
-
-      expect(container).not.toHaveTextContent(warningMessage);
     });
   });
 

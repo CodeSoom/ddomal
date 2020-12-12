@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { emphasisColor } from '../../styles/colors';
 
 import { flexBoxCenter } from '../../styles/common';
 
@@ -8,19 +9,22 @@ export const Container = styled.div({
 });
 
 export const SentenceBox = styled.div({
-  marginTop: '12.3vh',
+  marginTop: '9.06vh',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 });
 
-export const WarningMessage = styled.div({
-  fontSize: '.9rem',
+export const WarningMessage = styled.div(({ isHidden }) => ({
+  fontSize: '1rem',
   fontWeight: '600',
-  marginBottom: 0,
-  // height: '.9rem',
-  color: '#5555DD',
-});
+  marginBottom: '0.3rem',
+  color: emphasisColor,
+  visibility: `${isHidden ? 'hidden' : 'visible'}`,
+}));
 
 export const MicBox = styled.div({
-  marginTop: '10vh',
+  marginTop: '10.78vh',
   position: 'relative',
   zIndex: '100',
 });
