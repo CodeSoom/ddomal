@@ -12,18 +12,18 @@ export const Container = styled.div({
 });
 
 export const BarBox = styled.div({
-  marginTop: '2.3vh',
+  marginTop: '3.28vh',
 });
 
 export const PromptBox = styled.div({
   fontFamily: titleFont,
   fontSize: '4.5rem',
   ...flexBoxCenter,
-  marginTop: '10.6vh',
+  marginTop: '9.53vh',
   color: normalColor,
   height: '5.5rem',
 });
 
 export const SubmitButtonBox = styled.div({
-  marginTop: '10vh',
+  marginTop: '9.38vh',
 });

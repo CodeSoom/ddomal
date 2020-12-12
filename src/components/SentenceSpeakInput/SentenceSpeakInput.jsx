@@ -36,13 +36,9 @@ export default function SentenceSpeakInput({
   return (
     <Container>
       <SentenceBox>
-        {(isCorrectSentence || _.isNull(spokenSentence))
-          ? <WarningMessage />
-          : (
-            <WarningMessage>
-              제시어를 사용해서 문장을 말해보세요~
-            </WarningMessage>
-          )}
+        <WarningMessage isHidden={isCorrectSentence || _.isNull(spokenSentence)}>
+          제시어를 사용해서 문장을 말해보세요
+        </WarningMessage>
         <SpokenSentence
           prompt={prompt}
           spokenSentence={spokenSentence}
