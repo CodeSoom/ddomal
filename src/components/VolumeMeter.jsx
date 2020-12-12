@@ -37,18 +37,20 @@ export default function VolumeMeter() {
     const canvas = canvasRef.current;
     const canvasContext = canvas.getContext('2d');
 
+    let animationId;
     function render() {
       analyser.getByteFrequencyData(dataArray);
 
       const sum = dataArray.reduce((acc, curr) => acc + curr, 0);
 
       draw(canvasContext, sum);
-      return window.requestAnimationFrame(render);
+      animationId = window.requestAnimationFrame(render);
     }
-    const id = render();
+    render();
 
     return () => {
-      window.cancelAnimationFrame(id);
+      console.log(animationId);
+      window.cancelAnimationFrame(animationId);
     };
   }, [draw]);
 
