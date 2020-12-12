@@ -21,4 +21,13 @@ export const WarningMessage = styled.div({
 
 export const MicBox = styled.div({
   marginTop: '10vh',
+  position: 'relative',
+  zIndex: '100',
+});
+
+export const MeterBox = styled.div({
+  position: 'absolute',
+  top: '-100%',
+  left: '-100%',
+  zIndex: '-500',
 });

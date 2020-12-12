@@ -15,6 +15,7 @@ import MicState from '../../enums/MicState';
 jest.mock('react-redux');
 jest.mock('../../services/speechRecognitionService.js');
 jest.mock('../../hooks/audio.js');
+jest.mock('../../services/instances/audioContext.instance.js');
 
 const mockPush = jest.fn();
 

@@ -8,6 +8,16 @@ import SentenceSpeakPage from './SentenceSpeakPage';
 
 jest.mock('react-redux');
 jest.mock('../services/speechRecognitionService.js');
+jest.mock('../services/instances/audioContext.instance.js');
+
+jest.mock('react', () => {
+  const originReact = jest.requireActual('react');
+  const mockUseRef = jest.fn().mockImplementation(() => ({}));
+  return {
+    ...originReact,
+    useRef: mockUseRef,
+  };
+});
 
 describe('SentenceSpeakPage', () => {
   const prompt = '사과';

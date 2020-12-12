@@ -15,6 +15,8 @@ import {
   ButtonBox,
 } from './styled';
 
+import context from '../../services/instances/audioContext.instance';
+
 export default function SelectPage() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ export default function SelectPage() {
   const handleClickSpeakSentence = () => {
     history.push('/sentence');
     dispatch(initializeState());
+    context.resume();
   };
 
   const handleClickYesno = () => {

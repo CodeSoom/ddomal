@@ -13,8 +13,14 @@ import {
   SentenceBox,
   WarningMessage,
   MicBox,
+  MeterBox,
 } from './styled';
+
 import IconButton from '../../styles/IconButton';
+
+import VolumeMeter from '../VolumeMeter';
+
+import MicState from '../../enums/MicState';
 
 export default function SentenceSpeakInput({
   isCorrectSentence, prompt, spokenSentence, micState, onClick,
@@ -50,6 +56,13 @@ export default function SentenceSpeakInput({
           iconSize={55}
           onClick={onClick}
         />
+        <MeterBox>
+          {
+            micState !== MicState.OFF
+              ? <VolumeMeter />
+              : ''
+          }
+        </MeterBox>
       </MicBox>
     </Container>
   );
