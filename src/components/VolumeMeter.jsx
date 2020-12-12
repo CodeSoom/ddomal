@@ -49,7 +49,6 @@ export default function VolumeMeter() {
     render();
 
     return () => {
-      console.log(animationId);
       window.cancelAnimationFrame(animationId);
     };
   }, [draw]);

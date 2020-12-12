@@ -17,3 +17,5 @@ export function recognitionStart() {
 export function recognitionEnd() {
   return of('');
 }
+
+export const abortRecognition = jest.fn();

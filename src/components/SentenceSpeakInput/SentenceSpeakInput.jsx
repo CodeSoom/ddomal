@@ -27,6 +27,9 @@ export default function SentenceSpeakInput({
 }) {
   const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
 
+  const isWarningHidden = isCorrectSentence || _.isNull(spokenSentence);
+  const isMicNotOff = micState !== MicState.OFF;
+
   useEffect(() => {
     if (isCorrectSentence) {
       play();
@@ -36,7 +39,7 @@ export default function SentenceSpeakInput({
   return (
     <Container>
       <SentenceBox>
-        <WarningMessage isHidden={isCorrectSentence || _.isNull(spokenSentence)}>
+        <WarningMessage isHidden={isWarningHidden}>
           제시어를 사용해서 문장을 말해보세요
         </WarningMessage>
         <SpokenSentence
@@ -51,6 +54,7 @@ export default function SentenceSpeakInput({
           iconTitle="mic"
           iconSize={55}
           onClick={onClick}
+          disabled={isMicNotOff}
         />
         <MeterBox>
           {

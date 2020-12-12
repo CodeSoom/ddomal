@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 import SentenceSpeakInput from './SentenceSpeakInput';
 
@@ -51,6 +51,20 @@ describe('SentenceSpeakInput', () => {
     fireEvent.click(getByTitle(micButton));
 
     expect(handleClick).toBeCalled();
+  });
+
+  it('cannot click speak sentence button while mic is not off', () => {
+    [MicState.ON, MicState.SPEAKING].forEach((micState) => {
+      handleClick.mockClear();
+
+      const { getByTitle } = renderSentenceSpeakInput({ micState });
+
+      fireEvent.click(getByTitle(micButton));
+
+      expect(handleClick).not.toBeCalled();
+
+      cleanup();
+    });
   });
 
   context('when spoken sentence is correct', () => {

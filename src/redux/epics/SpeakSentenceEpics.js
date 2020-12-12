@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 
 import { merge, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 
 import MicState from '../../enums/MicState';
 
@@ -13,6 +13,7 @@ import {
   recognitionEnd,
   soundStart,
   soundEnd,
+  abortRecognition,
 } from '../../services/speechRecognitionService';
 
 import {
@@ -24,6 +25,7 @@ import {
 
 export const getNextQuestionEpic = (action$) => action$.pipe(
   ofType('getNextQuestion'),
+  tap(abortRecognition),
   map(fetchNextPrompt),
   mergeMap((nextPrompt) => of(
     setPrompt(nextPrompt),
