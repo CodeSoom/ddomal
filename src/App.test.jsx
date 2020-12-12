@@ -10,6 +10,7 @@ import App from './App';
 
 jest.mock('react-redux');
 jest.mock('./services/speechRecognitionService.js');
+jest.mock('./services/instances/audioContext.instance.js');
 
 describe('App', () => {
   const prompt = '사과';

@@ -9,6 +9,7 @@ import MicState from '../../enums/MicState';
 import { useAudio } from '../../hooks/audio';
 
 jest.mock('../../hooks/audio.js');
+jest.mock('../../services/instances/audioContext.instance.js');
 
 describe('SentenceSpeakInput', () => {
   const spokenSentence = '사과가 맛있네요';

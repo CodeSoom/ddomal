@@ -18,6 +18,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 jest.mock('react-redux');
+jest.mock('../../services/instances/audioContext.instance.js');
 
 describe('SelectPage', () => {
   const title = '무엇을 연습해 볼까요?';
