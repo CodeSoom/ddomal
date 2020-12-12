@@ -29,3 +29,11 @@ export function recognitionStart() {
 export function recognitionEnd() {
   return fromEvent(recognition, 'end');
 }
+
+recognition.onerror = () => {
+  console.log('error');
+};
+
+recognition.onnomatch = () => {
+  console.log('no match');
+};
