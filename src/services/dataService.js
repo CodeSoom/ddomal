@@ -1,15 +1,15 @@
-import uniqueRandom from 'unique-random';
+import uniqueRandomRange from 'unique-random-range';
 
 import examples from '../../data/examples';
 import prompts from '../../data/prompts';
 import yesNoQuestions from '../../data/yesNoQuestions';
 
-const randomIndexGenerator = (data) => uniqueRandom(0, data.length - 1);
+const dataIndexGenerator = (data) => uniqueRandomRange(0, data.length - 1);
+const promptsIndexGenerator = dataIndexGenerator(prompts);
+const yesnoIndexGenerator = dataIndexGenerator(yesNoQuestions);
 
 export function fetchNextPrompt() {
-  const getRandomIndex = randomIndexGenerator(prompts);
-
-  return prompts[getRandomIndex()];
+  return prompts[promptsIndexGenerator()];
 }
 
 export function getExamples(prompt) {
@@ -17,7 +17,5 @@ export function getExamples(prompt) {
 }
 
 export function fetchNextYesNoQuestion() {
-  const getRandomIndex = randomIndexGenerator(yesNoQuestions);
-
-  return yesNoQuestions[getRandomIndex()];
+  return yesNoQuestions[yesnoIndexGenerator()];
 }
