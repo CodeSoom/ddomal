@@ -22,6 +22,7 @@ describe('App', () => {
   const yesnoPage = '잘 듣고 정답을 골라보세요';
   const selectPageTitle = '무엇을 연습해 볼까요';
   const ynAnswersPage = '정답 확인';
+  const setQuestionNumberPage = '몇 문제를 풀어볼까요?';
 
   const dispatch = jest.fn();
 
@@ -75,5 +76,11 @@ describe('App', () => {
     const { container } = renderApp({ path: '/ynanswers' });
 
     expect(container).toHaveTextContent(ynAnswersPage);
+  });
+
+  it('shows set question number page on route /setnumber', () => {
+    const { container } = renderApp({ path: '/setnumber' });
+
+    expect(container).toHaveTextContent(setQuestionNumberPage);
   });
 });

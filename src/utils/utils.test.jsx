@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import { get, highlight } from './utils';
 
-import { emphasisColor } from './styles/colors';
+import { emphasisColor } from '../styles/colors';
 
 describe('utils', () => {
   test('get', () => {

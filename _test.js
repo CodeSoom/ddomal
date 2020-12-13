@@ -13,6 +13,8 @@ Scenario('Select Page', ({ I }) => {
   I.see('문장 만들기');
   I.see('듣고 이해하기');
   I.click('문장 만들기');
+  I.see('시작하기');
+  I.click('시작하기');
   I.see('문장을 소리내어 말해보세요');
 });
 
@@ -20,8 +22,6 @@ Scenario('Sentence Page', ({ I }) => {
   I.amOnPage('/sentence');
   I.see('문장을 소리내어 말해보세요');
   I.see('다음 문제');
-  I.click('다음 문제');
-  I.click('다음 문제');
   I.click('다음 문제');
   I.click('다음 문제');
   I.click('종료');

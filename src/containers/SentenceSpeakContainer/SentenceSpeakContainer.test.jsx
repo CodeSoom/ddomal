@@ -32,7 +32,7 @@ describe('SentenceSpeakContainer', () => {
   const spokenSentence = '사과가 맛있네요';
   const nextButton = '다음 문제';
   const exitButton = '종료';
-  const MAX_ANSWERS = 5;
+  const numberOfQuestions = 5;
 
   const dispatch = jest.fn();
 
@@ -52,6 +52,7 @@ describe('SentenceSpeakContainer', () => {
       spokenSentence,
       answers: given.answers || [],
       micState: MicState.OFF,
+      numberOfQuestions,
     }));
   });
 
@@ -76,7 +77,7 @@ describe('SentenceSpeakContainer', () => {
   });
 
   context('when answering is not complete', () => {
-    given('answers', () => new Array(MAX_ANSWERS - 2));
+    given('answers', () => new Array(numberOfQuestions - 2));
 
     it('renders next button', () => {
       const { getByText } = renderSentenceSpeakContainer();
@@ -91,7 +92,7 @@ describe('SentenceSpeakContainer', () => {
   });
 
   context('when answering is complete', () => {
-    given('answers', () => new Array(MAX_ANSWERS - 1));
+    given('answers', () => new Array(numberOfQuestions - 1));
 
     it('renders exit button', () => {
       const { getByText } = renderSentenceSpeakContainer();

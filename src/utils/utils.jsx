@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { emphasisColor } from './styles/colors';
+import { emphasisColor } from '../styles/colors';
 
 export function get(key) {
   return (obj) => obj[key];

@@ -23,17 +23,15 @@ import {
   saveAnswer,
 } from '../../redux/slice';
 
-const MAX_ANSWERS = 5;
-
 export default function SentenceSpeakContainer() {
   const {
-    prompt, spokenSentence, micState, answers,
+    prompt, spokenSentence, micState, answers, numberOfQuestions,
   } = useSelector((state) => state);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const isAnsweringComplete = answers.length === MAX_ANSWERS - 1;
+  const isAnsweringComplete = answers.length === numberOfQuestions - 1;
   const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
 
   const handleClickSpeak = () => {
@@ -54,7 +52,7 @@ export default function SentenceSpeakContainer() {
     <Container>
       <BarBox>
         <ProgressBar
-          maxNumber={MAX_ANSWERS}
+          maxNumber={numberOfQuestions}
           currentNumber={answers.length}
         />
       </BarBox>

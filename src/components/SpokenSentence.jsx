@@ -4,7 +4,7 @@ import MicState from '../enums/MicState';
 
 import Message from '../styles/Message';
 
-import { highlight } from '../utils';
+import { highlight } from '../utils/utils';
 
 export default function SpokenSentence({ micState, prompt, spokenSentence }) {
   const waiting = '...';

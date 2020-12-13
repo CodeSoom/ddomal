@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { get } from '../utils';
+import { get } from '../utils/utils';
 
 import { initializeState, playYesNoQuestion } from '../redux/slice';
 

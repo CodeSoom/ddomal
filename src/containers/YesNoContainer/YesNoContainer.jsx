@@ -16,7 +16,7 @@ import {
   stopYesNoQuestion,
 } from '../../redux/slice';
 
-import { get } from '../../utils';
+import { get } from '../../utils/utils';
 
 import ProgressBar from '../../components/ProgressBar';
 import YesNoGuideMessage from '../../components/YesNoGuideMessage';
@@ -31,12 +31,11 @@ import {
   SubmitButtonBox,
 } from './styled';
 
-const MAX_ANSWERS = 3;
-
 export default function YesNoContainer() {
   const answersNumber = useSelector(get('answers')).length;
   const { question, answer } = useSelector(get('yesNoQuestion')) || {};
   const soundState = useSelector(get('soundState'));
+  const numberOfQuestions = useSelector(get('numberOfQuestions'));
 
   const isPlaying = soundState === SoundState.PLAYING;
   const isIdle = soundState === SoundState.IDLE;
@@ -76,7 +75,7 @@ export default function YesNoContainer() {
     await playSound(userAnswer);
     dispatchActions(userAnswer);
 
-    if (answersNumber === MAX_ANSWERS - 1) {
+    if (answersNumber === numberOfQuestions - 1) {
       history.push('/ynanswers');
     }
   };
@@ -84,7 +83,7 @@ export default function YesNoContainer() {
   return (
     <Container>
       <BarBox>
-        <ProgressBar currentNumber={answersNumber} maxNumber={MAX_ANSWERS} />
+        <ProgressBar currentNumber={answersNumber} maxNumber={numberOfQuestions} />
       </BarBox>
       <MessageBox>
         <YesNoGuideMessage isIdle={isIdle} />
