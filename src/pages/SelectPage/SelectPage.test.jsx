@@ -9,7 +9,6 @@ import SelectPage from './SelectPage';
 import { initializeState } from '../../redux/slice';
 
 const mockPush = jest.fn();
-const mockResume = jest.fn();
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
