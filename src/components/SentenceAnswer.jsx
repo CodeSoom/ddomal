@@ -40,7 +40,9 @@ export default function SentenceAnswer({ answer: { prompt, spokenSentence, examp
           예시 문장:
         </p>
         {examples.map((example) => (
-          <Example>{example}</Example>
+          <Example key={example}>
+            {example}
+          </Example>
         ))}
       </ExamplesBox>
     </>

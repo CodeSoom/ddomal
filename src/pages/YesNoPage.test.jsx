@@ -8,6 +8,8 @@ import YesNoPage from './YesNoPage';
 
 import { getNextYesNoQuestion } from '../redux/slice';
 
+global.HTMLMediaElement.prototype.pause = jest.fn();
+
 describe('YesNoPage', () => {
   const dispatch = jest.fn();
 
