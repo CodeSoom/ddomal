@@ -9,6 +9,7 @@ import SelectPage from './SelectPage';
 import { initializeState } from '../../redux/slice';
 
 const mockPush = jest.fn();
+const mockResume = jest.fn();
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -44,7 +45,11 @@ describe('SelectPage', () => {
 
     fireEvent.click(getByText(speakSentenceButton));
 
-    expect(mockPush).toBeCalledWith('/sentence');
+    expect(mockPush).toBeCalledWith({
+      pathname: '/setnumber',
+      search: '?game=speak_sentence',
+    });
+
     expect(dispatch).toBeCalledWith(initializeState());
   });
 
@@ -53,6 +58,11 @@ describe('SelectPage', () => {
 
     fireEvent.click(getByText(yesnoButton));
 
-    expect(mockPush).toBeCalledWith('/yesno');
+    expect(mockPush).toBeCalledWith({
+      pathname: '/setnumber',
+      search: '?game=yesno',
+    });
+
+    expect(dispatch).toBeCalledWith(initializeState());
   });
 });

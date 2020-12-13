@@ -12,6 +12,7 @@ import reducer, {
   endPlaying,
   idlePlaying,
   endGame,
+  setNumberOfQuestions,
   initializeState,
 } from './slice';
 
@@ -105,6 +106,14 @@ describe('reducer', () => {
     expect(state.isGameEnd).toBe(true);
   });
 
+  test('setNumberOfQuestions', () => {
+    const state = reducer({
+      numberOfQuestions: 2,
+    }, setNumberOfQuestions(3));
+
+    expect(state.numberOfQuestions).toBe(3);
+  });
+
   test('initializeState', () => {
     const initialState = {
       prompt: null,
@@ -112,6 +121,7 @@ describe('reducer', () => {
       answers: [],
       isGameEnd: false,
       soundState: SoundState.IDLE,
+      numberOfQuestions: 3,
     };
 
     const state = reducer({

@@ -1,0 +1,55 @@
+import React from 'react';
+
+import { fireEvent, render } from '@testing-library/react';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import SetQuestionNumberContainer from './SetQuestionNumberContainer';
+
+import { setNumberOfQuestions } from '../redux/slice';
+
+jest.mock('react-redux');
+
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
+
+describe('SetQuestionNumberContainer', () => {
+  const increaseButton = '위';
+  const descreaseButton = '아래';
+
+  const numberOfQuestions = 3;
+
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    useSelector.mockImplementation((selector) => selector({
+      numberOfQuestions,
+    }));
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
+  it('renders increase button', () => {
+    const { getByText } = render(<SetQuestionNumberContainer />);
+
+    fireEvent.click(getByText(increaseButton));
+
+    expect(dispatch).toBeCalledWith(setNumberOfQuestions(numberOfQuestions + 1));
+  });
+
+  it('renders descrease button', () => {
+    const { getByText } = render(<SetQuestionNumberContainer />);
+
+    fireEvent.click(getByText(descreaseButton));
+
+    expect(dispatch).toBeCalledWith(setNumberOfQuestions(numberOfQuestions - 1));
+  });
+});

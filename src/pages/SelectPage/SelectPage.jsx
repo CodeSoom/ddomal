@@ -22,13 +22,21 @@ export default function SelectPage() {
   const dispatch = useDispatch();
 
   const handleClickSpeakSentence = () => {
-    history.push('/sentence');
+    history.push({
+      pathname: '/setnumber',
+      search: '?game=speak_sentence',
+    });
     dispatch(initializeState());
     context.resume();
   };
 
   const handleClickYesno = () => {
-    history.push('/yesno');
+    history.push({
+      pathname: '/setnumber',
+      search: '?game=yesno',
+    });
+    dispatch(initializeState());
+    context.resume();
   };
 
   return (

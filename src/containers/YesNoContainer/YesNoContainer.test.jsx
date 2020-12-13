@@ -34,7 +34,7 @@ describe('YesNoContainer', () => {
   const guideMessage = '잘 듣고 정답을 골라보세요';
   const currentQuestion = { question: '쥐는 코끼리보다 무겁나요?', answer: 'N' };
   const currentAnswersNumber = 1;
-  const MAX_ANSWERS = 3;
+  const numberOfQuestions = 3;
 
   const dispatch = jest.fn();
   const playYes = jest.fn();
@@ -49,6 +49,7 @@ describe('YesNoContainer', () => {
       soundState: SoundState.END,
       yesNoQuestion: currentQuestion,
       answers: (given.answers || []),
+      numberOfQuestions,
     }));
 
     useAudio.mockImplementation((path) => (
@@ -65,7 +66,7 @@ describe('YesNoContainer', () => {
       const { container } = render(<YesNoContainer />);
 
       expect(container).toHaveTextContent(currentAnswersNumber);
-      expect(container).toHaveTextContent(MAX_ANSWERS);
+      expect(container).toHaveTextContent(numberOfQuestions);
     });
   });
 
@@ -125,7 +126,7 @@ describe('YesNoContainer', () => {
   });
 
   context('when answers number is max', () => {
-    given('answers', () => new Array(MAX_ANSWERS - 1));
+    given('answers', () => new Array(numberOfQuestions - 1));
 
     it('go to answers page', async () => {
       const { getByText } = render(<YesNoContainer />);
@@ -137,7 +138,7 @@ describe('YesNoContainer', () => {
   });
 
   context('when answers number is not max', () => {
-    given('answers', () => new Array(MAX_ANSWERS - 2));
+    given('answers', () => new Array(numberOfQuestions - 2));
 
     it('does not go to answers page', async () => {
       const { getByText } = render(<YesNoContainer />);

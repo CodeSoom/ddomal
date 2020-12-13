@@ -9,6 +9,7 @@ const initialState = {
   answers: [],
   isGameEnd: false,
   soundState: SoundState.IDLE,
+  numberOfQuestions: 3,
 };
 
 const { reducer, actions } = createSlice({
@@ -80,6 +81,12 @@ const { reducer, actions } = createSlice({
         soundState: SoundState.IDLE,
       };
     },
+    setNumberOfQuestions(state, { payload: numberOfQuestions }) {
+      return {
+        ...state,
+        numberOfQuestions,
+      };
+    },
     initializeState() {
       return initialState;
     },
@@ -98,6 +105,7 @@ export const {
   startPlaying,
   endPlaying,
   idlePlaying,
+  setNumberOfQuestions,
   initializeState,
 } = actions;
 
