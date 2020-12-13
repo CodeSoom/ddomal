@@ -5,8 +5,8 @@ import { fireEvent, render } from '@testing-library/react';
 import FlowCounter from './FlowCounter';
 
 describe('FlowCounter', () => {
-  const increaseButton = '위';
-  const decreaseButton = '아래';
+  const increaseButton = 'arrowup';
+  const decreaseButton = 'arrowdown';
   const MIN_Q = 1;
   const MAX_Q = 5;
 
@@ -26,33 +26,33 @@ describe('FlowCounter', () => {
   });
 
   it('renders increase button', () => {
-    const { getByText } = renderFlowCounter();
+    const { getByTitle } = renderFlowCounter();
 
-    fireEvent.click(getByText(increaseButton));
+    fireEvent.click(getByTitle(increaseButton));
 
     expect(handleClickIncrease).toBeCalled();
   });
 
   it('renders decrease button', () => {
-    const { getByText } = renderFlowCounter();
+    const { getByTitle } = renderFlowCounter();
 
-    fireEvent.click(getByText(decreaseButton));
+    fireEvent.click(getByTitle(decreaseButton));
 
     expect(handleClickDecrease).toBeCalled();
   });
 
   it('cannot click increase if number of question is over MAX', () => {
-    const { getByText } = renderFlowCounter({ numberOfQuestions: MAX_Q + 1 });
+    const { getByTitle } = renderFlowCounter({ numberOfQuestions: MAX_Q + 1 });
 
-    fireEvent.click(getByText(increaseButton));
+    fireEvent.click(getByTitle(increaseButton));
 
     expect(handleClickIncrease).not.toBeCalled();
   });
 
   it('cannot click decrease if number of question is below MIN', () => {
-    const { getByText } = renderFlowCounter({ numberOfQuestions: MIN_Q - 1 });
+    const { getByTitle } = renderFlowCounter({ numberOfQuestions: MIN_Q - 1 });
 
-    fireEvent.click(getByText(decreaseButton));
+    fireEvent.click(getByTitle(decreaseButton));
 
     expect(handleClickDecrease).not.toBeCalled();
   });

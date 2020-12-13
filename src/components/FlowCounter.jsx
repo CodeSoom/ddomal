@@ -9,6 +9,7 @@ import { flexBoxCenter } from '../styles/common';
 
 const Container = styled.div({
   display: 'flex',
+  alignItems: 'center',
 });
 
 const NumberContainer = styled.div({
@@ -37,6 +38,39 @@ const Number = styled.div(({ curr, index }) => ({
 const ButtonContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
+  marginRight: '2rem',
+  height: '6rem',
+});
+
+const Text = styled.p({
+  fontSize: '1.5rem',
+  color: normalColor,
+  paddingLeft: '1.5rem',
+});
+
+const ArrowUp = styled.button({
+  backgroundImage: 'url("/assets/images/arrowup.png")',
+  border: 'none',
+  width: '1.3rem',
+  height: '1.3rem',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  backgroundColor: 'transparent',
+  cursor: 'pointer',
+  outline: 'unset',
+});
+
+const ArrowDown = styled.button({
+  backgroundImage: 'url("/assets/images/arrowdown.png")',
+  border: 'none',
+  width: '1.3rem',
+  height: '1.3rem',
+  backgroundSize: 'contain',
+  backgroundRepeat: 'no-repeat',
+  backgroundColor: 'transparent',
+  cursor: 'pointer',
+  outline: 'unset',
 });
 
 const MAX_QUESTIONS = 5;
@@ -51,12 +85,8 @@ export default function FlowCounter({ numberOfQuestions, onClickIncrease, onClic
   return (
     <Container>
       <ButtonContainer>
-        <button type="button" onClick={onClickIncrease} disabled={isOverMax}>
-          위
-        </button>
-        <button type="button" onClick={onClickDecrease} disabled={isBelowMin}>
-          아래
-        </button>
+        <ArrowUp type="button" title="arrowup" onClick={onClickIncrease} disabled={isOverMax} />
+        <ArrowDown type="button" title="arrowdown" onClick={onClickDecrease} disabled={isBelowMin} />
       </ButtonContainer>
       <NumberContainer>
         <NumberBox index={index}>
@@ -64,9 +94,9 @@ export default function FlowCounter({ numberOfQuestions, onClickIncrease, onClic
             <Number curr={curr} index={index}>{number}</Number>))}
         </NumberBox>
       </NumberContainer>
-      <div>
+      <Text>
         문제
-      </div>
+      </Text>
     </Container>
   );
 }

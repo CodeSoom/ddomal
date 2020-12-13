@@ -20,8 +20,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SetQuestionNumberContainer', () => {
-  const increaseButton = '위';
-  const descreaseButton = '아래';
+  const increaseButton = 'arrowup';
+  const descreaseButton = 'arrowdown';
 
   const numberOfQuestions = 3;
 
@@ -38,17 +38,17 @@ describe('SetQuestionNumberContainer', () => {
   });
 
   it('renders increase button', () => {
-    const { getByText } = render(<SetQuestionNumberContainer />);
+    const { getByTitle } = render(<SetQuestionNumberContainer />);
 
-    fireEvent.click(getByText(increaseButton));
+    fireEvent.click(getByTitle(increaseButton));
 
     expect(dispatch).toBeCalledWith(setNumberOfQuestions(numberOfQuestions + 1));
   });
 
   it('renders descrease button', () => {
-    const { getByText } = render(<SetQuestionNumberContainer />);
+    const { getByTitle } = render(<SetQuestionNumberContainer />);
 
-    fireEvent.click(getByText(descreaseButton));
+    fireEvent.click(getByTitle(descreaseButton));
 
     expect(dispatch).toBeCalledWith(setNumberOfQuestions(numberOfQuestions - 1));
   });
