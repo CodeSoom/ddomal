@@ -16,7 +16,7 @@ import {
   stopYesNoQuestion,
 } from '../../redux/slice';
 
-import { get } from '../../utils';
+import { get } from '../../utils/utils';
 
 import ProgressBar from '../../components/ProgressBar';
 import YesNoGuideMessage from '../../components/YesNoGuideMessage';

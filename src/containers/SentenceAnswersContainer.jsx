@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 import { initializeState, playYesNoQuestion } from '../redux/slice';
 
-import { get } from '../utils';
+import { get } from '../utils/utils';
 
 import SentenceAnswers from '../components/SentenceAnswers';
 

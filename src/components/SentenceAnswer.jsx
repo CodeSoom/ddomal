@@ -6,7 +6,7 @@ import { emphasisColor, normalColor } from '../styles/colors';
 
 import { titleFont } from '../styles/fonts';
 
-import { highlight } from '../utils';
+import { highlight } from '../utils/utils';
 
 import SentenceAnswerExamples from './SentenceAnswerExamples';
 
