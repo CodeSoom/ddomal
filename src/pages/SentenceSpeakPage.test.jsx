@@ -10,6 +10,9 @@ jest.mock('react-redux');
 jest.mock('../services/speechRecognitionService.js');
 jest.mock('../services/instances/audioContext.instance.js');
 
+global.HTMLMediaElement.prototype.pause = jest.fn();
+global.HTMLCanvasElement.prototype.getContext = jest.fn();
+
 jest.mock('react', () => {
   const originReact = jest.requireActual('react');
   const mockUseRef = jest.fn().mockImplementation(() => ({}));

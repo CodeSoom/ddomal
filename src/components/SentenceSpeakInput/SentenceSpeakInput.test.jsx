@@ -11,6 +11,8 @@ import { useAudio } from '../../hooks/audio';
 jest.mock('../../hooks/audio.js');
 jest.mock('../../services/instances/audioContext.instance.js');
 
+global.HTMLCanvasElement.prototype.getContext = jest.fn();
+
 describe('SentenceSpeakInput', () => {
   const spokenSentence = '사과가 맛있네요';
   const micButton = 'mic';
