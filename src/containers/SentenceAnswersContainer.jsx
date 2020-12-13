@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { initializeState } from '../redux/slice';
+import { initializeState, playYesNoQuestion } from '../redux/slice';
 
 import { get } from '../utils';
 
@@ -30,16 +30,20 @@ export default function SentenceAnswersContainer() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleClick = () => {
+  const handleClickRestart = () => {
     dispatch(initializeState());
     history.push('/');
   };
 
+  const handleClickReplay = (example) => {
+    dispatch(playYesNoQuestion(example));
+  };
+
   return (
     <>
-      <SentenceAnswers answers={answers} />
+      <SentenceAnswers answers={answers} onClickReplay={handleClickReplay} />
       <ButtonBox>
-        <Button type="button" onClick={handleClick}>
+        <Button type="button" onClick={handleClickRestart}>
           처음으로
         </Button>
       </ButtonBox>

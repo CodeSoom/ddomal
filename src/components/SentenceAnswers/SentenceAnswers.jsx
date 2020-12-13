@@ -15,7 +15,7 @@ import {
   AnswerBox,
 } from './styled';
 
-export default function SentenceAnswers({ answers }) {
+export default function SentenceAnswers({ answers, onClickReplay }) {
   const dispatch = useDispatch();
 
   const handleLastSlide = () => {
@@ -31,7 +31,7 @@ export default function SentenceAnswers({ answers }) {
       >
         {answers.map((answer) => (
           <AnswerBox key={answer.prompt}>
-            <SentenceAnswer answer={answer} />
+            <SentenceAnswer answer={answer} onClickReplay={onClickReplay} />
           </AnswerBox>
         ))}
       </CustomCarousel>

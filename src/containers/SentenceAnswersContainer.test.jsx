@@ -5,6 +5,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SentenceAnswersContainer from './SentenceAnswersContainer';
+import { playYesNoQuestion } from '../redux/slice';
 
 jest.mock('react-redux');
 jest.mock('../services/speechRecognitionService.js');
@@ -20,9 +21,11 @@ jest.mock('react-router-dom', () => ({
 
 describe('SentenceAnswersContainer', () => {
   const goHomeButton = '처음으로';
+  const replayButton = 'replay';
+  const example = '사과사과사과';
 
   const answers = [
-    { prompt: '사과', spokenSentence: '사과는 맛있다', examples: [] },
+    { prompt: '사과', spokenSentence: '사과는 맛있다', examples: [example] },
     { prompt: '양파', spokenSentence: '양파는 맛없다', examples: [] },
   ];
 
@@ -54,5 +57,15 @@ describe('SentenceAnswersContainer', () => {
 
     expect(dispatch).toBeCalled();
     expect(mockPush).toBeCalledWith('/');
+  });
+
+  it('renders replay button', () => {
+    const { getByTitle } = render(<SentenceAnswersContainer />);
+
+    fireEvent.click(getByTitle(replayButton));
+
+    expect(dispatch).toBeCalledWith(
+      playYesNoQuestion(example),
+    );
   });
 });

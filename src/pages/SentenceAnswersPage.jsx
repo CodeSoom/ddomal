@@ -6,11 +6,11 @@ import SentenceAnswersContainer from '../containers/SentenceAnswersContainer';
 
 import { flexBoxCenter } from '../styles/common';
 
-import { inactiveColor } from '../styles/colors';
+import { normalColor } from '../styles/colors';
 
 const Title = styled.h2({
   marginTop: '5vh',
-  color: inactiveColor,
+  color: normalColor,
 });
 
 const Container = styled.div({

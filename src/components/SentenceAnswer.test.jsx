@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import SentenceAnswer from './SentenceAnswer';
 
@@ -28,20 +28,43 @@ describe('SentenceAnswer', () => {
     examples,
   };
 
+  const handleClickReplay = jest.fn();
+
+  const renderSentenceAnswer = () => render(
+    <SentenceAnswer
+      answer={answer}
+      onClickReplay={handleClickReplay}
+    />,
+  );
+
+  beforeEach(() => {
+    handleClickReplay.mockClear();
+  });
+
   it('renders answer', () => {
     const { prompt, spokenSentence } = answer;
 
-    const { container } = render(<SentenceAnswer answer={answer} />);
+    const { container } = renderSentenceAnswer();
 
     expect(container).toHaveTextContent(prompt);
     expect(container).toHaveTextContent(spokenSentence);
   });
 
   it('renders examples', () => {
-    const { container } = render(<SentenceAnswer answer={answer} />);
+    const { container } = renderSentenceAnswer();
 
     examples.forEach((example) => {
       expect(container).toHaveTextContent(example);
+    });
+  });
+
+  it('renders replay button on each side of example', () => {
+    const { getAllByTitle } = renderSentenceAnswer();
+
+    examples.forEach((example, idx) => {
+      fireEvent.click(getAllByTitle('replay')[idx]);
+
+      expect(handleClickReplay).toBeCalledWith(example);
     });
   });
 });
