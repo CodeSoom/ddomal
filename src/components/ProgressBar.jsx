@@ -26,7 +26,7 @@ const Count = styled.span({
   color: normalColor,
 });
 
-export default function ProgressBar({ currentNumber, maxNumber }) {
+function ProgressBar({ currentNumber, maxNumber }) {
   return (
     <Container>
       <MaxBar>
@@ -40,3 +40,5 @@ export default function ProgressBar({ currentNumber, maxNumber }) {
     </Container>
   );
 }
+
+export default React.memo(ProgressBar);
