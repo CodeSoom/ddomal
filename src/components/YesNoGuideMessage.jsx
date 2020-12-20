@@ -2,7 +2,7 @@ import React from 'react';
 
 import Message from '../styles/Message';
 
-export default function YesNoGuideMessage({ isIdle }) {
+function YesNoGuideMessage({ isIdle }) {
   return (
     <Message>
       {isIdle
@@ -11,3 +11,5 @@ export default function YesNoGuideMessage({ isIdle }) {
     </Message>
   );
 }
+
+export default React.memo(YesNoGuideMessage);

@@ -91,7 +91,10 @@ export default function FlowCounter({ numberOfQuestions, onClickIncrease, onClic
       <NumberContainer>
         <NumberBox index={index}>
           {R.range(MIN_QUESTIONS, MAX_QUESTIONS + 1).map((number, curr) => (
-            <Number curr={curr} index={index}>{number}</Number>))}
+            <Number curr={curr} index={index}>
+              {number}
+            </Number>
+          ))}
         </NumberBox>
       </NumberContainer>
       <Text>

@@ -22,7 +22,7 @@ import VolumeMeter from '../VolumeMeter';
 
 import MicState from '../../enums/MicState';
 
-export default function SentenceSpeakInput({
+function SentenceSpeakInput({
   isCorrectSentence, prompt, spokenSentence, micState, onClick,
 }) {
   const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
@@ -67,3 +67,5 @@ export default function SentenceSpeakInput({
     </Container>
   );
 }
+
+export default React.memo(SentenceSpeakInput);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,19 +34,19 @@ export default function SentenceSpeakContainer() {
   const isAnsweringComplete = answers.length === numberOfQuestions - 1;
   const isCorrectSentence = _.isString(spokenSentence) && spokenSentence.includes(prompt);
 
-  const handleClickSpeak = () => {
+  const handleClickSpeak = useCallback(() => {
     dispatch(recognizeSpeech());
-  };
+  }, [dispatch]);
 
-  const handleClickNext = () => {
+  const handleClickNext = useCallback(() => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
     dispatch(getNextQuestion());
-  };
+  }, [dispatch, prompt, spokenSentence]);
 
-  const handleClickExit = () => {
+  const handleClickExit = useCallback(() => {
     dispatch(saveAnswer({ prompt, spokenSentence }));
     history.push('/answers');
-  };
+  }, [dispatch, prompt, spokenSentence, history]);
 
   return (
     <Container>

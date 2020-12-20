@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import context from '../services/instances/audioContext.instance';
 import { tertiaryColor } from '../styles/colors';
 
-export default function VolumeMeter() {
+function VolumeMeter() {
   const [analyser] = useState(() => context.createAnalyser());
   const [dataArray] = useState(new Uint8Array(analyser.frequencyBinCount));
 
@@ -57,3 +57,5 @@ export default function VolumeMeter() {
     <canvas ref={canvasRef} width="220.8px" height="220.8px" />
   );
 }
+
+export default React.memo(VolumeMeter);
