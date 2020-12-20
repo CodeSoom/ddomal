@@ -16,6 +16,12 @@ jobs:
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ID: ${{ secrets.AWS_ID }}
+      
+      - name: Move Files
+        run: |
+          mkdir ./dist/
+          mv -t ./dist/ ./index.html ./404.html ./404.md
+          mv ./assets/ ./dist/ 
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
