@@ -25,4 +25,4 @@ export const useAudio = (url) => {
 };
 
 // TODO: delete this
-export const xx = {};
+export const xx = () => {};
