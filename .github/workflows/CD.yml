@@ -19,7 +19,6 @@ jobs:
       
       - name: Move Files
         run: |
-          mkdir ./dist/
           mv -t ./dist/ ./index.html ./404.html ./404.md
           mv ./assets/ ./dist/ 
 
