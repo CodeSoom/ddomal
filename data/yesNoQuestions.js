@@ -1,6 +1,6 @@
 const yesNoQuestions = [
   {
-    question: '쥐는 코끼리 보다 큰 가요?',
+    question: '쥐는 하마 보다 큰가요?',
     answer: 'N',
   },
   {
