@@ -1,11 +1,9 @@
-import { ActionsObservable } from 'redux-observable';
+import { TestScheduler } from 'rxjs/testing';
 
 import { of } from 'rxjs';
-import { toArray } from 'rxjs/operators';
 
 import {
   addAnswer,
-  saveAnswer,
   setPrompt,
   setMicState,
   setSpokenSentence,
@@ -27,90 +25,94 @@ jest.mock('../../services/speechRecognitionService.js');
 jest.mock('../../services/dataService.js');
 
 describe('epics', () => {
-  describe('getNextQuestionEpic', () => {
-    const fakePrompt = '사과';
+  let testScheduler;
 
-    beforeEach(() => {
-      jest.clearAllMocks();
-      fetchNextPrompt.mockImplementation(() => fakePrompt);
-    });
+  const fakePrompt = '사과';
+  const fakeSentence = '사과는 맛있다';
+  const fakeExamples = [
+    '자두는 맛이 없다',
+    '자두는 맛이 있다',
+  ];
 
-    it('conveys setPrompt and setSpokenSentence(to null) actions', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'getNextQuestion',
-      });
+  beforeEach(() => {
+    fetchNextPrompt.mockImplementation(() => fakePrompt);
+    recognize.mockImplementation(() => of(fakeSentence));
+    getExamples.mockImplementation(() => fakeExamples);
 
-      getNextQuestionEpic(action$)
-        .pipe(toArray()).subscribe(([action1, action2]) => {
-          expect(action1).toEqual(setPrompt(fakePrompt));
-          expect(action2).toEqual(setSpokenSentence(null));
-          expect(abortRecognition).toBeCalled();
-          done();
-        });
+    testScheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected);
     });
   });
 
-  describe('recognizeSpeechEpic', () => {
-    const fakeSentence = '사과는 맛있다';
-
-    beforeEach(() => {
-      recognize.mockImplementation(() => of(fakeSentence));
-    });
-
-    it('conveys setSpokenSentence action', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'recognizeSpeech',
+  test('getNextQuestionEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'getNextQuestion' },
       });
 
-      recognizeSpeechEpic(action$)
-        .pipe(toArray()).subscribe(([action1, action2]) => {
-          expect(action1).toEqual({ type: 'listenRecognitionEvents' });
-          expect(action2).toEqual(setSpokenSentence(fakeSentence));
-          done();
-        });
+      const output$ = getNextQuestionEpic(action$);
+
+      expectObservable(output$).toBe('-(ab)', {
+        a: setPrompt(fakePrompt),
+        b: setSpokenSentence(null),
+      });
+    });
+
+    expect(abortRecognition).toBeCalled();
+  });
+
+  test('recognizeSpeechEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'recognizeSpeech' },
+      });
+
+      const output$ = recognizeSpeechEpic(action$);
+
+      expectObservable(output$).toBe('-(ab)', {
+        a: { type: 'listenRecognitionEvents' },
+        b: setSpokenSentence(fakeSentence),
+      });
     });
   });
 
-  describe('listenRecognitionEventsEpic', () => {
-    it('conveys setSpokenSentence action', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'listenRecognitionEvents',
+  test('listenRecognitionEventsEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'listenRecognitionEvents' },
       });
 
-      listenRecognitionEvents(action$)
-        .pipe(toArray()).subscribe(([action1, action2, action3, action4]) => {
-          expect(action1).toEqual(setMicState(MicState.ON));
-          expect(action2).toEqual(setMicState(MicState.OFF));
-          expect(action3).toEqual(setMicState(MicState.SPEAKING));
-          expect(action4).toEqual(setMicState(MicState.ON));
-          done();
-        });
+      const output$ = listenRecognitionEvents(action$);
+
+      expectObservable(output$).toBe('-(abcd)', {
+        a: setMicState(MicState.ON),
+        b: setMicState(MicState.OFF),
+        c: setMicState(MicState.SPEAKING),
+        d: setMicState(MicState.ON),
+      });
     });
   });
 
-  describe('saveAnswerEpic', () => {
-    const fakeExamples = [
-      '자두는 맛이 없다',
-      '자두는 맛이 있다',
-    ];
+  test('saveAnswerEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: {
+          type: 'saveAnswer',
+          payload: {
+            prompt: '자두',
+            spokenSentence: '자두는',
+          },
+        },
+      });
 
-    beforeEach(() => {
-      getExamples.mockImplementation(() => fakeExamples);
-    });
+      const output$ = saveAnswerEpic(action$);
 
-    it('returns add answer action with fake examples', (done) => {
-      const action$ = ActionsObservable.of(saveAnswer({
-        prompt: '자두',
-        spokenSentence: '자두는',
-      }));
-
-      saveAnswerEpic(action$).subscribe((action) => {
-        expect(action).toEqual(addAnswer({
+      expectObservable(output$).toBe('-a', {
+        a: addAnswer({
           prompt: '자두',
           spokenSentence: '자두는',
           examples: fakeExamples,
-        }));
-        done();
+        }),
       });
     });
   });
