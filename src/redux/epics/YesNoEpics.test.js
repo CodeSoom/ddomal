@@ -1,11 +1,9 @@
-import { ActionsObservable } from 'redux-observable';
-
-import { toArray } from 'rxjs/operators';
+import { TestScheduler } from 'rxjs/testing';
 
 import { of } from 'rxjs';
 
 import {
-  setYesNoQuestion, startPlaying, endPlaying,
+  setYesNoQuestion, startPlaying, idlePlaying, endPlaying,
 } from '../slice';
 
 import {
@@ -24,57 +22,73 @@ jest.mock('../../services/speechSynthesisService.js');
 jest.mock('../../services/dataService.js');
 
 describe('epics', () => {
-  describe('getNextYesNoQuestionEpic', () => {
-    const fakeQuestion = {
-      answer: '네',
-      question: '지구는 네모난 모양인가요?',
-    };
+  let testScheduler;
 
-    beforeEach(() => {
-      fetchNextYesNoQuestion.mockImplementation(() => fakeQuestion);
+  const yesNoQuestion = '안녕하세요';
+  const fakeQuestion = {
+    answer: '네',
+    question: '지구는 네모난 모양인가요?',
+  };
+
+  beforeEach(() => {
+    fetchNextYesNoQuestion.mockImplementation(() => fakeQuestion);
+    play.mockImplementation(() => of(''));
+
+    testScheduler = new TestScheduler((actual, expected) => {
+      expect(actual).toEqual(expected);
     });
+  });
 
-    it('conveys setYesNoQuestion and playYesNoQuestion actions', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'getNextYesNoQuestion',
+  test('getNextYesNoQuestionEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'getNextYesNoQuestion' },
       });
 
-      getNextYesNoQuestionEpic(action$).subscribe((action) => {
-        expect(action).toEqual(setYesNoQuestion(fakeQuestion));
-        done();
+      const output$ = getNextYesNoQuestionEpic(action$);
+
+      expectObservable(output$).toBe('-a', {
+        a: setYesNoQuestion(fakeQuestion),
       });
     });
   });
 
-  describe('playYesNoQuestionEpic', () => {
-    const fakeQuestion = '안녕하세요';
-
-    const playYesNoQuestion = play;
-
-    beforeEach(() => {
-      play.mockImplementation(() => of(''));
-    });
-
-    it('plays yesNoQuestion', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'playYesNoQuestion',
-        payload: fakeQuestion,
+  test('playYesNoQuestionEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'playYesNoQuestion', payload: yesNoQuestion },
       });
 
-      playYesNoQuestionEpic(action$)
-        .pipe(toArray()).subscribe(([action1, action2]) => {
-          expect(playYesNoQuestion).toBeCalledWith(fakeQuestion);
-          expect(action1).toEqual(startPlaying());
-          expect(action2).toEqual({ type: 'listenYesNoEndEvent' });
-          done();
-        });
+      const output$ = playYesNoQuestionEpic(action$);
+
+      expectObservable(output$).toBe('-(ab)', {
+        a: startPlaying(),
+        b: { type: 'listenYesNoEndEvent' },
+      });
     });
+    expect(play).toBeCalledWith(yesNoQuestion);
   });
 
-  describe('listenYesNoEndEventEpic', () => {
-    it('ends playing yes no question', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'listenYesNoEndEvent',
+  test('stopYesNoQuestionEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'stopYesNoQuestion' },
+      });
+
+      const output$ = stopYesNoQuestionEpic(action$);
+
+      expectObservable(output$).toBe('-a', {
+        a: idlePlaying(),
+      });
+    });
+
+    expect(stop).toBeCalled();
+  });
+
+  test('listenYesNoEndEventEpic', () => {
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: { type: 'listenYesNoEndEvent' },
       });
 
       const state$ = {
@@ -83,26 +97,10 @@ describe('epics', () => {
         },
       };
 
-      listenYesNoEndEventEpic(action$, state$).subscribe((action) => {
-        expect(action).toEqual(endPlaying());
-        done();
-      });
-    });
-  });
+      const output$ = listenYesNoEndEventEpic(action$, state$);
 
-  describe('stopPlayingYesNoQuestionEpic', () => {
-    beforeEach(() => {
-      stop.mockClear();
-    });
-
-    it('stops playing yes no question', (done) => {
-      const action$ = ActionsObservable.of({
-        type: 'stopYesNoQuestion',
-      });
-
-      stopYesNoQuestionEpic(action$).subscribe(() => {
-        expect(stop).toBeCalled();
-        done();
+      expectObservable(output$).toBe('-a', {
+        a: endPlaying(),
       });
     });
   });
