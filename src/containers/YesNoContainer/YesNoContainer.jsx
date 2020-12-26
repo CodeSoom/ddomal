@@ -12,9 +12,12 @@ import {
   getNextYesNoQuestion,
   idlePlaying,
   playYesNoQuestion,
-  saveAnswer,
   stopYesNoQuestion,
-} from '../../redux/slice';
+} from '../../redux/slices/yesNoSlice';
+
+import {
+  addAnswer,
+} from '../../redux/slices/applicationSlice';
 
 import { get } from '../../utils/utils';
 
@@ -32,10 +35,11 @@ import {
 } from './styled';
 
 export default function YesNoContainer() {
-  const answersNumber = useSelector(get('answers')).length;
-  const { question, answer } = useSelector(get('yesNoQuestion')) || {};
-  const soundState = useSelector(get('soundState'));
-  const numberOfQuestions = useSelector(get('numberOfQuestions'));
+  const { answers, numberOfQuestions } = useSelector(get('application'));
+  const { yesNoQuestion, soundState } = useSelector(get('yesno'));
+
+  const answersNumber = answers.length;
+  const { question, answer } = yesNoQuestion || {};
 
   const isPlaying = soundState === SoundState.PLAYING;
   const isIdle = soundState === SoundState.IDLE;
@@ -60,7 +64,7 @@ export default function YesNoContainer() {
     const actions = [
       stopYesNoQuestion(),
       idlePlaying(),
-      saveAnswer({
+      addAnswer({
         question,
         answer,
         userAnswer,

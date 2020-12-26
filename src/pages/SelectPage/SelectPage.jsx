@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { initializeState } from '../../redux/slice';
+import { initializeState } from '../../redux/slices/applicationSlice';
 
 import Button from '../../styles/CommonButtonActive';
 

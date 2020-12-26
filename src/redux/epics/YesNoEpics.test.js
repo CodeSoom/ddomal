@@ -3,8 +3,14 @@ import { TestScheduler } from 'rxjs/testing';
 import { of } from 'rxjs';
 
 import {
-  setYesNoQuestion, startPlaying, idlePlaying, endPlaying,
-} from '../slice';
+  setYesNoQuestion,
+  startPlaying,
+  idlePlaying,
+  endPlaying,
+  getNextYesNoQuestion,
+  playYesNoQuestion,
+  stopYesNoQuestion,
+} from '../slices/yesNoSlice';
 
 import {
   getNextYesNoQuestionEpic,
@@ -42,7 +48,7 @@ describe('epics', () => {
   test('getNextYesNoQuestionEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'getNextYesNoQuestion' },
+        a: getNextYesNoQuestion,
       });
 
       const output$ = getNextYesNoQuestionEpic(action$);
@@ -56,7 +62,7 @@ describe('epics', () => {
   test('playYesNoQuestionEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'playYesNoQuestion', payload: yesNoQuestion },
+        a: playYesNoQuestion(yesNoQuestion),
       });
 
       const output$ = playYesNoQuestionEpic(action$);
@@ -72,7 +78,7 @@ describe('epics', () => {
   test('stopYesNoQuestionEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'stopYesNoQuestion' },
+        a: stopYesNoQuestion(),
       });
 
       const output$ = stopYesNoQuestionEpic(action$);

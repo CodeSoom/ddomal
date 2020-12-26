@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import CustomCarousel from '../../customs/CustomCarousel';
 
-import { endGame } from '../../redux/slice';
+// import { endGame } from '../../redux/slices/applicationSlice';
 
 import SentenceAnswer from '../SentenceAnswer';
 
@@ -16,10 +16,11 @@ import {
 } from './styled';
 
 export default function SentenceAnswers({ answers, onClickReplay }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleLastSlide = () => {
-    dispatch(endGame());
+    // TODO: fixthis
+    // dispatch(endGame());
   };
 
   return (

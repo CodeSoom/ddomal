@@ -8,7 +8,7 @@ export default function SentenceSpeakPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'getNextQuestion' });
+    dispatch({ type: 'speakSentence/getNextQuestion' });
   }, []);
 
   return (

@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
-import { initializeState, playYesNoQuestion } from '../redux/slice';
+import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
+import { initializeState } from '../redux/slices/applicationSlice';
 
 import { get } from '../utils/utils';
 
@@ -22,13 +23,12 @@ const ButtonBox = styled.div({
 });
 
 export default function SentenceAnswersContainer() {
-  const answers = useSelector(get('answers'));
-  const isGameEnd = useSelector(get('isGameEnd'));
-
-  const Button = isGameEnd ? ActiveButton : InactiveButton;
+  const { answers, isGameEnd } = useSelector(get('application'));
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const Button = isGameEnd ? ActiveButton : InactiveButton;
 
   const handleClickRestart = () => {
     dispatch(initializeState());

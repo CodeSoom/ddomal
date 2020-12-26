@@ -10,7 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils/utils';
 
-import { initializeState, playYesNoQuestion } from '../redux/slice';
+import { initializeState } from '../redux/slices/applicationSlice';
+import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 import YesNoAnswer from '../components/YesNoAnswer';
 
@@ -35,7 +36,7 @@ const Container = styled.div({
 });
 
 export default function YesNoAnswersContainer() {
-  const answers = useSelector(get('answers'));
+  const { answers } = useSelector(get('application'));
 
   const dispatch = useDispatch();
   const history = useHistory();

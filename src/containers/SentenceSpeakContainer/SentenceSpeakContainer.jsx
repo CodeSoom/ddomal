@@ -21,12 +21,13 @@ import {
   recognizeSpeech,
   getNextQuestion,
   saveAnswer,
-} from '../../redux/slice';
+} from '../../redux/slices/speakSentenceSlice';
+
+import { get } from '../../utils/utils';
 
 export default function SentenceSpeakContainer() {
-  const {
-    prompt, spokenSentence, micState, answers, numberOfQuestions,
-  } = useSelector((state) => state);
+  const { prompt, spokenSentence, micState } = useSelector(get('speakSentence'));
+  const { answers, numberOfQuestions } = useSelector((get('application')));
 
   const dispatch = useDispatch();
   const history = useHistory();

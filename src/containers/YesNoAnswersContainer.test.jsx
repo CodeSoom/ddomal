@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import YesNoAnswersContainer from './YesNoAnswersContainer';
 
-import { initializeState, playYesNoQuestion } from '../redux/slice';
+import { initializeState } from '../redux/slices/applicationSlice';
+import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 jest.mock('react-redux');
 
@@ -47,7 +48,7 @@ describe('YesNoAnswersContainer', () => {
     jest.clearAllMocks();
 
     useSelector.mockImplementation((selector) => selector({
-      answers,
+      application: { answers },
     }));
 
     useDispatch.mockImplementation(() => dispatch);

@@ -11,6 +11,7 @@ import { useAudio } from '../../hooks/audio';
 import SentenceSpeakContainer from './SentenceSpeakContainer';
 
 import MicState from '../../enums/MicState';
+import { recognizeSpeech, saveAnswer } from '../../redux/slices/speakSentenceSlice';
 
 jest.mock('react-redux');
 jest.mock('../../services/speechRecognitionService.js');
@@ -48,11 +49,15 @@ describe('SentenceSpeakContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      prompt,
-      spokenSentence,
-      answers: given.answers || [],
-      micState: MicState.OFF,
-      numberOfQuestions,
+      application: {
+        numberOfQuestions,
+        answers: given.answers || [],
+      },
+      speakSentence: {
+        micState: MicState.OFF,
+        prompt,
+        spokenSentence,
+      },
     }));
   });
 
@@ -73,7 +78,7 @@ describe('SentenceSpeakContainer', () => {
 
     fireEvent.click(getByTitle(micButton));
 
-    expect(dispatch).toBeCalledWith({ type: 'recognizeSpeech' });
+    expect(dispatch).toBeCalledWith(recognizeSpeech());
   });
 
   context('when answering is not complete', () => {
@@ -84,10 +89,7 @@ describe('SentenceSpeakContainer', () => {
 
       fireEvent.click(getByText(nextButton));
 
-      expect(dispatch).toBeCalledWith({
-        type: 'saveAnswer',
-        payload: { prompt, spokenSentence },
-      });
+      expect(dispatch).toBeCalledWith(saveAnswer({ prompt, spokenSentence }));
     });
   });
 
@@ -99,10 +101,7 @@ describe('SentenceSpeakContainer', () => {
 
       fireEvent.click(getByText(exitButton));
 
-      expect(dispatch).toBeCalledWith({
-        type: 'saveAnswer',
-        payload: { prompt, spokenSentence },
-      });
+      expect(dispatch).toBeCalledWith(saveAnswer({ prompt, spokenSentence }));
 
       expect(mockPush).toBeCalledWith('/answers');
     });

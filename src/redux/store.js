@@ -4,7 +4,7 @@ import { createEpicMiddleware } from 'redux-observable';
 
 import rootEpic from './epics/index';
 
-import reducer from './slice';
+import reducer from './slices/index';
 
 const epicMiddleware = createEpicMiddleware();
 

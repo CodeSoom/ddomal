@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import SetQuestionNumberContainer from './SetQuestionNumberContainer';
 
-import { setNumberOfQuestions } from '../redux/slice';
+import { setNumberOfQuestions } from '../redux/slices/applicationSlice';
 
 jest.mock('react-redux');
 
@@ -31,7 +31,9 @@ describe('SetQuestionNumberContainer', () => {
     jest.clearAllMocks();
 
     useSelector.mockImplementation((selector) => selector({
-      numberOfQuestions,
+      application: {
+        numberOfQuestions,
+      },
     }));
 
     useDispatch.mockImplementation(() => dispatch);
