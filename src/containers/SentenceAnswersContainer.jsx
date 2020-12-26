@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
-import { initializeState } from '../redux/slices/applicationSlice';
+import { endGame, initializeState } from '../redux/slices/applicationSlice';
 
 import { get } from '../utils/utils';
 
@@ -39,9 +39,19 @@ export default function SentenceAnswersContainer() {
     dispatch(playYesNoQuestion(example));
   };
 
+  const handleClickLastSlide = () => {
+    if (!isGameEnd) {
+      dispatch(endGame());
+    }
+  };
+
   return (
     <>
-      <SentenceAnswers answers={answers} onClickReplay={handleClickReplay} />
+      <SentenceAnswers
+        answers={answers}
+        onClickReplay={handleClickReplay}
+        onClickLastSlide={handleClickLastSlide}
+      />
       <ButtonBox>
         <Button type="button" onClick={handleClickRestart}>
           처음으로
