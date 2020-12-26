@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { fireEvent, render } from '@testing-library/react';
 
 import given from 'given2';
@@ -27,6 +29,10 @@ describe('SetQuestionNumberPage', () => {
 
   beforeEach(() => {
     mockLocation.search = given.query;
+
+    useSelector.mockImplementation((selector) => selector({
+      application: {},
+    }));
   });
 
   context('speak sentence game', () => {

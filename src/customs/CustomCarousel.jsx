@@ -25,4 +25,4 @@ function CustomCarousel({
   );
 }
 
-export default CustomCarousel;
+export default React.memo(CustomCarousel);

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { getNextYesNoQuestion } from '../redux/slice';
+import { getNextYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 import YesNoContainer from '../containers/YesNoContainer';
 

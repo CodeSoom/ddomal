@@ -18,7 +18,9 @@ describe('SentenceAnswersPage', () => {
 
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      answers: [answer],
+      application: {
+        answers: [answer],
+      },
     }));
 
     useDispatch.mockImplementation(() => jest.fn());

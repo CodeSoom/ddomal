@@ -11,7 +11,7 @@ jest.mock('react-redux');
 describe('YesNoPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      answers: [],
+      application: { answers: [] },
     }));
   });
 

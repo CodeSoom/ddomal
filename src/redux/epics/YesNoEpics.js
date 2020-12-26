@@ -16,17 +16,18 @@ import { play, playEnded, stop } from '../../services/speechSynthesisService';
 import {
   endPlaying,
   idlePlaying,
-  setYesNoQuestion, startPlaying,
-} from '../slice';
+  setYesNoQuestion,
+  startPlaying,
+} from '../slices/yesNoSlice';
 
 export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
-  ofType('getNextYesNoQuestion'),
+  ofType('yesno/getNextYesNoQuestion'),
   map(fetchNextYesNoQuestion),
   map(setYesNoQuestion),
 );
 
 export const playYesNoQuestionEpic = (action$) => action$.pipe(
-  ofType('playYesNoQuestion'),
+  ofType('yesno/playYesNoQuestion'),
   tap(({ payload }) => play(payload)),
   mergeMap(() => of(
     startPlaying(),
@@ -35,7 +36,7 @@ export const playYesNoQuestionEpic = (action$) => action$.pipe(
 );
 
 export const stopYesNoQuestionEpic = (action$) => action$.pipe(
-  ofType('stopYesNoQuestion'),
+  ofType('yesno/stopYesNoQuestion'),
   tap(() => stop()),
   map(() => idlePlaying()),
 );

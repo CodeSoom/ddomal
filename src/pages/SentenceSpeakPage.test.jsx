@@ -33,9 +33,13 @@ describe('SentenceSpeakPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      prompt,
-      spokenSentence: '',
-      answers: [],
+      application: {
+        answers: [],
+      },
+      speakSentence: {
+        prompt,
+        spokenSentence: '',
+      },
     }));
   });
 

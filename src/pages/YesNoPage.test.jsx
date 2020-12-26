@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import YesNoPage from './YesNoPage';
 
-import { getNextYesNoQuestion } from '../redux/slice';
+import { getNextYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 global.HTMLMediaElement.prototype.pause = jest.fn();
 
@@ -19,7 +19,8 @@ describe('YesNoPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      answers: [],
+      application: { answers: [] },
+      yesno: {},
     }));
   });
 

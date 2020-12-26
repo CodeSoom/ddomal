@@ -18,13 +18,16 @@ import {
 
 import {
   addAnswer,
+} from '../slices/applicationSlice';
+
+import {
   setMicState,
   setPrompt,
   setSpokenSentence,
-} from '../slice';
+} from '../slices/speakSentenceSlice';
 
 export const getNextQuestionEpic = (action$) => action$.pipe(
-  ofType('getNextQuestion'),
+  ofType('speakSentence/getNextQuestion'),
   tap(abortRecognition),
   map(fetchNextPrompt),
   mergeMap((nextPrompt) => of(
@@ -34,7 +37,7 @@ export const getNextQuestionEpic = (action$) => action$.pipe(
 );
 
 export const recognizeSpeechEpic = (action$) => action$.pipe(
-  ofType('recognizeSpeech'),
+  ofType('speakSentence/recognizeSpeech'),
   map(recognize),
   mergeMap((sentence$) => merge(
     of({ type: 'listenRecognitionEvents' }),
@@ -63,7 +66,7 @@ export const listenRecognitionEvents = (action$) => action$.pipe(
 );
 
 export const saveAnswerEpic = (action$) => action$.pipe(
-  ofType('saveAnswer'),
+  ofType('speakSentence/saveAnswer'),
   map(({ payload }) => (
     addAnswer({
       ...payload,

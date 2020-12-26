@@ -4,10 +4,16 @@ import { of } from 'rxjs';
 
 import {
   addAnswer,
-  setPrompt,
+} from '../slices/applicationSlice';
+
+import {
+  getNextQuestion,
+  recognizeSpeech,
+  saveAnswer,
   setMicState,
+  setPrompt,
   setSpokenSentence,
-} from '../slice';
+} from '../slices/speakSentenceSlice';
 
 import {
   getNextQuestionEpic,
@@ -47,7 +53,7 @@ describe('epics', () => {
   test('getNextQuestionEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'getNextQuestion' },
+        a: getNextQuestion(),
       });
 
       const output$ = getNextQuestionEpic(action$);
@@ -64,7 +70,7 @@ describe('epics', () => {
   test('recognizeSpeechEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: { type: 'recognizeSpeech' },
+        a: recognizeSpeech(),
       });
 
       const output$ = recognizeSpeechEpic(action$);
@@ -96,13 +102,10 @@ describe('epics', () => {
   test('saveAnswerEpic', () => {
     testScheduler.run(({ hot, expectObservable }) => {
       const action$ = hot('-a', {
-        a: {
-          type: 'saveAnswer',
-          payload: {
-            prompt: '자두',
-            spokenSentence: '자두는',
-          },
-        },
+        a: saveAnswer({
+          prompt: '자두',
+          spokenSentence: '자두는',
+        }),
       });
 
       const output$ = saveAnswerEpic(action$);

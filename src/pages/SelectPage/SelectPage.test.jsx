@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import SelectPage from './SelectPage';
 
-import { initializeState } from '../../redux/slice';
+import { initializeState } from '../../redux/slices/applicationSlice';
 
 const mockPush = jest.fn();
 

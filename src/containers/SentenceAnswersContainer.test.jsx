@@ -5,7 +5,8 @@ import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SentenceAnswersContainer from './SentenceAnswersContainer';
-import { playYesNoQuestion } from '../redux/slice';
+
+import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 jest.mock('react-redux');
 jest.mock('../services/speechRecognitionService.js');
@@ -37,7 +38,9 @@ describe('SentenceAnswersContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      answers,
+      application: {
+        answers,
+      },
     }));
   });
 

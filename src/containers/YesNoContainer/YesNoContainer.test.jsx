@@ -7,14 +7,18 @@ import given from 'given2';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  getNextYesNoQuestion, idlePlaying, playYesNoQuestion, saveAnswer, stopYesNoQuestion,
-} from '../../redux/slice';
+  getNextYesNoQuestion,
+  idlePlaying,
+  playYesNoQuestion,
+  stopYesNoQuestion,
+} from '../../redux/slices/yesNoSlice';
 
 import YesNoContainer from './YesNoContainer';
 
 import SoundState from '../../enums/SoundState';
 
 import { useAudio } from '../../hooks/audio';
+import { addAnswer } from '../../redux/slices/applicationSlice';
 
 jest.mock('../../hooks/audio.js');
 
@@ -46,10 +50,14 @@ describe('YesNoContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
-      soundState: SoundState.END,
-      yesNoQuestion: currentQuestion,
-      answers: (given.answers || []),
-      numberOfQuestions,
+      application: {
+        answers: (given.answers || []),
+        numberOfQuestions,
+      },
+      yesno: {
+        soundState: SoundState.END,
+        yesNoQuestion: currentQuestion,
+      },
     }));
 
     useAudio.mockImplementation((path) => (
@@ -119,7 +127,7 @@ describe('YesNoContainer', () => {
 
     fireEvent.click(getByText(yesButton));
 
-    await waitFor(() => expect(dispatch).toBeCalledWith(saveAnswer({
+    await waitFor(() => expect(dispatch).toBeCalledWith(addAnswer({
       ...currentQuestion,
       userAnswer: 'Y',
     })));
