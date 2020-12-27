@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import FlowCounter from './FlowCounter';
+import FlowCounter from './QuestionCounter';
 
 describe('FlowCounter', () => {
   const increaseButton = 'arrowup';
