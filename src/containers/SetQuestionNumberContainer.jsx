@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import FlowCounter from '../components/FlowCounter';
+import QuestionCounter from '../components/QuestionCounter';
 
 import { setNumberOfQuestions } from '../redux/slices/applicationSlice';
 
@@ -22,12 +22,10 @@ export default function SentenceAnswersContainer() {
   };
 
   return (
-    <>
-      <FlowCounter
-        numberOfQuestions={numberOfQuestions}
-        onClickIncrease={handleClickIncrease}
-        onClickDecrease={handleClickDecrease}
-      />
-    </>
+    <QuestionCounter
+      numberOfQuestions={numberOfQuestions}
+      onClickIncrease={handleClickIncrease}
+      onClickDecrease={handleClickDecrease}
+    />
   );
 }
