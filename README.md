@@ -29,3 +29,5 @@
 문제를 잘 듣고 예 / 아니오 고르기! (얼마든지 다시 들을 수 있어요)  
 정답 확인하기!  
 ```
+## 프로젝트 용어사전
+위키 - https://github.com/CodeSoom/project-react-2-gringrape/wiki/%EC%9A%A9%EC%96%B4-%EC%82%AC%EC%A0%84#1-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5
