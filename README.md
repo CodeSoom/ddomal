@@ -77,5 +77,7 @@
 
 ### .env file
 
-```
+```bash
+> AWS_ID='your aws identity pool id'
+> AWS_REGION='your aws region'
 ```
