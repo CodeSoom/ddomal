@@ -15,7 +15,7 @@ global.HTMLCanvasElement.prototype.getContext = jest.fn();
 
 jest.mock('react', () => {
   const originReact = jest.requireActual('react');
-  const mockUseRef = jest.fn().mockImplementation(() => ({}));
+  const mockUseRef = jest.fn().mockReturnValue({ current: {} });
   return {
     ...originReact,
     useRef: mockUseRef,
