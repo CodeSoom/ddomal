@@ -81,3 +81,6 @@
 > AWS_ID='your aws identity pool id'
 > AWS_REGION='your aws region'
 ```
+
+#### Using AWS Identity pool
+https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html
