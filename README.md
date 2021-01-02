@@ -31,3 +31,51 @@
 ```
 ## 프로젝트 용어사전
 위키 - https://github.com/CodeSoom/project-react-2-gringrape/wiki/%EC%9A%A9%EC%96%B4-%EC%82%AC%EC%A0%84#1-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5
+
+### Project Setting
+
+#### Install npm dependencies
+
+```bash
+> npm install
+```
+#### Start dev-server
+
+```bash
+> npm start
+```
+
+#### Run tests
+
+- watch test
+```bash
+> npm test
+```
+
+- unit test
+```bash
+> npm run test:unit
+```
+
+#### Run build project
+
+```bash
+> npm build
+```
+
+#### Run Lint
+
+```bash
+> npm run lint
+```
+
+#### Run Coverage
+
+```bash
+> npm run coverage
+```
+
+#### 📢 .env file
+
+```
+```
