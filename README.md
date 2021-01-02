@@ -47,9 +47,9 @@
 
 ### Run tests
 
-- watch test
+- e2e test
 ```bash
-> npm test
+> npm test:e2e
 ```
 
 - unit test
