@@ -9,8 +9,6 @@ module.exports = {
     'airbnb',
   ],
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
     context: 'readonly',
     Feature: 'readonly',
     Scenario: 'readonly',
