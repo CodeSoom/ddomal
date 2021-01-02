@@ -19,6 +19,7 @@ import SetQuestionNumberPage from './pages/SetQuestionNumberPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
 import { normalFont } from './styles/fonts';
+import NotFoundPage from './pages/NotFoundPage';
 
 const Container = styled.div({
   width: '100%',
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/yesno" component={YesNoPage} />
         <Route path="/ynanswers" component={YesNoAnswersPage} />
         <Route path="/setnumber" component={SetQuestionNumberPage} />
+        <Route component={NotFoundPage} />
       </Switch>
     </Container>
   );

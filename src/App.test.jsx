@@ -88,4 +88,10 @@ describe('App', () => {
 
     expect(container).toHaveTextContent(setQuestionNumberPage);
   });
+
+  it('shows the not found page on invalid route', () => {
+    const { container } = renderApp({ path: '/404' });
+
+    expect(container).toHaveTextContent('페이지를 찾을수 없어요~');
+  });
 });
