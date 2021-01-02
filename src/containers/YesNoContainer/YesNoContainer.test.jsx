@@ -62,8 +62,8 @@ describe('YesNoContainer', () => {
 
     useAudio.mockImplementation((path) => (
       path.includes('Correct')
-        ? ['', playYes]
-        : ['', playWrong]
+        ? playYes
+        : playWrong
     ));
   });
 

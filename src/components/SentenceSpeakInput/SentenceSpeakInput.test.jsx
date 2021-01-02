@@ -36,7 +36,7 @@ describe('SentenceSpeakInput', () => {
     handleClick.mockClear();
     play.mockClear();
 
-    useAudio.mockImplementation(() => ['', play]);
+    useAudio.mockReturnValue(play);
   });
 
   it('renders spoken sentence with sentence', () => {

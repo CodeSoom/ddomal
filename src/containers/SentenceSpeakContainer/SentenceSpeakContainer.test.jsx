@@ -44,7 +44,7 @@ describe('SentenceSpeakContainer', () => {
   beforeEach(() => {
     dispatch.mockClear();
 
-    useAudio.mockImplementation(() => ['', () => {}]);
+    useAudio.mockImplementation(() => jest.fn());
 
     useDispatch.mockImplementation(() => dispatch);
 

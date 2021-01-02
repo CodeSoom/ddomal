@@ -25,7 +25,7 @@ import MicState from '../../enums/MicState';
 function SentenceSpeakInput({
   isCorrectSentence, prompt, spokenSentence, micState, onClick,
 }) {
-  const [, play] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
+  const play = useAudio('../../assets/sounds/CorrectAnswer.mp3');
 
   const isWarningHidden = isCorrectSentence || _.isNull(spokenSentence);
   const isMicNotOff = micState !== MicState.OFF;
