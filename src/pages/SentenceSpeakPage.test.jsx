@@ -9,6 +9,7 @@ import SentenceSpeakPage from './SentenceSpeakPage';
 jest.mock('react-redux');
 jest.mock('../services/speechRecognitionService.js');
 jest.mock('../services/instances/audioContext.instance.js');
+jest.mock('../hooks/volumeCanvas.js');
 
 global.HTMLMediaElement.prototype.pause = jest.fn();
 global.HTMLCanvasElement.prototype.getContext = jest.fn();
