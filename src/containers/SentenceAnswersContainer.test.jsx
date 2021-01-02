@@ -9,7 +9,6 @@ import SentenceAnswersContainer from './SentenceAnswersContainer';
 import { playYesNoQuestion } from '../redux/slices/yesNoSlice';
 
 jest.mock('react-redux');
-jest.mock('../services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 
