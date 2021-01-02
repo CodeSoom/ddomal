@@ -47,8 +47,8 @@ export default function YesNoContainer() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [, playCorrect] = useAudio('../../assets/sounds/CorrectAnswer.mp3');
-  const [, playWrong] = useAudio('../../assets/sounds/IncorrectAnswer.mp3');
+  const playCorrect = useAudio('../../assets/sounds/CorrectAnswer.mp3');
+  const playWrong = useAudio('../../assets/sounds/IncorrectAnswer.mp3');
 
   const handleClickPlay = () => {
     dispatch(playYesNoQuestion(question));
@@ -56,7 +56,7 @@ export default function YesNoContainer() {
 
   const playSound = (userAnswer) => {
     const play = (userAnswer === answer) ? playCorrect : playWrong;
-    play();
+    return play();
   };
 
   // TODO: 액션 조율은 Epic 에서 해야할 일
