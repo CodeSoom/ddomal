@@ -9,6 +9,7 @@ import MicState from '../../enums/MicState';
 import { useAudio } from '../../hooks/audio';
 
 jest.mock('../../hooks/audio.js');
+jest.mock('../../hooks/volumeCanvas.js');
 jest.mock('../../services/instances/audioContext.instance.js');
 
 global.HTMLCanvasElement.prototype.getContext = jest.fn();
