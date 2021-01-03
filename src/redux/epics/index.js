@@ -12,6 +12,7 @@ import {
   playYesNoQuestionEpic,
   listenYesNoEndEventEpic,
   stopYesNoQuestionEpic,
+  saveAndGoToNextYesNoQuestionEpic,
 } from './YesNoEpics';
 
 const rootEpic = combineEpics(
@@ -23,6 +24,7 @@ const rootEpic = combineEpics(
   playYesNoQuestionEpic,
   listenYesNoEndEventEpic,
   stopYesNoQuestionEpic,
+  saveAndGoToNextYesNoQuestionEpic,
 );
 
 export default rootEpic;

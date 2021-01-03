@@ -9,15 +9,9 @@ import { useAudio } from '../../hooks/audio';
 import SoundState from '../../enums/SoundState';
 
 import {
-  getNextYesNoQuestion,
-  idlePlaying,
   playYesNoQuestion,
-  stopYesNoQuestion,
+  saveAndGoToNextYesNoQuestion,
 } from '../../redux/slices/yesNoSlice';
-
-import {
-  addAnswer,
-} from '../../redux/slices/applicationSlice';
 
 import { get } from '../../utils/utils';
 
@@ -59,25 +53,10 @@ export default function YesNoContainer() {
     return play();
   };
 
-  // TODO: 액션 조율은 Epic 에서 해야할 일
-  const dispatchActions = (userAnswer) => {
-    const actions = [
-      stopYesNoQuestion(),
-      idlePlaying(),
-      addAnswer({
-        question,
-        answer,
-        userAnswer,
-      }),
-      getNextYesNoQuestion(),
-    ];
-
-    actions.forEach((action) => dispatch(action));
-  };
-
   const handleClickYesNo = async (userAnswer) => {
     await playSound(userAnswer);
-    dispatchActions(userAnswer);
+
+    dispatch(saveAndGoToNextYesNoQuestion({ question, answer, userAnswer }));
 
     if (answersNumber === numberOfQuestions - 1) {
       history.push('/ynanswers');

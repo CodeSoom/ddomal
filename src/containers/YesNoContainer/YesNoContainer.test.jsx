@@ -7,10 +7,8 @@ import given from 'given2';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  getNextYesNoQuestion,
-  idlePlaying,
   playYesNoQuestion,
-  stopYesNoQuestion,
+  saveAndGoToNextYesNoQuestion,
 } from '../../redux/slices/yesNoSlice';
 
 import YesNoContainer from './YesNoContainer';
@@ -18,7 +16,6 @@ import YesNoContainer from './YesNoContainer';
 import SoundState from '../../enums/SoundState';
 
 import { useAudio } from '../../hooks/audio';
-import { addAnswer } from '../../redux/slices/applicationSlice';
 
 jest.mock('../../hooks/audio.js');
 
@@ -108,26 +105,12 @@ describe('YesNoContainer', () => {
     expect(playWrong).toBeCalled();
   });
 
-  it('get next question when user click yes or no button', () => {
-    const { getByText } = render(<YesNoContainer />);
-
-    [yesButton, noButton].forEach(async (button) => {
-      dispatch.mockClear();
-
-      fireEvent.click(getByText(button));
-
-      await waitFor(() => expect(dispatch).toBeCalledWith(stopYesNoQuestion()));
-      await waitFor(() => expect(dispatch).toBeCalledWith(getNextYesNoQuestion()));
-      await waitFor(() => expect(dispatch).toBeCalledWith(idlePlaying()));
-    });
-  });
-
-  it('save answer when user click button', async () => {
+  it('save and get next question when user clicks yes or no buttons', async () => {
     const { getByText } = render(<YesNoContainer />);
 
     fireEvent.click(getByText(yesButton));
 
-    await waitFor(() => expect(dispatch).toBeCalledWith(addAnswer({
+    await waitFor(() => expect(dispatch).toBeCalledWith(saveAndGoToNextYesNoQuestion({
       ...currentQuestion,
       userAnswer: 'Y',
     })));

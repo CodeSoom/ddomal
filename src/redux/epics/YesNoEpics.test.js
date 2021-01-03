@@ -10,18 +10,21 @@ import {
   getNextYesNoQuestion,
   playYesNoQuestion,
   stopYesNoQuestion,
+  saveAndGoToNextYesNoQuestion,
 } from '../slices/yesNoSlice';
 
 import {
   getNextYesNoQuestionEpic,
   listenYesNoEndEventEpic,
   playYesNoQuestionEpic,
+  saveAndGoToNextYesNoQuestionEpic,
   stopYesNoQuestionEpic,
 } from './YesNoEpics';
 
 import { fetchNextYesNoQuestion } from '../../services/dataService';
 import { play, stop } from '../../services/speechSynthesisService';
 import SoundState from '../../enums/SoundState';
+import { addAnswer } from '../slices/applicationSlice';
 
 jest.mock('../../services/speechRecognitionService.js');
 jest.mock('../../services/speechSynthesisService.js');
@@ -107,6 +110,25 @@ describe('epics', () => {
 
       expectObservable(output$).toBe('-a', {
         a: endPlaying(),
+      });
+    });
+  });
+
+  test('saveAndGoToNextYesNoQuestionEpic', () => {
+    const questionAnswer = { ...fakeQuestion, userAnswer: 'Y' };
+
+    testScheduler.run(({ hot, expectObservable }) => {
+      const action$ = hot('-a', {
+        a: saveAndGoToNextYesNoQuestion(questionAnswer),
+      });
+
+      const output$ = saveAndGoToNextYesNoQuestionEpic(action$);
+
+      expectObservable(output$).toBe('-(abcd)', {
+        a: stopYesNoQuestion(),
+        b: idlePlaying(),
+        c: addAnswer(questionAnswer),
+        d: getNextYesNoQuestion(),
       });
     });
   });
