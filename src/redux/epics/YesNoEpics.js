@@ -12,12 +12,15 @@ import SoundState from '../../enums/SoundState';
 
 import { fetchNextYesNoQuestion } from '../../services/dataService';
 import { play, playEnded, stop } from '../../services/speechSynthesisService';
+import { addAnswer } from '../slices/applicationSlice';
 
 import {
   endPlaying,
+  getNextYesNoQuestion,
   idlePlaying,
   setYesNoQuestion,
   startPlaying,
+  stopYesNoQuestion,
 } from '../slices/yesNoSlice';
 
 export const getNextYesNoQuestionEpic = (action$) => action$.pipe(
@@ -47,5 +50,15 @@ export const listenYesNoEndEventEpic = (action$, state$) => action$.pipe(
   mergeMap((end$) => end$.pipe(
     filter(() => state$.value.soundState !== SoundState.IDLE),
     map(() => endPlaying()),
+  )),
+);
+
+export const saveAndGoToNextYesNoQuestionEpic = (action$) => action$.pipe(
+  ofType('yesno/saveAndGoToNextYesNoQuestion'),
+  mergeMap(({ payload }) => of(
+    stopYesNoQuestion(),
+    idlePlaying(),
+    addAnswer(payload),
+    getNextYesNoQuestion(),
   )),
 );

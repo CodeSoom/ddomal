@@ -5,7 +5,6 @@ import { fireEvent, render } from '@testing-library/react';
 import SentenceAnswerExamples from './SentenceAnswerExamples';
 
 jest.mock('react-redux');
-jest.mock('../services/speechRecognitionService.js');
 
 const mockPush = jest.fn();
 

@@ -47,5 +47,6 @@ export const {
 export const getNextYesNoQuestion = createAction('yesno/getNextYesNoQuestion');
 export const playYesNoQuestion = createAction('yesno/playYesNoQuestion');
 export const stopYesNoQuestion = createAction('yesno/stopYesNoQuestion');
+export const saveAndGoToNextYesNoQuestion = createAction('yesno/saveAndGoToNextYesNoQuestion');
 
 export default reducer;
