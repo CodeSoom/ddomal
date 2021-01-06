@@ -4,26 +4,49 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
+import styled from '@emotion/styled';
+
 import _ from 'lodash';
 
-import SentenceSpeakInput from '../../components/SentenceSpeakInput';
-import SentenceSubmitButton from '../../components/SentenceSubmitButton';
-import ProgressBar from '../../components/ProgressBar';
+import SentenceSpeakInput from '../components/SentenceSpeakInput';
+import SentenceSubmitButton from '../components/SentenceSubmitButton';
+import ProgressBar from '../components/ProgressBar';
 
-import {
-  Container,
-  BarBox,
-  PromptBox,
-  SubmitButtonBox,
-} from './styled';
+import { flexBoxCenter } from '../styles/common';
+
+import { titleFont } from '../styles/fonts';
+import { normalColor } from '../styles/colors';
 
 import {
   recognizeSpeech,
   getNextQuestion,
   saveAnswer,
-} from '../../redux/slices/speakSentenceSlice';
+} from '../redux/slices/speakSentenceSlice';
 
-import { get } from '../../utils/utils';
+import { get } from '../utils/utils';
+
+const Container = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
+const QuestionProgress = styled(ProgressBar)({
+  marginTop: '3.28vh',
+});
+
+const Prompt = styled.div({
+  fontFamily: titleFont,
+  fontSize: '4.5rem',
+  ...flexBoxCenter,
+  marginTop: '9.53vh',
+  color: normalColor,
+  height: '5.5rem',
+});
+
+export const SubmitButton = styled(SentenceSubmitButton)({
+  marginTop: '9.38vh',
+});
 
 export default function SentenceSpeakContainer() {
   const { prompt, spokenSentence, micState } = useSelector(get('speakSentence'));
@@ -51,15 +74,13 @@ export default function SentenceSpeakContainer() {
 
   return (
     <Container>
-      <BarBox>
-        <ProgressBar
-          maxNumber={numberOfQuestions}
-          currentNumber={answers.length}
-        />
-      </BarBox>
-      <PromptBox>
+      <QuestionProgress
+        maxNumber={numberOfQuestions}
+        currentNumber={answers.length}
+      />
+      <Prompt>
         {prompt}
-      </PromptBox>
+      </Prompt>
       <SentenceSpeakInput
         prompt={prompt}
         isCorrectSentence={isCorrectSentence}
@@ -67,14 +88,12 @@ export default function SentenceSpeakContainer() {
         micState={micState}
         onClick={handleClickSpeak}
       />
-      <SubmitButtonBox>
-        <SentenceSubmitButton
-          onClickNext={handleClickNext}
-          onClickExit={handleClickExit}
-          isComplete={isAnsweringComplete}
-          isCorrectSentence={isCorrectSentence}
-        />
-      </SubmitButtonBox>
+      <SubmitButton
+        onClickNext={handleClickNext}
+        onClickExit={handleClickExit}
+        isComplete={isAnsweringComplete}
+        isCorrectSentence={isCorrectSentence}
+      />
     </Container>
   );
 }
