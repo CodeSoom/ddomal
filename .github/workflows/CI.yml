@@ -24,8 +24,6 @@ jobs:
         run: npm run test
         env:
           HEADLESS: true
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ID: ${{ secrets.AWS_ID }}
       - name: Lint
         run: npm run lint
         
