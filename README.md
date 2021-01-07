@@ -31,7 +31,7 @@
 ```
 ## 프로젝트 지식 위키
 [사용자 스토리](https://github.com/CodeSoom/ddomal/wiki/%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%8A%A4%ED%86%A0%EB%A6%AC)
-[용어 사전]
+[용어 사전](https://github.com/CodeSoom/ddomal/wiki/%EC%9A%A9%EC%96%B4-%EC%82%AC%EC%A0%84)
 
 ## Project Setting
 
