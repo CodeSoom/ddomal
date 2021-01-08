@@ -90,6 +90,13 @@ describe('App', () => {
     expect(container).toHaveTextContent(setQuestionNumberPage);
   });
 
+  // TODO: rename
+  it('shows related speech page on route /speech', () => {
+    const { container } = renderApp({ path: '/speech' });
+
+    expect(container).toHaveTextContent('버튼을 누르고 문장을 말해보세요');
+  });
+
   it('shows the not found page on invalid route', () => {
     const { container } = renderApp({ path: '/404' });
 
