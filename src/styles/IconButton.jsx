@@ -22,12 +22,16 @@ const getIcon = (Icon) => styled(Icon)`
 `;
 
 export default function IconButton({
-  Icon, iconSize, iconTitle, onClick, disabled,
+  Icon, iconSize, iconTitle, onClick, disabled, className,
 }) {
   const StyledIcon = getIcon(Icon);
 
   return (
-    <IconBox onClick={onClick} disabled={disabled}>
+    <IconBox
+      onClick={onClick}
+      disabled={disabled}
+      className={className}
+    >
       <StyledIcon
         title={iconTitle}
         size={iconSize}

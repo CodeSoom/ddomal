@@ -16,6 +16,7 @@ import SentenceAnswersPage from './pages/SentenceAnswersPage';
 import YesNoPage from './pages/YesNoPage';
 import YesNoAnswersPage from './pages/YesNoAnswersPage';
 import SetQuestionNumberPage from './pages/SetQuestionNumberPage';
+import SpeechPage from './pages/SpeechPage';
 
 import { primaryColor, tertiaryColor } from './styles/colors';
 import { normalFont } from './styles/fonts';
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/yesno" component={YesNoPage} />
         <Route path="/ynanswers" component={YesNoAnswersPage} />
         <Route path="/setnumber" component={SetQuestionNumberPage} />
+        <Route path="/speech" component={SpeechPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Container>
