@@ -26,9 +26,9 @@ const Count = styled.span({
   color: normalColor,
 });
 
-function ProgressBar({ currentNumber, maxNumber }) {
+function ProgressBar({ currentNumber, maxNumber, className }) {
   return (
-    <Container>
+    <Container className={className}>
       <MaxBar>
         <CurrentBar current={currentNumber} max={maxNumber} />
       </MaxBar>
